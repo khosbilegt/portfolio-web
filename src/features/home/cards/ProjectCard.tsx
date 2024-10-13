@@ -1,8 +1,24 @@
-import { Button, Card, Flex, Image, Stack, Text } from "@mantine/core";
-import { Cape } from "../../../assets/image";
+import { Button, Card, Flex, List, Stack, Text } from "@mantine/core";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const projectCounter = [
+  {
+    type: "Completed",
+    count: 5,
+  },
+  {
+    type: "In Progress",
+    count: 3,
+  },
+  {
+    type: "Deferred",
+    count: 3,
+  },
+];
 
 function ProjectCard({ height }: { height: string }) {
+  const navigate = useNavigate();
   const [isHovered, setHovered] = useState(false);
 
   return (
@@ -25,7 +41,7 @@ function ProjectCard({ height }: { height: string }) {
           width: "100%",
           height: "25px",
           color: "#fff",
-          background: "linear-gradient(-45deg, #F8D092 60%, #571C56 0)",
+          background: "linear-gradient(-45deg, #F8D092 70%, #25245D 5px)",
         }}
       >
         Projects
@@ -35,22 +51,14 @@ function ProjectCard({ height }: { height: string }) {
         style={{ height: "100%", padding: "15px" }}
         justify="space-between"
       >
-        <Flex
-          align={"center"}
-          justify={"space-around"}
-          style={{ height: "75%" }}
-        >
-          <Image
-            src={Cape}
-            fit={"contain"}
-            style={{ height: "100%", aspectRatio: "1/1" }}
-          />
-          <Stack>
-            <Text>Completed: 5</Text>
-            <Text>In Progress: 3</Text>
-            <Text>Deferred: 3</Text>
-          </Stack>
-        </Flex>
+        <Text>What have I made so far?</Text>
+        <List style={{ padding: "15px" }}>
+          {projectCounter.map((project) => (
+            <List.Item key={project.type}>
+              {project.type}: {project.count}
+            </List.Item>
+          ))}
+        </List>
         <Flex justify={"flex-end"}>
           <Button
             style={{
@@ -58,6 +66,7 @@ function ProjectCard({ height }: { height: string }) {
               width: "150px",
               background: "#25245D",
             }}
+            onClick={() => navigate("/projects")}
           >
             Read More
           </Button>

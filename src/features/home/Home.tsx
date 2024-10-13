@@ -3,6 +3,7 @@ import SkillCard from "./cards/SkillCard";
 import "./Home.css";
 import ProjectCard from "./cards/ProjectCard";
 import ContactCard from "./cards/ContactCard";
+import AboutCard from "./cards/AboutCard";
 
 function Home() {
   return (
@@ -42,14 +43,15 @@ function Home() {
               Portfolio
             </Text>
           </Grid.Col>
-          <Grid.Col span={7} style={{ height: "300px" }}>
+          <Grid.Col span={6} style={{ height: "300px" }}>
             <ProjectCard height="275px" />
           </Grid.Col>
-          <Grid.Col span={5} style={{ height: "300px" }}>
+          <Grid.Col span={6} style={{ height: "300px" }}>
             <ContactCard height="275px" />
           </Grid.Col>
-          <Grid.Col span={6} style={{ background: "pink", height: "300px" }} />
-          <Grid.Col span={6} style={{ background: "green", height: "300px" }} />
+          <Grid.Col span={12} style={{ height: "300px" }}>
+            <AboutCard height="300px" />
+          </Grid.Col>
         </Grid>
       </Flex>
     </Flex>

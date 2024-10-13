@@ -1,10 +1,12 @@
 import { Button, Card, Flex, Image, Stack, Text, Title } from "@mantine/core";
 import { Flying } from "../../../assets/image";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const fontFamily = "IBM Plex Mono, monospace";
 
 function SkillCard({ width, height }: { width: string; height: string }) {
+  const navigate = useNavigate();
   const [isHovered, setHovered] = useState(false);
 
   return (
@@ -32,7 +34,7 @@ function SkillCard({ width, height }: { width: string; height: string }) {
           width: "100%",
           height: "25px",
           color: "#fff",
-          background: "linear-gradient(-45deg, #159097 70%, #571C56 0)",
+          background: "linear-gradient(-45deg, #159097 70%, #25245D 0)",
           fontFamily: fontFamily,
         }}
       >
@@ -62,6 +64,7 @@ function SkillCard({ width, height }: { width: string; height: string }) {
               width: "150px",
               background: "#25245D",
             }}
+            onClick={() => navigate("/skills")}
           >
             Read More
           </Button>

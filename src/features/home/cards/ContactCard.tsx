@@ -12,13 +12,13 @@ const contactType = [
     label: "Freelance Work",
     type: "Email",
     icon: "",
-    url: "archerdoc13@gmail.com",
+    url: "khosbilegt.b@gmail.com",
   },
   {
     label: "Advice & Help",
     type: "Email",
     icon: "",
-    url: "archerdoc13@gmail.com",
+    url: "khosbilegt.b@gmail.com",
   },
 ];
 
@@ -48,7 +48,7 @@ function ContactCard({ height }: { height: string }) {
           width: "100%",
           height: "25px",
           color: "#fff",
-          background: "linear-gradient(-45deg, #1A5678 60%, #571C56 0)",
+          background: "linear-gradient(-45deg, #1A5678 70%, #25245D 0)",
         }}
       >
         Contact
