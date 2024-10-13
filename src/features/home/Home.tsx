@@ -1,16 +1,25 @@
-import { Flex, Grid } from "@mantine/core";
+import { Flex, Grid, Text } from "@mantine/core";
 import AboutCard from "./cards/AboutCard";
 
 function Home() {
   return (
-    <Flex style={{ height: "100vh", width: "100vw", background: "grey" }}>
+    <Flex
+      justify={"center"}
+      style={{ height: "90vh", width: "90vw", padding: "2.5vw" }}
+    >
       <AboutCard style={{ width: "50%" }} />
       <Grid style={{ width: "50%", height: "100%" }}>
-        <Grid.Col span={12} style={{ background: "green", height: "100px" }} />
-        <Grid.Col span={8} style={{ background: "blue", height: "400px" }} />
-        <Grid.Col span={4} style={{ background: "red", height: "400px" }} />
-        <Grid.Col span={6} style={{ background: "pink", height: "400px" }} />
-        <Grid.Col span={6} style={{ background: "green", height: "400px" }} />
+        <Grid.Col span={12} style={{ height: "100px" }}>
+          <Text
+            style={{ fontSize: "75px", textAlign: "center", lineHeight: "1" }}
+          >
+            Portfolio
+          </Text>
+        </Grid.Col>
+        <Grid.Col span={8} style={{ background: "blue", height: "300px" }} />
+        <Grid.Col span={4} style={{ background: "red", height: "300px" }} />
+        <Grid.Col span={6} style={{ background: "pink", height: "300px" }} />
+        <Grid.Col span={6} style={{ background: "green", height: "300px" }} />
       </Grid>
     </Flex>
   );
