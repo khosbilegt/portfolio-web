@@ -2,7 +2,7 @@ import { Button, Card, Flex, Image, Stack, Text } from "@mantine/core";
 import { Cape } from "../../../assets/image";
 import { useState } from "react";
 
-function ProjectCard() {
+function ProjectCard({ height }: { height: string }) {
   const [isHovered, setHovered] = useState(false);
 
   return (
@@ -13,8 +13,7 @@ function ProjectCard() {
         background: "#F8D092",
         boxShadow: isHovered ? "0 0 10px 0 #ffcc33" : "none",
         transition: "200ms",
-        height: "275px",
-        width: "100%",
+        height: height,
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -36,12 +35,15 @@ function ProjectCard() {
         style={{ height: "100%", padding: "15px" }}
         justify="space-between"
       >
-        <Text style={{ textAlign: "center" }}>What have I done so far?</Text>
-        <Flex align={"center"} justify={"space-around"}>
+        <Flex
+          align={"center"}
+          justify={"space-around"}
+          style={{ height: "75%" }}
+        >
           <Image
             src={Cape}
             fit={"contain"}
-            style={{ height: "150px", aspectRatio: "1/1" }}
+            style={{ height: "100%", aspectRatio: "1/1" }}
           />
           <Stack>
             <Text>Completed: 5</Text>

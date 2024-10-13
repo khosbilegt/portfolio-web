@@ -9,7 +9,6 @@ function SkillCard({ width, height }: { width: string; height: string }) {
 
   return (
     <Card
-      className="card"
       radius={"lg"}
       padding={"none"}
       style={{
@@ -52,7 +51,7 @@ function SkillCard({ width, height }: { width: string; height: string }) {
             I'm Khosoo.
           </Title>
           <Text size="lg" style={{ color: "#fff" }}>
-            I specialize in the research of obscure technologies and back-end
+            I specialize in the research of obscure technologies and full-stack
             services based on them.
           </Text>
         </Stack>

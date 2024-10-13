@@ -2,6 +2,7 @@ import { Flex, Grid, Text } from "@mantine/core";
 import SkillCard from "./cards/SkillCard";
 import "./Home.css";
 import ProjectCard from "./cards/ProjectCard";
+import ContactCard from "./cards/ContactCard";
 
 function Home() {
   return (
@@ -41,10 +42,12 @@ function Home() {
               Portfolio
             </Text>
           </Grid.Col>
-          <Grid.Col span={8} style={{ height: "300px" }}>
-            <ProjectCard />
+          <Grid.Col span={7} style={{ height: "300px" }}>
+            <ProjectCard height="275px" />
           </Grid.Col>
-          <Grid.Col span={4} style={{ background: "red", height: "300px" }} />
+          <Grid.Col span={5} style={{ height: "300px" }}>
+            <ContactCard height="275px" />
+          </Grid.Col>
           <Grid.Col span={6} style={{ background: "pink", height: "300px" }} />
           <Grid.Col span={6} style={{ background: "green", height: "300px" }} />
         </Grid>
