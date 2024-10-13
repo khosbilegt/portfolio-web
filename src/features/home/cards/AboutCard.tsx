@@ -1,4 +1,4 @@
-import { Card, Flex, Image, NavLink, Stack, Text } from "@mantine/core";
+import { Card, Flex, Image, Stack, Text } from "@mantine/core";
 import { useState } from "react";
 import { Eating } from "../../../assets/image";
 import "./AboutCard.css";
@@ -39,7 +39,7 @@ function AboutCard({ height }: { height: string }) {
           width: "100%",
           height: "25px",
           color: "#fff",
-          background: "linear-gradient(-45deg, #571C56 80%, #25245D 0)",
+          background: "linear-gradient(-45deg, #571C56 50%, #25245D 0)",
         }}
       >
         About me
