@@ -1,5 +1,20 @@
-import { Card, Text } from "@mantine/core";
+import { Card, Flex, Image, NavLink, Stack, Text } from "@mantine/core";
 import { useState } from "react";
+import { Eating } from "../../../assets/image";
+import "./AboutCard.css";
+
+const lines = [
+  {
+    text: "Hello there!",
+  },
+  {
+    text: "I'm a gamer, amateur author, fan of all Trading Card & Tabletop Games, metal enthusiast and a foodie.",
+  },
+  {
+    text: "You can read my blogs & vlogs ",
+    url: "/blog",
+  },
+];
 
 function AboutCard({ height }: { height: string }) {
   const [isHovered, setHovered] = useState(false);
@@ -29,6 +44,21 @@ function AboutCard({ height }: { height: string }) {
       >
         About me
       </Text>
+      <Flex justify={"center"}>
+        <Image src={Eating} fit={"contain"} style={{ height: "250px" }} />
+        <Stack className="speech-bubble">
+          {lines.map((line, index) => (
+            <Text key={index} style={{ color: "#fff" }}>
+              {line.text}{" "}
+              {line.url && (
+                <span>
+                  <a href={line.url}>here.</a>
+                </span>
+              )}
+            </Text>
+          ))}
+        </Stack>
+      </Flex>
     </Card>
   );
 }

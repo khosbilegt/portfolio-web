@@ -1,9 +1,9 @@
 import { Flex, Grid, Text } from "@mantine/core";
 import SkillCard from "./cards/SkillCard";
-import "./Home.css";
 import ProjectCard from "./cards/ProjectCard";
 import ContactCard from "./cards/ContactCard";
 import AboutCard from "./cards/AboutCard";
+import "./Home.css";
 
 function Home() {
   return (
@@ -30,7 +30,7 @@ function Home() {
         }}
       >
         <SkillCard width="400px" height="700px" />
-        <Grid style={{ height: "700px" }}>
+        <Grid style={{ height: "700px", width: "60%" }}>
           <Grid.Col span={12} style={{ height: "100px" }}>
             <Text
               style={{
@@ -49,7 +49,7 @@ function Home() {
           <Grid.Col span={6} style={{ height: "300px" }}>
             <ContactCard height="275px" />
           </Grid.Col>
-          <Grid.Col span={12} style={{ height: "300px" }}>
+          <Grid.Col offset={2} span={8} style={{ height: "300px" }}>
             <AboutCard height="300px" />
           </Grid.Col>
         </Grid>
