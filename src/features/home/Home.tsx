@@ -1,12 +1,14 @@
-import { Flex, Grid, Text } from "@mantine/core";
+import { Flex, Grid, Notification, Text } from "@mantine/core";
 import SkillCard from "./cards/SkillCard";
 import ProjectCard from "./cards/ProjectCard";
 import ContactCard from "./cards/ContactCard";
 import AboutCard from "./cards/AboutCard";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
+import { useState } from "react";
 
 function Home() {
   const { width } = useWindowDimensions();
+  const [isAttributionVisible, setAttributionVisible] = useState(true);
 
   return (
     <Flex
@@ -100,6 +102,30 @@ function Home() {
           </Grid.Col>
         </Grid>
       </Flex>
+      <Notification
+        title="Attribution"
+        style={{
+          position: "absolute",
+          top: "15px",
+          right: "15px",
+          transition: "200ms",
+          zIndex: isAttributionVisible ? 2 : -1,
+          opacity: isAttributionVisible ? 1 : 0,
+        }}
+        onClose={() => setAttributionVisible(false)}
+      >
+        The astronaut pictures you see are from{" "}
+        <span>
+          <a href="https://www.freepik.com/">freepik.com</a>
+        </span>{" "}
+        artist{" "}
+        <span>
+          <a href="https://www.freepik.com/author/catalyststuff">
+            @catalyststuff
+          </a>
+        </span>
+        .
+      </Notification>
     </Flex>
   );
 }
