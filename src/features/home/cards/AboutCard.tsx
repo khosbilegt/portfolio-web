@@ -20,6 +20,8 @@ function AboutCard({ width, height }: { width: string; height: string }) {
         height: height,
         minWidth: width,
         width: width,
+        transition: "200ms",
+        boxShadow: isHovered ? "0 0 10px 0 #ffcc33" : "none",
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
