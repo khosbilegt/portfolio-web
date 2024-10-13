@@ -5,10 +5,16 @@ function Home() {
   return (
     <Flex
       justify={"center"}
-      style={{ height: "90vh", width: "90vw", padding: "2.5vw" }}
+      wrap={"wrap"}
+      style={{
+        height: "100vh",
+        width: "100vw",
+        padding: "2.5vw",
+        background: "#25245D",
+      }}
     >
-      <AboutCard style={{ width: "50%" }} />
-      <Grid style={{ width: "50%", height: "100%" }}>
+      <AboutCard width="400px" height="700px" />
+      <Grid style={{ height: "100%" }}>
         <Grid.Col span={12} style={{ height: "100px" }}>
           <Text
             style={{ fontSize: "75px", textAlign: "center", lineHeight: "1" }}
