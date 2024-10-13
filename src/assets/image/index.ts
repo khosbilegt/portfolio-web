@@ -1,5 +1,9 @@
-import Astronaut from './astronout.png';
+import Flying from './flying.png';
+import Eating from './eating.png';
+import Cape from './cape.png';
 
 export {
-    Astronaut
+    Flying,
+    Eating,
+    Cape
 }

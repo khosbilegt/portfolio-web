@@ -1,6 +1,7 @@
 import { Flex, Grid, Text } from "@mantine/core";
-import AboutCard from "./cards/AboutCard";
+import SkillCard from "./cards/SkillCard";
 import "./Home.css";
+import ProjectCard from "./cards/ProjectCard";
 
 function Home() {
   return (
@@ -21,27 +22,28 @@ function Home() {
         wrap={"wrap"}
         gap={"lg"}
         style={{
-          padding: "2.5vw",
           width: "100%",
           height: "100%",
           zIndex: 1,
         }}
       >
-        <AboutCard width="400px" height="700px" />
+        <SkillCard width="400px" height="700px" />
         <Grid style={{ height: "700px" }}>
           <Grid.Col span={12} style={{ height: "100px" }}>
             <Text
               style={{
                 fontSize: "50px",
                 textAlign: "center",
-                color: "#D3D3D3",
+                color: "#fff",
                 lineHeight: "1",
               }}
             >
               Portfolio
             </Text>
           </Grid.Col>
-          <Grid.Col span={8} style={{ background: "blue", height: "300px" }} />
+          <Grid.Col span={8} style={{ height: "300px" }}>
+            <ProjectCard />
+          </Grid.Col>
           <Grid.Col span={4} style={{ background: "red", height: "300px" }} />
           <Grid.Col span={6} style={{ background: "pink", height: "300px" }} />
           <Grid.Col span={6} style={{ background: "green", height: "300px" }} />

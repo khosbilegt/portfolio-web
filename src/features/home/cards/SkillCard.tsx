@@ -1,10 +1,10 @@
 import { Button, Card, Flex, Image, Stack, Text, Title } from "@mantine/core";
-import { Astronaut } from "../../../assets/image";
+import { Flying } from "../../../assets/image";
 import { useState } from "react";
 
 const fontFamily = "IBM Plex Mono, monospace";
 
-function AboutCard({ width, height }: { width: string; height: string }) {
+function SkillCard({ width, height }: { width: string; height: string }) {
   const [isHovered, setHovered] = useState(false);
 
   return (
@@ -37,12 +37,12 @@ function AboutCard({ width, height }: { width: string; height: string }) {
           fontFamily: fontFamily,
         }}
       >
-        About me
+        Skills
       </Text>
       <Stack justify="space-between" style={{ height: "90%", padding: "10px" }}>
         <Image
           style={{ height: "50%", aspectRatio: "1/1", borderRadius: "1000px" }}
-          src={Astronaut}
+          src={Flying}
         />
         <Stack align="flex-start" style={{ width: "100%", padding: "25px" }}>
           <Title order={3} style={{ fontFamily: fontFamily, color: "#fff" }}>
@@ -59,7 +59,7 @@ function AboutCard({ width, height }: { width: string; height: string }) {
         <Flex justify={"flex-end"}>
           <Button
             style={{
-              margin: "15px",
+              marginBottom: "15px",
               width: "150px",
               background: "#25245D",
             }}
@@ -72,4 +72,4 @@ function AboutCard({ width, height }: { width: string; height: string }) {
   );
 }
 
-export default AboutCard;
+export default SkillCard;
