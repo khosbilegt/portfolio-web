@@ -1,21 +1,23 @@
-import { Button, Card, Flex, List, Stack, Text } from "@mantine/core";
+import {
+  Button,
+  Card,
+  Flex,
+  Stack,
+  Table,
+  TableData,
+  Text,
+} from "@mantine/core";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const projectCounter = [
-  {
-    type: "Completed",
-    count: 5,
-  },
-  {
-    type: "In Progress",
-    count: 3,
-  },
-  {
-    type: "Deferred",
-    count: 3,
-  },
-];
+const projects: TableData = {
+  head: ["Type", "Count"],
+  body: [
+    ["Completed", 5],
+    ["In Progress", 3],
+    ["Deferred", 3],
+  ],
+};
 
 function ProjectCard({ height }: { height: string }) {
   const navigate = useNavigate();
@@ -51,14 +53,10 @@ function ProjectCard({ height }: { height: string }) {
         style={{ height: "100%", padding: "15px" }}
         justify="space-between"
       >
-        <Text>What have I made so far?</Text>
-        <List style={{ padding: "15px" }}>
-          {projectCounter.map((project) => (
-            <List.Item key={project.type}>
-              {project.type}: {project.count}
-            </List.Item>
-          ))}
-        </List>
+        <Text style={{ width: "100%", textAlign: "center" }}>
+          What have I made so far?
+        </Text>
+        <Table data={projects} />
         <Flex justify={"flex-end"}>
           <Button
             style={{

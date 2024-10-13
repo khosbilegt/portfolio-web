@@ -16,7 +16,13 @@ const lines = [
   },
 ];
 
-function AboutCard({ height }: { height: string }) {
+function AboutCard({
+  height,
+  screenWidth,
+}: {
+  height: string;
+  screenWidth: number;
+}) {
   const [isHovered, setHovered] = useState(false);
 
   return (
@@ -46,10 +52,14 @@ function AboutCard({ height }: { height: string }) {
       </Text>
       <Flex justify={"center"}>
         <Image src={Eating} fit={"contain"} style={{ height: "250px" }} />
-        <Stack className="speech-bubble">
+        <Stack className="speech-bubble" style={{ width: "60%" }}>
           {lines.map((line, index) => (
-            <Text key={index} style={{ color: "#fff" }}>
-              {line.text}{" "}
+            <Text
+              key={index}
+              style={{ color: "#fff" }}
+              size={screenWidth < 596 ? "xs" : "md"}
+            >
+              {line.text}
               {line.url && (
                 <span>
                   <a href={line.url}>here.</a>
