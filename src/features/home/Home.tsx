@@ -5,6 +5,7 @@ import ContactCard from "./cards/ContactCard";
 import AboutCard from "./cards/AboutCard";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { useState } from "react";
+import "../../components/StarBackground.css";
 
 function Home() {
   const { width } = useWindowDimensions();
@@ -23,6 +24,9 @@ function Home() {
         position: width < 1024 ? "relative" : "fixed",
       }}
     >
+      <div id="stars"></div>
+      <div id="stars2"></div>
+      <div id="stars3"></div>
       <Flex
         justify={"center"}
         align={"center"}
@@ -95,10 +99,7 @@ function Home() {
               maxWidth: "2000px",
             }}
           >
-            <AboutCard
-              height={width < 900 ? "400px" : "325px"}
-              screenWidth={width}
-            />
+            <AboutCard height={"325px"} screenWidth={width} />
           </Grid.Col>
         </Grid>
       </Flex>

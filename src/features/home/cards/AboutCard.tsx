@@ -33,7 +33,7 @@ function AboutCard({
         background: "#571C56",
         boxShadow: isHovered ? "0 0 10px 0 #ffcc33" : "none",
         transition: "200ms",
-        height: height,
+        minHeight: height,
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -51,7 +51,13 @@ function AboutCard({
         About me
       </Text>
       <Flex justify={"center"}>
-        <Image src={Eating} fit={"contain"} style={{ height: "250px" }} />
+        <Image
+          src={Eating}
+          fit={"contain"}
+          style={{
+            width: screenWidth < 1024 ? "50%" : "40%",
+          }}
+        />
         <Stack className="speech-bubble" style={{ width: "60%" }}>
           {lines.map((line, index) => (
             <Text
