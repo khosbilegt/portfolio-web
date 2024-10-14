@@ -10,11 +10,9 @@ const fontFamily = "IBM Plex Mono, monospace";
 function SkillCard({
   minWidth: minWidth,
   maxWidth: maxWidth,
-  height,
 }: {
   minWidth: string;
   maxWidth: string;
-  height: string;
 }) {
   const navigate = useNavigate();
   const [isHovered, setHovered] = useState(false);
@@ -28,7 +26,6 @@ function SkillCard({
         background: "transparent",
         display: "flex",
         alignItems: "center",
-        minHeight: height,
         maxWidth: maxWidth,
         minWidth: minWidth,
         transition: "200ms",
@@ -70,14 +67,11 @@ function SkillCard({
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ repeat: Infinity, ease: "easeOut", duration: 4 }}
-              style={{
-                height: "50%",
-              }}
             >
               <Image
                 fit="contain"
                 style={{
-                  height: "100%",
+                  height: "275px",
                   aspectRatio: "1/1",
                 }}
                 src={Flying}
@@ -100,15 +94,14 @@ function SkillCard({
               >
                 I'm Khosoo.
               </Title>
-              <Text size="lg" style={{ color: "#fff" }}>
+              <Text size="md" style={{ color: "#fff" }}>
                 I specialize in the research of obscure technologies and
                 full-stack services based on them.
               </Text>
             </Stack>
-            <Flex justify={"flex-end"}>
+            <Flex justify={"flex-end"} style={{ padding: "15px" }}>
               <Button
                 style={{
-                  marginBottom: "15px",
                   width: "150px",
                   background: "#25245D",
                 }}

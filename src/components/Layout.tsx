@@ -12,8 +12,10 @@ function Layout({ children }: { children: React.ReactNode }) {
         zIndex: 0,
         top: 0,
         left: 0,
+        minWidth: "100vw",
+        maxWidth: "100vw",
         height: "100%",
-        width: "100%",
+        minHeight: "100vh",
         background: "#25245D",
         position: width < 1024 ? "relative" : "fixed",
       }}

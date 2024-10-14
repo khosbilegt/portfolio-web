@@ -38,7 +38,7 @@ function Navbar() {
             className="nav-button"
             key={link.label}
             style={{ marginRight: "10px" }}
-            size={"xl"}
+            size={width < 568 ? "sm" : "xl"}
             color={"transparent"}
             onClick={() => {
               navigate(link.to);

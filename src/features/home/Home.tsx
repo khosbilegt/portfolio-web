@@ -21,21 +21,17 @@ function Home() {
         style={{
           width: "100%",
           height: "100%",
-          minHeight: "100vh",
           zIndex: 1,
-          marginTop: width < 1024 ? "36px" : "-80px",
         }}
       >
         <SkillCard
-          minWidth={width < 576 ? "80%" : width < 900 ? "60%" : "400px"}
-          maxWidth={width < 576 ? "80%" : width < 900 ? "60%" : "400px"}
-          height="700px"
+          minWidth={width < 576 ? "80%" : "400px"}
+          maxWidth={width < 576 ? "80%" : "400px"}
         />
         <Grid
           style={{
-            height: width < 1024 ? "100%" : "700px",
+            height: "100%",
             width: width < 576 ? "80%" : "60%",
-            background: "#25245D",
             padding: "15px 0",
             paddingBottom: "50px",
           }}
