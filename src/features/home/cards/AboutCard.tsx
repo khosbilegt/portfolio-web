@@ -1,5 +1,6 @@
 import { Card, Flex, Image, Stack, Text } from "@mantine/core";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Eating } from "../../../assets/image";
 import "./AboutCard.css";
 
@@ -51,13 +52,22 @@ function AboutCard({
         About me
       </Text>
       <Flex justify={"center"}>
-        <Image
-          src={Eating}
-          fit={"contain"}
+        <motion.div
           style={{
             width: screenWidth < 1024 ? "50%" : "40%",
           }}
-        />
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, ease: "easeOut", duration: 4 }}
+        >
+          <Image
+            src={Eating}
+            fit={"contain"}
+            style={{
+              width: "100%",
+            }}
+          />
+        </motion.div>
+
         <Stack className="speech-bubble" style={{ width: "60%" }}>
           {lines.map((line, index) => (
             <Text

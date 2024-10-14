@@ -25,9 +25,9 @@ function SkillCard({
       radius={"lg"}
       padding={"none"}
       style={{
+        background: "transparent",
         display: "flex",
         alignItems: "center",
-        background: "#159097",
         minHeight: height,
         maxWidth: maxWidth,
         minWidth: minWidth,
@@ -37,65 +37,89 @@ function SkillCard({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <Text
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
         style={{
-          paddingLeft: "5%",
-          textAlign: "start",
           width: "100%",
-          height: "25px",
-          color: "#fff",
-          background: "linear-gradient(-45deg, #159097 50%, #25245D 0)",
-          fontFamily: fontFamily,
         }}
       >
-        Skills
-      </Text>
-      <Stack justify="space-between" style={{ height: "90%", padding: "10px" }}>
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, ease: "easeOut", duration: 4 }}
+        <Stack
+          style={{
+            background: "#159097",
+          }}
         >
-          <Image
-            fit="contain"
+          <Text
             style={{
-              height: "50%",
-              aspectRatio: "1/1",
+              paddingLeft: "5%",
+              textAlign: "start",
+              width: "100%",
+              height: "25px",
+              color: "#fff",
+              background: "linear-gradient(-45deg, #159097 50%, #25245D 0)",
+              fontFamily: fontFamily,
             }}
-            src={Flying}
-            alt="Flying"
-          />
-        </motion.div>
-        <Stack align="flex-start" style={{ width: "100%", padding: "25px" }}>
-          <Title
-            order={windowWidth < 596 ? 4 : 3}
-            style={{ fontFamily: fontFamily, color: "#fff" }}
           >
-            Hi,
-          </Title>
-          <Title
-            order={windowWidth < 596 ? 2 : 1}
-            style={{ fontFamily: fontFamily, color: "#fff" }}
-          >
-            I'm Khosoo.
-          </Title>
-          <Text size="lg" style={{ color: "#fff" }}>
-            I specialize in the research of obscure technologies and full-stack
-            services based on them.
+            Skills
           </Text>
-        </Stack>
-        <Flex justify={"flex-end"}>
-          <Button
-            style={{
-              marginBottom: "15px",
-              width: "150px",
-              background: "#25245D",
-            }}
-            onClick={() => navigate("/skills")}
+          <Stack
+            justify="space-between"
+            style={{ height: "90%", padding: "10px" }}
           >
-            Read More
-          </Button>
-        </Flex>
-      </Stack>
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ repeat: Infinity, ease: "easeOut", duration: 4 }}
+              style={{
+                height: "50%",
+              }}
+            >
+              <Image
+                fit="contain"
+                style={{
+                  height: "100%",
+                  aspectRatio: "1/1",
+                }}
+                src={Flying}
+                alt="Flying"
+              />
+            </motion.div>
+            <Stack
+              align="flex-start"
+              style={{ width: "100%", padding: "25px" }}
+            >
+              <Title
+                order={windowWidth < 596 ? 4 : 3}
+                style={{ fontFamily: fontFamily, color: "#fff" }}
+              >
+                Hi,
+              </Title>
+              <Title
+                order={windowWidth < 596 ? 2 : 1}
+                style={{ fontFamily: fontFamily, color: "#fff" }}
+              >
+                I'm Khosoo.
+              </Title>
+              <Text size="lg" style={{ color: "#fff" }}>
+                I specialize in the research of obscure technologies and
+                full-stack services based on them.
+              </Text>
+            </Stack>
+            <Flex justify={"flex-end"}>
+              <Button
+                style={{
+                  marginBottom: "15px",
+                  width: "150px",
+                  background: "#25245D",
+                }}
+                onClick={() => navigate("/skills")}
+              >
+                Read More
+              </Button>
+            </Flex>
+          </Stack>
+        </Stack>
+      </motion.div>
     </Card>
   );
 }

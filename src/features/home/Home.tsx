@@ -26,17 +26,11 @@ function Home() {
           marginTop: width < 1024 ? "36px" : "-80px",
         }}
       >
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-        >
-          <SkillCard
-            minWidth={width < 576 ? "80%" : width < 900 ? "60%" : "400px"}
-            maxWidth={width < 576 ? "80%" : width < 900 ? "60%" : "400px"}
-            height="700px"
-          />
-        </motion.div>
+        <SkillCard
+          minWidth={width < 576 ? "80%" : width < 900 ? "60%" : "400px"}
+          maxWidth={width < 576 ? "80%" : width < 900 ? "60%" : "400px"}
+          height="700px"
+        />
         <Grid
           style={{
             height: width < 1024 ? "100%" : "700px",
