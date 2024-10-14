@@ -5,28 +5,14 @@ import ContactCard from "./cards/ContactCard";
 import AboutCard from "./cards/AboutCard";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { useState } from "react";
-import "../../components/StarBackground.css";
+import { motion } from "framer-motion";
 
 function Home() {
   const { width } = useWindowDimensions();
   const [isAttributionVisible, setAttributionVisible] = useState(true);
 
   return (
-    <Flex
-      className="bg-animation"
-      style={{
-        background: "#25245D",
-        zIndex: 0,
-        top: 0,
-        left: 0,
-        height: "100%",
-        width: "100%",
-        position: width < 1024 ? "relative" : "fixed",
-      }}
-    >
-      <div id="stars"></div>
-      <div id="stars2"></div>
-      <div id="stars3"></div>
+    <Flex gap={0}>
       <Flex
         justify={"center"}
         align={"center"}
@@ -35,15 +21,22 @@ function Home() {
         style={{
           width: "100%",
           height: "100%",
+          minHeight: "100vh",
           zIndex: 1,
-          marginTop: width < 1024 ? "36px" : "0",
+          marginTop: width < 1024 ? "36px" : "-80px",
         }}
       >
-        <SkillCard
-          minWidth={width < 576 ? "80%" : width < 900 ? "60%" : "400px"}
-          maxWidth={width < 576 ? "80%" : width < 900 ? "60%" : "400px"}
-          height="700px"
-        />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <SkillCard
+            minWidth={width < 576 ? "80%" : width < 900 ? "60%" : "400px"}
+            maxWidth={width < 576 ? "80%" : width < 900 ? "60%" : "400px"}
+            height="700px"
+          />
+        </motion.div>
         <Grid
           style={{
             height: width < 1024 ? "100%" : "700px",
@@ -54,17 +47,23 @@ function Home() {
           }}
         >
           <Grid.Col span={12} style={{ height: "100px", maxWidth: "2000px" }}>
-            <Text
-              style={{
-                width: "100%",
-                fontSize: "50px",
-                textAlign: "center",
-                color: "#fff",
-                lineHeight: "1",
-              }}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.75, ease: "easeOut" }}
             >
-              Portfolio
-            </Text>
+              <Text
+                style={{
+                  width: "100%",
+                  fontSize: "50px",
+                  textAlign: "center",
+                  color: "#fff",
+                  lineHeight: "1",
+                }}
+              >
+                Portfolio
+              </Text>
+            </motion.div>
           </Grid.Col>
           <Grid.Col
             span={{
@@ -73,7 +72,13 @@ function Home() {
             }}
             style={{ height: "300px", maxWidth: "1000px" }}
           >
-            <ProjectCard height="275px" />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+            >
+              <ProjectCard height="275px" />
+            </motion.div>
           </Grid.Col>
           <Grid.Col
             span={{
@@ -82,7 +87,13 @@ function Home() {
             }}
             style={{ height: "300px", maxWidth: "1000px" }}
           >
-            <ContactCard height="275px" />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.25, ease: "easeOut" }}
+            >
+              <ContactCard height="275px" />
+            </motion.div>
           </Grid.Col>
           <Grid.Col
             offset={{
@@ -99,7 +110,13 @@ function Home() {
               maxWidth: "2000px",
             }}
           >
-            <AboutCard height={"325px"} screenWidth={width} />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+            >
+              <AboutCard height={"325px"} screenWidth={width} />
+            </motion.div>
           </Grid.Col>
         </Grid>
       </Flex>

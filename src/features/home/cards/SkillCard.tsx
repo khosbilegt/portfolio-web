@@ -2,6 +2,7 @@ import { Button, Card, Flex, Image, Stack, Text, Title } from "@mantine/core";
 import { Flying } from "../../../assets/image";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
 
 const fontFamily = "IBM Plex Mono, monospace";
@@ -50,14 +51,20 @@ function SkillCard({
         Skills
       </Text>
       <Stack justify="space-between" style={{ height: "90%", padding: "10px" }}>
-        <Image
-          fit="contain"
-          style={{
-            height: "50%",
-            aspectRatio: "1/1",
-          }}
-          src={Flying}
-        />
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, ease: "easeOut", duration: 4 }}
+        >
+          <Image
+            fit="contain"
+            style={{
+              height: "50%",
+              aspectRatio: "1/1",
+            }}
+            src={Flying}
+            alt="Flying"
+          />
+        </motion.div>
         <Stack align="flex-start" style={{ width: "100%", padding: "25px" }}>
           <Title
             order={windowWidth < 596 ? 4 : 3}

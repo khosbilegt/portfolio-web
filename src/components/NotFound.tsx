@@ -2,9 +2,11 @@ import { Button, Flex, Image, Stack, Text, Title } from "@mantine/core";
 import { Moon } from "../assets/image";
 import { useNavigate } from "react-router-dom";
 import "./StarBackground.css";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 function NotFound() {
   const navigate = useNavigate();
+  const { width } = useWindowDimensions();
 
   return (
     <Flex
@@ -23,27 +25,54 @@ function NotFound() {
       <div id="stars"></div>
       <div id="stars2"></div>
       <div id="stars3"></div>
-      <Stack
-        style={{ width: "50%", height: "100%", zIndex: 1 }}
-        align="center"
-        justify="center"
-      >
-        <Text>Oh no,</Text>
-        <Text style={{ fontSize: "1.5rem" }}>
-          You're at the wrong coordinates!
-        </Text>
-        <Title order={1} style={{ fontSize: "15rem", color: "#F8D092" }}>
-          404
-        </Title>
-        <Button onClick={() => navigate("/")}>Back to Earth</Button>
-      </Stack>
-      <Stack
-        style={{ width: "50%", height: "100%", zIndex: 1 }}
-        justify="center"
-        align="center"
-      >
-        <Image src={Moon} style={{ width: "70%" }} />
-      </Stack>
+      {width < 1024 && (
+        <Stack
+          style={{
+            width: "100%",
+            height: "100%",
+            zIndex: 1,
+          }}
+          align="center"
+          justify="center"
+        >
+          <Text style={{ fontSize: "2rem" }}>Oh no,</Text>
+          <Text style={{ fontSize: "2rem" }}>
+            You're at the wrong coordinates!
+          </Text>
+          <Title order={1} style={{ fontSize: "15rem", color: "#F8D092" }}>
+            404
+          </Title>
+          <Button size="xl" onClick={() => navigate("/")}>
+            Back to Earth
+          </Button>
+          <Image src={Moon} style={{ width: "70%" }} />
+        </Stack>
+      )}
+      {width >= 1024 && (
+        <Flex>
+          <Stack
+            style={{ width: "50%", height: "100%", zIndex: 1 }}
+            align="center"
+            justify="center"
+          >
+            <Text>Oh no,</Text>
+            <Text style={{ fontSize: "1.5rem" }}>
+              You're at the wrong coordinates!
+            </Text>
+            <Title order={1} style={{ fontSize: "15rem", color: "#F8D092" }}>
+              404
+            </Title>
+            <Button onClick={() => navigate("/")}>Back to Earth</Button>
+          </Stack>
+          <Stack
+            style={{ width: "50%", height: "100%", zIndex: 1 }}
+            justify="center"
+            align="center"
+          >
+            <Image src={Moon} style={{ width: "70%" }} />
+          </Stack>
+        </Flex>
+      )}
     </Flex>
   );
 }
