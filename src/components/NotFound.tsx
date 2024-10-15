@@ -18,6 +18,7 @@ function NotFound() {
         minWidth: "100vw",
         height: "100%",
         minHeight: "100vh",
+        maxHeight: "100vw",
         background: "#25245D",
         color: "#fff",
       }}

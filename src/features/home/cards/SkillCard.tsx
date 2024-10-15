@@ -95,6 +95,9 @@ function SkillCard({
                 I'm Khosoo.
               </Title>
               <Text size="md" style={{ color: "#fff" }}>
+                I'm a Software Developer with over 3 years of experience.
+              </Text>
+              <Text size="md" style={{ color: "#fff" }}>
                 I specialize in the research of obscure technologies and
                 full-stack services based on them.
               </Text>
