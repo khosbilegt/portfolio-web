@@ -9,14 +9,17 @@ import {
   Button,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconChevronRight } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { AvatarImage } from "../../assets";
+import Blog from "../features/blog/Blog";
+import Playground from "../features/playground/Playground";
+import Home from "../features/dashboard/Home";
+import { AvatarImage } from "../assets";
 
 const pages = [
   {
     title: "About",
+    name: "about",
     link: "/",
     children: [
       {
@@ -31,23 +34,39 @@ const pages = [
   },
   {
     title: "Projects",
+    name: "projects",
     link: "/projects",
   },
   {
     title: "Blog",
+    name: "blog",
     link: "/blog",
   },
   {
     title: "Playground",
+    name: "playground",
     link: "/playground",
   },
 ];
 
-function Dashboard() {
+function Layout() {
   const location = useLocation();
   const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
   const [opened, { toggle }] = useDisclosure();
+
+  const renderContent = (name: string) => {
+    switch (name) {
+      case "projects":
+        return <Blog />;
+      case "blog":
+        return <Blog />;
+      case "playground":
+        return <Playground />;
+      default:
+        return <Home />;
+    }
+  };
 
   useEffect(() => {
     pages?.forEach((page, index) => {
@@ -96,7 +115,7 @@ function Dashboard() {
                     <Button
                       variant="light"
                       key={childIndex}
-                      bg={index === activeIndex ? "" : "transparent"}
+                      bg={"transparent"}
                       style={{ borderRadius: 3 }}
                       onClick={() => navigate(page.link + "#" + child.hash)}
                     >
@@ -110,10 +129,10 @@ function Dashboard() {
         </Stack>
       </AppShell.Navbar>
       <AppShell.Main>
-        <Flex></Flex>
+        <Flex>{renderContent(pages[activeIndex]?.name)}</Flex>
       </AppShell.Main>
     </AppShell>
   );
 }
 
-export default Dashboard;
+export default Layout;

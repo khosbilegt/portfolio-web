@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import Dashboard from "../features/dashboard/Dashboard";
+import Layout from "./Layout";
 
 function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="*" element={<Dashboard />} />
+        <Route path="*" element={<Layout />} />
       </Routes>
     </BrowserRouter>
   );
