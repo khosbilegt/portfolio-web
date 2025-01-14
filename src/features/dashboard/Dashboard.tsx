@@ -1,13 +1,33 @@
-import { AppShell, Burger, Flex, Stack, NavLink } from "@mantine/core";
+import {
+  AppShell,
+  Burger,
+  Flex,
+  Stack,
+  NavLink,
+  Avatar,
+  Text,
+  Button,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronRight } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
+import { AvatarImage } from "../../assets";
 
 const pages = [
   {
     title: "About",
     link: "/",
+    children: [
+      {
+        title: "Education",
+        hash: "education",
+      },
+      {
+        title: "Experience",
+        hash: "experience",
+      },
+    ],
   },
   {
     title: "Projects",
@@ -25,6 +45,7 @@ const pages = [
 
 function Dashboard() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
   const [opened, { toggle }] = useDisclosure();
 
@@ -45,24 +66,47 @@ function Dashboard() {
         <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
       </AppShell.Header>
       <AppShell.Navbar p="md">
-        <Stack gap={0}>
-          {pages.map((page, index) => (
-            <NavLink
-              key={index}
-              href={page.link}
-              label={page.title}
-              style={{ borderRadius: 3 }}
-              rightSection={
-                <IconChevronRight
-                  size="0.8rem"
-                  stroke={1.5}
-                  className="mantine-rotate-rtl"
-                />
-              }
-              variant="filled"
-              active={index === activeIndex}
-            />
-          ))}
+        <Stack gap={2} align="center">
+          <Avatar src={AvatarImage} size={"xl"} />
+          <Text>Khosbilegt.B</Text>
+          <Text size="sm" c="gray.6">
+            Software Developer
+          </Text>
+        </Stack>
+        <Stack gap={0} mt={7}>
+          {pages.map((page, index) =>
+            page?.children === undefined || page?.children?.length === 0 ? (
+              <NavLink
+                key={index}
+                href={page.link}
+                label={page.title}
+                style={{ borderRadius: 3 }}
+                active={index === activeIndex}
+              />
+            ) : (
+              <NavLink
+                key={index}
+                href={page.link}
+                label={page.title}
+                style={{ borderRadius: 3 }}
+                active={index === activeIndex}
+              >
+                <Stack gap={3} mt={5}>
+                  {page.children?.map((child, childIndex) => (
+                    <Button
+                      variant="light"
+                      key={childIndex}
+                      bg={index === activeIndex ? "" : "transparent"}
+                      style={{ borderRadius: 3 }}
+                      onClick={() => navigate(page.link + "#" + child.hash)}
+                    >
+                      {child.title}
+                    </Button>
+                  ))}
+                </Stack>
+              </NavLink>
+            )
+          )}
         </Stack>
       </AppShell.Navbar>
       <AppShell.Main>
