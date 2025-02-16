@@ -1,5 +1,4 @@
-import { Button, Container, Flex, Grid, useMantineTheme } from "@mantine/core";
-import { JumboTitle } from "../../../components/JumboTitle";
+import { Container, Grid, useMantineTheme } from "@mantine/core";
 import BlogCard from "../components/BlogCard";
 
 type Blog = {
