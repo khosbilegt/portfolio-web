@@ -6,7 +6,7 @@ import classes from "./Hero.module.css";
 export const Hero = () => (
   <Container
     bg="var(--mantine-color-body)"
-    h={"80vh"}
+    h={"90vh"}
     px={0}
     py={{
       base: "calc(var(--mantine-spacing-lg) * 4)",
