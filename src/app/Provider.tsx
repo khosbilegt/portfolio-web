@@ -4,7 +4,7 @@ import "@mantine/core/styles.css";
 
 function Provider() {
   return (
-    <MantineProvider>
+    <MantineProvider defaultColorScheme="dark">
       <App />
     </MantineProvider>
   );

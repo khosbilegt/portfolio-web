@@ -1,4 +1,5 @@
 import {
+  ActionIcon,
   Anchor,
   Burger,
   Button,
@@ -9,8 +10,9 @@ import {
   MantineBreakpoint,
   MantineRadius,
   Text,
+  useMantineColorScheme,
 } from "@mantine/core";
-import { IconArrowRight } from "@tabler/icons-react";
+import { IconArrowRight, IconMoon, IconSun } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import classes from "./Header.module.css";
 
@@ -68,6 +70,10 @@ function Header({
   radius = 30,
   ...containerProps
 }: Header01Props) {
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme({
+    keepTransitions: true,
+  });
+
   return (
     <Container
       className={classes.container}
@@ -122,6 +128,9 @@ function Header({
                 {link.label}
               </Anchor>
             ))}
+            <ActionIcon variant="subtle" onClick={() => toggleColorScheme()}>
+              {colorScheme === "dark" ? <IconSun /> : <IconMoon />}
+            </ActionIcon>
           </Flex>
         </motion.div>
         <Button

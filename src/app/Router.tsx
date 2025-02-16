@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import Layout from "./Layout";
-import Blog from "../features/blog/Blog";
 import Home from "../features/home/pages/Home";
 import About from "../features/about/pages/About";
+import { Blog } from "../features/blog/pages/Blog";
 
 function Router() {
   return (
