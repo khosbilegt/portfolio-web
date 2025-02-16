@@ -1,5 +1,12 @@
+import { Stack } from "@mantine/core";
+import { Hero } from "../components/Hero";
+
 function Home() {
-  return <p>Test</p>;
+  return (
+    <Stack>
+      <Hero />
+    </Stack>
+  );
 }
 
 export default Home;
