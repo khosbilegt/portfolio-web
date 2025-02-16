@@ -34,14 +34,14 @@ type LinkGroupItem = {
 const LinkGroup = ({ title, links }: LinkGroupItem) => (
   <Box>
     <Text fw="bold">{title}</Text>
-    {links.map((link) => (
+    {links.map((link, index) => (
       <Anchor
         c="dimmed"
         className={classes.link}
         display="block"
         fz="sm"
         href={link.href}
-        key={link.href}
+        key={index}
         py={4}
         underline="never"
       >

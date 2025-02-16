@@ -1,14 +1,13 @@
-import { Flex, Stack } from "@mantine/core";
+import { Stack } from "@mantine/core";
 import { Hero } from "../components/Hero";
 import Experience from "../components/Experience";
+import HomeCard from "../components/HomeCard";
 
 function Home() {
   return (
     <Stack>
       <Hero />
-      <Flex justify={"center"}>
-        <Experience />
-      </Flex>
+      <HomeCard title="Experience" children={<Experience />} />
     </Stack>
   );
 }

@@ -1,4 +1,4 @@
-import { Stack, Timeline, Title, Text } from "@mantine/core";
+import { Timeline, Text } from "@mantine/core";
 
 const experiences = [
   {
@@ -27,25 +27,25 @@ const experiences = [
     company: "[Insert Company Name]",
     start_date: "Present",
     end_date: "Future",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "I am always open to new opportunities.",
   },
 ];
 
 function Experience() {
   return (
-    <Stack>
-      <Title order={2}>Experience</Title>
-      <Timeline active={experiences?.length - 2}>
-        {experiences.map((experience) => (
-          <Timeline.Item key={experience.company} title={experience.title}>
-            <Text c="dimmed" size="sm">
-              {experience.company}
-            </Text>
-            <Text>{experience.description}</Text>
-          </Timeline.Item>
-        ))}
-      </Timeline>
-    </Stack>
+    <Timeline active={experiences?.length - 2}>
+      {experiences.map((experience) => (
+        <Timeline.Item key={experience.company} title={experience.title}>
+          <Text c="dimmed" size="sm">
+            {experience.company}
+          </Text>
+          <Text>{experience.description}</Text>
+          <Text>
+            {experience.start_date} - {experience.end_date}
+          </Text>
+        </Timeline.Item>
+      ))}
+    </Timeline>
   );
 }
 
