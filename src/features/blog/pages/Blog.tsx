@@ -1,20 +1,9 @@
 import { Container, Grid, useMantineTheme } from "@mantine/core";
 import BlogCard from "../components/BlogCard";
-
-type Blog = {
-  backgroundImageUrl: string;
-  backgroundImageAlt: string;
-  backgroundImageSizes?: string;
-  title: string;
-  tag: string;
-  authorName: string;
-  authorAvatarAlt: string;
-  authorAvatarUrl: string;
-  publishedAt: string;
-};
+import { BlogDefinition } from "../types";
 
 export type Blog01Props = {
-  blogs?: Blog[];
+  blogs?: BlogDefinition[];
 };
 
 export const Blog = ({ blogs = BLOGS }: Blog01Props) => {
@@ -40,9 +29,7 @@ export const Blog = ({ blogs = BLOGS }: Blog01Props) => {
                 backgroundImageSizes={`(max-width: ${theme.breakpoints.md}) 100vw, 33vw`}
                 title={blog.title}
                 tag={blog.tag}
-                authorName={blog.authorName}
-                authorAvatarUrl={blog.authorAvatarUrl}
-                authorAvatarAlt={blog.authorAvatarAlt}
+                description={blog.description}
                 publishedAt={blog.publishedAt}
                 index={index}
               />
@@ -54,17 +41,14 @@ export const Blog = ({ blogs = BLOGS }: Blog01Props) => {
   );
 };
 
-const BLOGS: Blog[] = [
+const BLOGS: BlogDefinition[] = [
   {
     backgroundImageUrl:
       "https://images.unsplash.com/photo-1455612693675-112974d4880b?q=80&w=900&h=900&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     backgroundImageAlt: "",
     title: "Smart Home Features Buyers Want Now",
     tag: "Market",
-    authorName: "Liam Novak",
-    authorAvatarUrl:
-      "https://images.unsplash.com/flagged/photo-1595514191830-3e96a518989b?q=80&w=900&h=900&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?&format&fit=facearea&facepad=3&w=256&h=256&q=80&ixlib=rb-1.2.1",
-    authorAvatarAlt: "Liam Novak",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     publishedAt: "Dec 4th, 2024",
   },
   {
@@ -73,10 +57,7 @@ const BLOGS: Blog[] = [
     backgroundImageAlt: "",
     title: "Luxury Market: Beyond the Basics",
     tag: "Investing",
-    authorName: "Emily Nakamura",
-    authorAvatarUrl:
-      "https://images.unsplash.com/photo-1542996966-2e31c00bae31?&format&fit=facearea&facepad=3&w=256&h=256&q=80&ixlib=rb-1.2.1",
-    authorAvatarAlt: "Emily Nakamura",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     publishedAt: "Nov 25th, 2024",
   },
   {
@@ -85,10 +66,7 @@ const BLOGS: Blog[] = [
     backgroundImageAlt: "",
     title: "First-Time Buyer's Guide to Mortgages",
     tag: "Tips",
-    authorName: "Michael Rodriguez",
-    authorAvatarUrl:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&format&fit=facearea&facepad=3&w=256&h=256&q=80&ixlib=rb-1.2.1",
-    authorAvatarAlt: "Michael Rodriguez",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     publishedAt: "Nov 19th, 2024",
   },
   {
@@ -97,10 +75,7 @@ const BLOGS: Blog[] = [
     backgroundImageAlt: "",
     title: "First-Time Buyer's Guide to Mortgages",
     tag: "Tips",
-    authorName: "Michael Rodriguez",
-    authorAvatarUrl:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&format&fit=facearea&facepad=3&w=256&h=256&q=80&ixlib=rb-1.2.1",
-    authorAvatarAlt: "Michael Rodriguez",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     publishedAt: "Nov 19th, 2024",
   },
 ] as const;

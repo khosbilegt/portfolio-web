@@ -23,7 +23,7 @@ export type HeaderLink = {
 
 const HEADER_LINKS: HeaderLink[] = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+  { label: "Projects", href: "/project" },
   { label: "Blog", href: "/blog" },
 ];
 
