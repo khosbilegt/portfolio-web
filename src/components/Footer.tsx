@@ -64,40 +64,22 @@ export const Footer = () => (
       <Grid>
         <Grid.Col span={{ base: 6, md: 3 }}>
           <LinkGroup
-            title="Blocks"
+            title="Home"
             links={[
-              { title: "Banners", href: "#" },
-              { title: "Features", href: "#" },
-              { title: "Footers", href: "#" },
-              { title: "Headers", href: "#" },
-              { title: "Heros", href: "#" },
-              { title: "Navbars", href: "#" },
+              { title: "Hero", href: "/#hero" },
+              { title: "Experience", href: "/#experience" },
+              { title: "Education", href: "/#education" },
+              { title: "Certification", href: "/#certificate" },
             ]}
           />
         </Grid.Col>
         <Grid.Col span={{ base: 6, md: 3 }}>
           <LinkGroup
-            title="Components"
+            title="Navigation"
             links={[
-              { title: "Accordion", href: "#" },
-              { title: "AutoScrollView", href: "#" },
-              { title: "Carousel", href: "#" },
-              { title: "Jumbo Title", href: "#" },
-              { title: "Ratings", href: "#" },
-              { title: "Stats", href: "#" },
-            ]}
-          />
-        </Grid.Col>
-        <Grid.Col span={{ base: 6, md: 3 }}>
-          <LinkGroup
-            title="Company"
-            links={[
-              { title: "About", href: "#" },
-              { title: "Blog", href: "#" },
-              { title: "Careers", href: "#" },
-              { title: "Press", href: "#" },
-              { title: "Privacy Policy", href: "#" },
-              { title: "Terms of Service", href: "#" },
+              { title: "Home", href: "/" },
+              { title: "Projects", href: "/project" },
+              { title: "Blog", href: "/blog" },
             ]}
           />
         </Grid.Col>
@@ -111,7 +93,7 @@ export const Footer = () => (
                     <IconBrandGithubFilled size={16} /> Github
                   </Flex>
                 ),
-                href: "#",
+                href: "https://github.com/khosbilegt/",
               },
               {
                 title: (
@@ -119,15 +101,7 @@ export const Footer = () => (
                     <IconBrandLinkedinFilled size={16} /> LinkedIn
                   </Flex>
                 ),
-                href: "#",
-              },
-              {
-                title: (
-                  <Flex align="center" gap={4}>
-                    <IconBrandX size={16} /> X
-                  </Flex>
-                ),
-                href: "#",
+                href: "https://www.linkedin.com/in/khosbilegt-bilegsaikhan-82929424b/",
               },
               {
                 title: (
@@ -135,52 +109,18 @@ export const Footer = () => (
                     <IconBrandYoutubeFilled size={16} /> YouTube
                   </Flex>
                 ),
-                href: "#",
+                href: "https://www.youtube.com/@khosbilegtbilegsaikhan7542",
               },
             ]}
           />
         </Grid.Col>
       </Grid>
-      <Divider my="xl" />
       <Flex justify={{ sm: "space-between" }} wrap="wrap" gap="xl">
         <Box maw={{ sm: 300 }}>
-          <Flex align="center">
-            <Image
-              component={"img"}
-              src="/logo-light.png"
-              width={138}
-              height={23}
-              alt="Titanium"
-              darkHidden
-            />
-            <Image
-              component={"img"}
-              src="/logo-dark.png"
-              width={138}
-              height={23}
-              alt="Titanium"
-              lightHidden
-            />
-          </Flex>
           <Text mt="xs" size="xs" c="dimmed">
-            © 2024 Titanium, Inc. All rights reserved.
+            © 2025 Khosbilegt.B All rights reserved.
           </Text>
         </Box>
-        <Anchor component={"a"} href="#" maw={{ sm: 300 }} underline="never">
-          <Alert bg="var(--mantine-color-body)" radius="md">
-            <Flex gap="xs">
-              <IconHeartHandshake
-                color="var(--mantine-color-text)"
-                size={24}
-                style={{ flexShrink: 0 }}
-              />
-              <Text fz="sm">
-                <strong>Join our affiliate program.</strong> Earn 30% commission
-                on every sale.
-              </Text>
-            </Flex>
-          </Alert>
-        </Anchor>
       </Flex>
     </Container>
   </Container>
