@@ -1,4 +1,4 @@
-import { Stack } from "@mantine/core";
+import { Flex, Stack } from "@mantine/core";
 import { Hero } from "../components/Hero";
 import Experience from "../components/Experience";
 import HomeCard from "../components/HomeCard";
@@ -9,7 +9,9 @@ function Home() {
     <Stack gap={"lg"}>
       <Hero />
       <HomeCard title="Experience" children={<Experience />} />
+      <Flex h={100} />
       <HomeCard title="Education" children={<Education />} />
+      <Flex h={100} />
     </Stack>
   );
 }

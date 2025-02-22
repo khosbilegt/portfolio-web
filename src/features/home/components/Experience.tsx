@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { portfolioManagerURL } from "../../../app/Variables";
 import { useEffect, useState } from "react";
-import { Button, Card, Flex, Text, Timeline } from "@mantine/core";
+import { Anchor, Button, Card, Flex, Text, Timeline } from "@mantine/core";
 import { useNavigate } from "react-router";
 
 interface Experience {
   title: string;
   company: string;
+  website: string;
   start_date: string;
   end_date: string;
   skills: string[];
@@ -37,7 +38,10 @@ function Experience() {
   }, [data]);
 
   return (
-    <Timeline active={experiences?.length - 2} w={"50%"}>
+    <Timeline
+      active={experiences?.length - 2}
+      w={{ xs: "80%", md: "50%", lg: "40%" }}
+    >
       {experiences.map((experience: Experience, index: number) => (
         <Timeline.Item key={index}>
           <Card style={{ display: "flex", gap: "5px" }}>
@@ -47,9 +51,9 @@ function Experience() {
             <Text size="lg" fw={500}>
               {experience.title}
             </Text>
-            <Text c="dimmed" size="sm">
+            <Anchor c="dimmed" size="sm" href={experience.website}>
               {experience.company}
-            </Text>
+            </Anchor>
             <Text size="md">{experience.description}</Text>
             <Flex gap={5} mt={5} wrap={"wrap"}>
               {experience.skills.map((skill: string, index: number) => (

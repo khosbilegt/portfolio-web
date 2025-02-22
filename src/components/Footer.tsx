@@ -1,22 +1,10 @@
 "use client";
 
-import {
-  Alert,
-  Anchor,
-  Box,
-  Container,
-  Divider,
-  Flex,
-  Grid,
-  Image,
-  Text,
-} from "@mantine/core";
+import { Anchor, Box, Container, Flex, Grid, Text } from "@mantine/core";
 import {
   IconBrandGithubFilled,
   IconBrandLinkedinFilled,
-  IconBrandX,
   IconBrandYoutubeFilled,
-  IconHeartHandshake,
 } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import classes from "./Footer.module.css";

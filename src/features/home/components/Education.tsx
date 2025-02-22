@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { portfolioManagerURL } from "../../../app/Variables";
 import { useEffect, useState } from "react";
-import { Card, Text, Timeline } from "@mantine/core";
+import { Anchor, Card, Text, Timeline } from "@mantine/core";
 
 interface Education {
   title: string;
+  website: string;
   university: string;
   start_date: string;
   end_date: string;
@@ -34,7 +35,10 @@ function Education() {
   }, [data]);
 
   return (
-    <Timeline active={educations?.length - 1} w={"50%"}>
+    <Timeline
+      active={educations?.length - 1}
+      w={{ xs: "80%", md: "50%", lg: "40%" }}
+    >
       {educations.map((education: Education, index: number) => (
         <Timeline.Item key={index}>
           <Card style={{ display: "flex", gap: "5px" }}>
@@ -44,9 +48,9 @@ function Education() {
             <Text size="lg" fw={500}>
               {education.title}
             </Text>
-            <Text c="dimmed" size="sm">
+            <Anchor c="dimmed" size="sm" href={education.website}>
               {education.university}
-            </Text>
+            </Anchor>
             <Text size="md">{education.description}</Text>
           </Card>
         </Timeline.Item>
