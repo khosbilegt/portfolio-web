@@ -1,48 +1,72 @@
-import { Timeline, Text } from "@mantine/core";
+import { useQuery } from "@tanstack/react-query";
+import { portfolioManagerURL } from "../../../app/Variables";
+import { useEffect, useState } from "react";
+import { Button, Card, Flex, Text, Timeline } from "@mantine/core";
+import { useNavigate } from "react-router";
 
-const experiences = [
-  {
-    title: "Game Developer",
-    company: "Digital Solutions",
-    start_date: "2022-06-01",
-    end_date: "2022-11-01",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    title: "Research Assistant",
-    company: "National University of Mongolia",
-    start_date: "2021-09-01",
-    end_date: "2023-06-01",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    title: "Full-Stack Developer",
-    company: "Unitel LLC",
-    start_date: "2023-06-01",
-    end_date: "Present",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    title: "Full-Stack Developer",
-    company: "[Insert Company Name]",
-    start_date: "Present",
-    end_date: "Future",
-    description: "I am always open to new opportunities.",
-  },
-];
+interface Experience {
+  title: string;
+  company: string;
+  start_date: string;
+  end_date: string;
+  skills: string[];
+  description: string;
+}
 
 function Experience() {
+  const experienceBlockId = 1;
+  const navigate = useNavigate();
+  const [experiences, setExperiences] = useState<Experience[]>([]);
+
+  const { data } = useQuery({
+    queryKey: ["experiences"],
+    queryFn: async () => {
+      const response = await fetch(
+        `${portfolioManagerURL}/api/page/block/${experienceBlockId}`
+      );
+      return response.json();
+    },
+  });
+
+  useEffect(() => {
+    const tempExperiences: Experience[] = [];
+    data?.definition?.experiences?.map((experience: Experience) => {
+      tempExperiences.push(experience);
+    });
+    setExperiences(tempExperiences);
+  }, [data]);
+
   return (
-    <Timeline active={experiences?.length - 2}>
-      {experiences.map((experience) => (
-        <Timeline.Item key={experience.company} title={experience.title}>
-          <Text c="dimmed" size="sm">
-            {experience.company}
-          </Text>
-          <Text>{experience.description}</Text>
-          <Text>
-            {experience.start_date} - {experience.end_date}
-          </Text>
+    <Timeline active={experiences?.length - 2} w={"50%"}>
+      {experiences.map((experience: Experience, index: number) => (
+        <Timeline.Item key={index}>
+          <Card style={{ display: "flex", gap: "5px" }}>
+            <Text size="sm" c={"blue"}>
+              {experience.start_date} - {experience.end_date}
+            </Text>
+            <Text size="lg" fw={500}>
+              {experience.title}
+            </Text>
+            <Text c="dimmed" size="sm">
+              {experience.company}
+            </Text>
+            <Text size="md">{experience.description}</Text>
+            <Flex gap={5} mt={5} wrap={"wrap"}>
+              {experience.skills.map((skill: string, index: number) => (
+                <Button
+                  key={index}
+                  color="blue"
+                  variant="filled"
+                  size="compact-sm"
+                  onClick={() => {
+                    navigate(`/project?tags=${skill}`);
+                  }}
+                >
+                  {skill}
+                </Button>
+              ))}
+            </Flex>
+          </Card>
         </Timeline.Item>
       ))}
     </Timeline>
