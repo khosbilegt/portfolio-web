@@ -1,10 +1,7 @@
 import { Badge, Box, Card, Group, Image, Stack, Text } from "@mantine/core";
 import { motion } from "motion/react";
-import { useNavigate } from "react-router";
-import { BlogDefinition } from "../types";
-import classes from "./BlogCard.module.css";
 
-const BlogCard = ({
+function CertificateCard({
   backgroundImageUrl,
   backgroundImageAlt,
   backgroundImageSizes,
@@ -12,12 +9,19 @@ const BlogCard = ({
   tag,
   description,
   publishedAt,
+  url,
   index = 1,
-}: BlogDefinition & {
+}: {
+  backgroundImageUrl: string;
+  backgroundImageAlt: string;
+  backgroundImageSizes: string;
+  title: string;
+  tag: string;
+  url: string;
+  description: string;
+  publishedAt: string;
   index?: number;
-}) => {
-  const navigate = useNavigate();
-
+}) {
   return (
     <motion.div
       initial={{ opacity: 0.0, y: 40 }}
@@ -30,17 +34,23 @@ const BlogCard = ({
         transition={{ type: "spring" }}
         style={{ borderRadius: "var(--mantine-radius-lg)" }}
       >
-        <Card
-          radius="lg"
-          p="xl"
-          className={classes["blog-card"]}
-          onClick={() => navigate(`/blog/${title}`)}
-        >
+        <Card radius="lg" p="xl" onClick={() => window.open(url)}>
           <Stack>
-            <Box pos="relative" w="100%" style={{ aspectRatio: "9/6" }}>
+            <Box
+              pos="relative"
+              w="100%"
+              style={{
+                aspectRatio: "9/6",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
               <Image
                 component={"img"}
                 radius="lg"
+                w={200}
+                h={200}
+                style={{ objectFit: "scale-down", objectPosition: "center" }}
                 src={backgroundImageUrl}
                 alt={backgroundImageAlt}
                 sizes={backgroundImageSizes}
@@ -61,6 +71,6 @@ const BlogCard = ({
       </motion.div>
     </motion.div>
   );
-};
+}
 
-export default BlogCard;
+export default CertificateCard;

@@ -3,6 +3,7 @@ import { portfolioManagerURL } from "../../../app/Variables";
 import { useEffect, useState } from "react";
 import { Anchor, Button, Card, Flex, Text, Timeline } from "@mantine/core";
 import { useNavigate } from "react-router";
+import { motion } from "motion/react";
 
 interface Experience {
   title: string;
@@ -44,33 +45,53 @@ function Experience() {
     >
       {experiences.map((experience: Experience, index: number) => (
         <Timeline.Item key={index}>
-          <Card style={{ display: "flex", gap: "5px" }}>
-            <Text size="sm" c={"blue"}>
-              {experience.start_date} - {experience.end_date}
-            </Text>
-            <Text size="lg" fw={500}>
-              {experience.title}
-            </Text>
-            <Anchor c="dimmed" size="sm" href={experience.website}>
-              {experience.company}
-            </Anchor>
-            <Text size="md">{experience.description}</Text>
-            <Flex gap={5} mt={5} wrap={"wrap"}>
-              {experience.skills.map((skill: string, index: number) => (
-                <Button
-                  key={index}
-                  color="blue"
-                  variant="filled"
-                  size="compact-sm"
-                  onClick={() => {
-                    navigate(`/project?tags=${skill}`);
-                  }}
-                >
-                  {skill}
-                </Button>
-              ))}
-            </Flex>
-          </Card>
+          <motion.div
+            initial={{ opacity: 0.0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.8,
+              delay: 0.2 * index,
+              ease: "easeInOut",
+            }}
+            viewport={{ once: true }}
+          >
+            <motion.div
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "var(--mantine-shadow-xl)",
+              }}
+              transition={{ type: "spring" }}
+              style={{ borderRadius: "var(--mantine-radius-lg)" }}
+            >
+              <Card style={{ display: "flex", gap: "5px" }}>
+                <Text size="sm" c={"blue"}>
+                  {experience.start_date} - {experience.end_date}
+                </Text>
+                <Text size="lg" fw={500}>
+                  {experience.title}
+                </Text>
+                <Anchor c="dimmed" size="sm" href={experience.website}>
+                  {experience.company}
+                </Anchor>
+                <Text size="md">{experience.description}</Text>
+                <Flex gap={5} mt={5} wrap={"wrap"}>
+                  {experience.skills.map((skill: string, index: number) => (
+                    <Button
+                      key={index}
+                      color="blue"
+                      variant="filled"
+                      size="compact-sm"
+                      onClick={() => {
+                        navigate(`/project?tags=${skill}`);
+                      }}
+                    >
+                      {skill}
+                    </Button>
+                  ))}
+                </Flex>
+              </Card>
+            </motion.div>
+          </motion.div>
         </Timeline.Item>
       ))}
     </Timeline>
