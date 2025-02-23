@@ -1,12 +1,75 @@
-import { Flex } from "@mantine/core";
+import { Chip, Flex, Input, Stack } from "@mantine/core";
 import { BlogDefinition } from "../types";
 import BlogList from "../components/BlogList";
+import { IconSearch } from "@tabler/icons-react";
+import { useEffect, useState } from "react";
+import { Tag } from "../../../types/types";
+import { useQuery } from "@tanstack/react-query";
+import { portfolioManagerURL } from "../../../app/Variables";
 
 export const BlogExplorer = () => {
+  const [searchText, setSearchText] = useState("");
+  const [tags, setTags] = useState<Tag[]>([]);
+  const [selectedTags, setSelectedTags] = useState<number[]>([]);
+
+  const { data: tagData } = useQuery(["tags"], async () => {
+    const response = await fetch(`${portfolioManagerURL}/api/page/tags`);
+    return response.json();
+  });
+
+  useEffect(() => {
+    const tempTags = tagData?.map((tag: Tag) => {
+      return {
+        id: tag.id,
+        name: tag.name,
+      };
+    });
+    setTags(tempTags);
+  }, [tagData]);
+
+  useEffect(() => {
+    console.log(selectedTags);
+  }, [selectedTags]);
+
   return (
-    <Flex>
+    <Stack align="center">
+      <Stack w={{ base: "100%", md: "40%" }}>
+        <Input
+          w={"100%"}
+          placeholder="Search"
+          leftSection={<IconSearch size={15} />}
+          value={searchText}
+          onChange={(e) => setSearchText(e.currentTarget.value)}
+        />
+      </Stack>
+      <Flex
+        w={{ base: "100%", md: "40%" }}
+        wrap={"wrap"}
+        gap={5}
+        rowGap={10}
+        justify={"center"}
+      >
+        {tags?.map((tag: Tag) => {
+          return (
+            <Chip
+              key={tag.id}
+              onClick={() => {
+                setSelectedTags((prev) => {
+                  if (prev.includes(tag.id)) {
+                    return prev.filter((id) => id !== tag.id);
+                  } else {
+                    return [...prev, tag.id];
+                  }
+                });
+              }}
+            >
+              {tag.name}
+            </Chip>
+          );
+        })}
+      </Flex>
       <BlogList blogs={BLOGS} />
-    </Flex>
+    </Stack>
   );
 };
 

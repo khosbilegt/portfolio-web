@@ -70,24 +70,12 @@ export const Hero = () => (
         >
           <Flex gap={"md"}>
             <motion.div whileHover={{ scale: 1.1 }}>
-              <Button
-                component={"a"}
-                href="#"
-                radius="xl"
-                size="xl"
-                className={classes.cta}
-              >
+              <Button radius="xl" size="xl" className={classes.cta}>
                 Browse
               </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.1 }}>
-              <Button
-                component={"a"}
-                href="#"
-                radius="xl"
-                size="xl"
-                variant="subtle"
-              >
+              <Button radius="xl" size="xl" variant="subtle">
                 About me
               </Button>
             </motion.div>

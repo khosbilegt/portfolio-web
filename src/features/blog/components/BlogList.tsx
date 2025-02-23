@@ -18,7 +18,7 @@ function BlogList({ blogs = [] }: BlogProps) {
       <Container size="lg" p={0} mt="xl">
         <Grid gutter="xl" align="center">
           {blogs.map((blog, index) => (
-            <Grid.Col key={blog.title} span={{ base: 12, md: 4 }}>
+            <Grid.Col key={index} span={{ base: 12, md: 4 }}>
               <BlogCard
                 key={blog.title}
                 backgroundImageUrl={blog.backgroundImageUrl}

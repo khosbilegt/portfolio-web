@@ -15,6 +15,7 @@ import {
 import { IconArrowRight, IconMoon, IconSun } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import classes from "./Header.module.css";
+import { useNavigate } from "react-router";
 
 export type HeaderLink = {
   label: string;
@@ -28,28 +29,13 @@ const HEADER_LINKS: HeaderLink[] = [
 ];
 
 type Header01Props = ContainerProps & {
-  /** Logo to display in the header */
   logo?: React.ReactNode;
-
-  /** Links to display in the header */
   links?: HeaderLink[];
-
-  /** Title for the call to action button */
   callToActionTitle?: string;
-
-  /** URL for the call to action button */
   callToActionUrl?: string;
-
-  /** Callback for when the menu is toggled */
   onMenuToggle?: () => void;
-
-  /** Whether the menu is open */
   isMenuOpen?: boolean;
-
-  /** Breakpoint at which the menu is displayed */
   breakpoint?: MantineBreakpoint;
-
-  /** Border radius of the header */
   radius?: MantineRadius | number;
 };
 
@@ -73,6 +59,7 @@ function Header({
   const { colorScheme, toggleColorScheme } = useMantineColorScheme({
     keepTransitions: true,
   });
+  const navigate = useNavigate();
 
   return (
     <Container
@@ -122,7 +109,7 @@ function Header({
               <Anchor
                 key={link.href}
                 className={classes.link}
-                href={link.href}
+                onClick={() => navigate(link.href)}
                 td="none"
               >
                 {link.label}
@@ -134,8 +121,7 @@ function Header({
           </Flex>
         </motion.div>
         <Button
-          component="a"
-          href={callToActionUrl}
+          onClick={() => navigate(callToActionUrl)}
           className={classes.cta}
           radius="xl"
           rightSection={<IconArrowRight size={16} />}
