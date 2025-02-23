@@ -1,11 +1,29 @@
+type Tag = {
+  id: number;
+  name: string;
+}
+
 type AnchorCardDefinition = {
   title: string;
   subtitle: string;
   thumbnail: string;
   href: string;
   href_type: string;
-  tags: string[];
+  tags: Tag[];
   create_date: string;
+}
+
+type PageDefinition = {
+  id: number;
+  key: string;
+  name: string;
+  title: string;
+  subtitle: string;
+  thumbnail: string;
+  createDate: string;
+  lastModifiedDate: string;
+  tags: Tag[];
+  contents: string[];
 }
 
 type BlogDefinition = {
@@ -22,4 +40,4 @@ type BlogProps = {
   blogs?: BlogDefinition[];
 };
 
-export type { AnchorCardDefinition, BlogDefinition, BlogProps };
+export type { AnchorCardDefinition, PageDefinition, Tag, BlogDefinition, BlogProps };

@@ -1,8 +1,17 @@
-import { motion } from "motion/react";
-
 import { AnchorCardDefinition } from "../features/blog/types";
-import { Badge, Box, Card, Group, Image, Stack, Text } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Card,
+  Flex,
+  Group,
+  Image,
+  Stack,
+  Text,
+} from "@mantine/core";
 import { useNavigate } from "react-router";
+import { Tag } from "../types/types";
+import { motion } from "motion/react";
 import classes from "./AnchorCard.module.css";
 
 function AnchorCard({
@@ -11,7 +20,7 @@ function AnchorCard({
   thumbnail,
   href,
   href_type,
-  //   tags,
+  tags,
   create_date,
   index = 1,
 }: AnchorCardDefinition & { index?: number }) {
@@ -50,7 +59,13 @@ function AnchorCard({
               />
             </Box>
             <Group mb="xs">
-              <Badge variant="light">{"Tag"}</Badge>
+              <Flex wrap={"wrap"} gap={5} w={"100%"}>
+                {tags?.map((tag: Tag, index) => (
+                  <Button key={index} size="compact-sm">
+                    {tag.name}
+                  </Button>
+                ))}
+              </Flex>
               <Text fz="sm" c="dimmed">
                 {create_date}
               </Text>
