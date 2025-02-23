@@ -1,43 +1,12 @@
-import { Container, Grid, useMantineTheme } from "@mantine/core";
-import BlogCard from "../components/BlogCard";
+import { Flex } from "@mantine/core";
 import { BlogDefinition } from "../types";
+import BlogList from "../components/BlogList";
 
-export type Blog01Props = {
-  blogs?: BlogDefinition[];
-};
-
-export const BlogList = ({ blogs = BLOGS }: Blog01Props) => {
-  const theme = useMantineTheme();
+export const BlogExplorer = () => {
   return (
-    <Container
-      bg="var(--mantine-color-body)"
-      py={{
-        base: "calc(var(--mantine-spacing-lg) * 1)",
-        xs: "calc(var(--mantine-spacing-lg) * 2)",
-        lg: "calc(var(--mantine-spacing-lg) * 3)",
-      }}
-      fluid
-    >
-      <Container size="lg" p={0} mt="xl">
-        <Grid gutter="xl" align="center">
-          {blogs.map((blog, index) => (
-            <Grid.Col key={blog.title} span={{ base: 12, md: 4 }}>
-              <BlogCard
-                key={blog.title}
-                backgroundImageUrl={blog.backgroundImageUrl}
-                backgroundImageAlt={blog.backgroundImageAlt}
-                backgroundImageSizes={`(max-width: ${theme.breakpoints.md}) 100vw, 33vw`}
-                title={blog.title}
-                tag={blog.tag}
-                description={blog.description}
-                publishedAt={blog.publishedAt}
-                index={index}
-              />
-            </Grid.Col>
-          ))}
-        </Grid>
-      </Container>
-    </Container>
+    <Flex>
+      <BlogList blogs={BLOGS} />
+    </Flex>
   );
 };
 

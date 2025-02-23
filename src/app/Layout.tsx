@@ -13,7 +13,7 @@ function Layout({ children }: { children: React.ReactNode }) {
     <Stack w={"100%"} justify="start" mt={0} style={{ padding: "5px" }}>
       <Header />
       {children}
-      <CallButton open={openCallModal} />
+      {/* <CallButton open={openCallModal} /> */}
       <CallModal isOpen={isCallModalOpen} onClose={closeCallModal} />
       <Footer />
     </Stack>

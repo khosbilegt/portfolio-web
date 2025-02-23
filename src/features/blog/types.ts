@@ -9,4 +9,8 @@ type BlogDefinition = {
   publishedAt: string;
 };
 
-export type { BlogDefinition };
+type BlogProps = {
+  blogs?: BlogDefinition[];
+};
+
+export type { BlogDefinition, BlogProps };
