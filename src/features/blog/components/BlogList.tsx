@@ -1,10 +1,8 @@
-import { Container, Grid, useMantineTheme } from "@mantine/core";
-import BlogCard from "./BlogCard";
+import { Container, Grid } from "@mantine/core";
 import { BlogProps } from "../types";
+import AnchorCard from "../../../components/AnchorCard";
 
 function BlogList({ blogs = [] }: BlogProps) {
-  const theme = useMantineTheme();
-
   return (
     <Container
       bg="var(--mantine-color-body)"
@@ -19,16 +17,15 @@ function BlogList({ blogs = [] }: BlogProps) {
         <Grid gutter="xl" align="center">
           {blogs.map((blog, index) => (
             <Grid.Col key={index} span={{ base: 12, md: 4 }}>
-              <BlogCard
-                key={blog.title}
-                backgroundImageUrl={blog.backgroundImageUrl}
-                backgroundImageAlt={blog.backgroundImageAlt}
-                backgroundImageSizes={`(max-width: ${theme.breakpoints.md}) 100vw, 33vw`}
+              <AnchorCard
+                key={index}
                 title={blog.title}
-                tag={blog.tag}
-                description={blog.description}
-                publishedAt={blog.publishedAt}
-                index={index}
+                subtitle={blog.tag}
+                thumbnail={blog.backgroundImageUrl}
+                href={`/blog/${blog.title}`}
+                href_type="internal"
+                create_date={blog.publishedAt}
+                tags={[]}
               />
             </Grid.Col>
           ))}
