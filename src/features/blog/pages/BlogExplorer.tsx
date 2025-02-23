@@ -8,12 +8,12 @@ import { useQuery } from "@tanstack/react-query";
 import { portfolioManagerURL } from "../../../app/Variables";
 import { format } from "date-fns";
 
-export const BlogExplorer = () => {
+export const BlogExplorer = ({ defaultTags }: { defaultTags: number[] }) => {
   const [searchText, setSearchText] = useState("");
   const [blogs, setBlogs] = useState<PageDefinition[]>([]);
   const [filteredBlogs, setFilteredBlogs] = useState<PageDefinition[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
-  const [selectedTags, setSelectedTags] = useState<number[]>([]);
+  const [selectedTags, setSelectedTags] = useState<number[]>(defaultTags);
 
   const { data: tagData } = useQuery(["tags"], async () => {
     const response = await fetch(`${portfolioManagerURL}/api/page/tags`);
@@ -26,14 +26,12 @@ export const BlogExplorer = () => {
   });
 
   const conductSearch = () => {
-    // Filter by search text
     const filteredBySearch = blogs.filter((blog) => {
       return (
         blog.title.toLowerCase().includes(searchText.toLowerCase()) ||
         blog.subtitle.toLowerCase().includes(searchText.toLowerCase())
       );
     });
-    // Filter by tags
     const filteredByTags = filteredBySearch.filter((blog) => {
       return selectedTags.every((tagId) =>
         blog.tags.some((tag) => tag.id === tagId)
@@ -105,7 +103,11 @@ export const BlogExplorer = () => {
               onClick={() => {
                 setSelectedTags((prev) => {
                   if (prev.includes(tag.id)) {
-                    return prev.filter((id) => id !== tag.id);
+                    if (defaultTags.includes(tag.id)) {
+                      return prev;
+                    } else {
+                      return prev.filter((id) => id !== tag.id);
+                    }
                   } else {
                     return [...prev, tag.id];
                   }

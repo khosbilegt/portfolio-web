@@ -56,6 +56,7 @@ function AnchorCard({
                 radius="lg"
                 src={thumbnail}
                 alt={title + " thumbnail"}
+                style={{ objectFit: "scale-down" }}
               />
             </Box>
             <Group mb="xs">
