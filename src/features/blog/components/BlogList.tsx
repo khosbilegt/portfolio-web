@@ -28,16 +28,7 @@ function BlogList({ blogs }: { blogs: PageDefinition[] }) {
                 }}
                 viewport={{ once: true }}
               >
-                <motion.div
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow: "var(--mantine-shadow-xl)",
-                  }}
-                  transition={{ type: "spring" }}
-                  style={{ borderRadius: "var(--mantine-radius-lg)" }}
-                >
-                  <h1>No blogs found with matching filters</h1>
-                </motion.div>
+                <h1>No pages found with matching filters</h1>
               </motion.div>
             </Grid.Col>
           )}
