@@ -1,12 +1,13 @@
-import { Chip, Flex, Input, Stack } from "@mantine/core";
+import { Button, Chip, Flex, Input, Stack } from "@mantine/core";
 import { PageDefinition } from "../types";
-import BlogList from "../components/BlogList";
 import { IconSearch } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { Tag } from "../../../types/types";
 import { useQuery } from "@tanstack/react-query";
 import { portfolioManagerURL } from "../../../app/Variables";
 import { format } from "date-fns";
+import { motion } from "motion/react";
+import BlogList from "../components/BlogList";
 
 export const BlogExplorer = ({ defaultTags }: { defaultTags: number[] }) => {
   const [searchText, setSearchText] = useState("");
@@ -14,6 +15,7 @@ export const BlogExplorer = ({ defaultTags }: { defaultTags: number[] }) => {
   const [filteredBlogs, setFilteredBlogs] = useState<PageDefinition[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
   const [selectedTags, setSelectedTags] = useState<number[]>(defaultTags);
+  const [tagLimitEnabled, setTagLimitEnabled] = useState(true);
 
   const { data: tagData } = useQuery(["tags"], async () => {
     const response = await fetch(`${portfolioManagerURL}/api/page/tags`);
@@ -40,12 +42,49 @@ export const BlogExplorer = ({ defaultTags }: { defaultTags: number[] }) => {
     setFilteredBlogs(filteredByTags);
   };
 
+  const renderTag = (tag: Tag, index: number) => {
+    return (
+      <motion.div
+        initial={{ opacity: 0.0, x: -10 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{
+          duration: 0.8,
+          delay: 0.02 * index,
+          ease: "easeInOut",
+        }}
+      >
+        <Chip
+          key={index}
+          onClick={() => {
+            setSelectedTags((prev) => {
+              if (prev.includes(tag.id)) {
+                if (defaultTags.includes(tag.id)) {
+                  return prev;
+                } else {
+                  return prev.filter((id) => id !== tag.id);
+                }
+              } else {
+                return [...prev, tag.id];
+              }
+            });
+          }}
+        >
+          {tag.name}
+        </Chip>
+      </motion.div>
+    );
+  };
+
   useEffect(() => {
-    const tempTags = tagData?.map((tag: Tag) => {
-      return {
-        id: tag.id,
-        name: tag.name,
-      };
+    const tempTags: Tag[] = [];
+    tagData?.map((tag: Tag) => {
+      if (tag.type !== "system") {
+        tempTags.push({
+          id: tag.id,
+          name: tag.name,
+          type: tag.type,
+        });
+      }
     });
     setTags(tempTags);
   }, [tagData]);
@@ -95,29 +134,25 @@ export const BlogExplorer = ({ defaultTags }: { defaultTags: number[] }) => {
         gap={5}
         rowGap={10}
         justify={"center"}
+        align={"center"}
       >
-        {tags?.map((tag: Tag) => {
-          return (
-            <Chip
-              key={tag.id}
-              onClick={() => {
-                setSelectedTags((prev) => {
-                  if (prev.includes(tag.id)) {
-                    if (defaultTags.includes(tag.id)) {
-                      return prev;
-                    } else {
-                      return prev.filter((id) => id !== tag.id);
-                    }
-                  } else {
-                    return [...prev, tag.id];
-                  }
-                });
-              }}
-            >
-              {tag.name}
-            </Chip>
-          );
+        {tags?.map((tag: Tag, index: number) => {
+          if (tagLimitEnabled) {
+            if (index < 5) {
+              return renderTag(tag, index);
+            }
+          } else {
+            return renderTag(tag, index);
+          }
         })}
+        {tags?.length > 5 && (
+          <Button
+            variant="transparent"
+            onClick={() => setTagLimitEnabled(!tagLimitEnabled)}
+          >
+            See more
+          </Button>
+        )}
       </Flex>
       <BlogList blogs={filteredBlogs} />
     </Stack>

@@ -1,6 +1,7 @@
 type Tag = {
   id: number;
   name: string;
+  type: string;
 }
 
 type AnchorCardDefinition = {
