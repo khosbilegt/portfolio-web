@@ -1,5 +1,7 @@
+import UnderConstruction from "../../../pages/UnderConstruction";
+
 function Blog() {
-  return <div>BlogReader</div>;
+  return <UnderConstruction />;
 }
 
 export default Blog;
