@@ -37,7 +37,6 @@ function AnchorCard({
         transition={{ type: "spring" }}
         style={{ borderRadius: "var(--mantine-radius-lg)" }}
       >
-        <p>Test</p>
         <Card
           radius="lg"
           p="xl"
