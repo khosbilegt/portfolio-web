@@ -1,5 +1,5 @@
 import { Container, Grid } from "@mantine/core";
-import { PageDefinition } from "../types";
+import { PageDefinition } from "../../../types/types";
 import { motion } from "motion/react";
 import AnchorCard from "../../../components/AnchorCard";
 

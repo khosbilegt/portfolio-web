@@ -1,4 +1,3 @@
-import { AnchorCardDefinition } from "../features/blog/types";
 import {
   Box,
   Button,
@@ -12,6 +11,7 @@ import {
 import { useNavigate } from "react-router";
 import { Tag } from "../types/types";
 import { motion } from "motion/react";
+import { AnchorCardDefinition } from "../types/types";
 import classes from "./AnchorCard.module.css";
 
 function AnchorCard({

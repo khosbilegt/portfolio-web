@@ -1,5 +1,5 @@
 import { Button, Chip, Flex, Input, Stack } from "@mantine/core";
-import { PageDefinition } from "../types";
+import { PageDefinition } from "../../../types/types";
 import { IconSearch } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { Tag } from "../../../types/types";
