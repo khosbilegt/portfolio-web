@@ -16,6 +16,9 @@ import { IconArrowRight, IconMoon, IconSun } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import classes from "./Header.module.css";
 import { useNavigate } from "react-router";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { portfolioManagerURL } from "../app/Variables";
+import { useEffect } from "react";
 
 export type HeaderLink = {
   label: string;
@@ -31,8 +34,6 @@ const HEADER_LINKS: HeaderLink[] = [
 type Header01Props = ContainerProps & {
   logo?: React.ReactNode;
   links?: HeaderLink[];
-  callToActionTitle?: string;
-  callToActionUrl?: string;
   onMenuToggle?: () => void;
   isMenuOpen?: boolean;
   breakpoint?: MantineBreakpoint;
@@ -47,8 +48,6 @@ function Header({
       Khosbilegt.B
     </Text>
   ),
-  callToActionTitle = "Download CV",
-  callToActionUrl = "#",
   links = HEADER_LINKS,
   onMenuToggle,
   isMenuOpen,
@@ -56,10 +55,36 @@ function Header({
   radius = 30,
   ...containerProps
 }: Header01Props) {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { colorScheme, toggleColorScheme } = useMantineColorScheme({
     keepTransitions: true,
   });
-  const navigate = useNavigate();
+
+  const { data } = useQuery({
+    queryKey: ["user_info_header"],
+
+    queryFn: async () => {
+      const token: string | null = localStorage.getItem("token");
+      if (token && token?.length > 0) {
+        const response = await fetch(`${portfolioManagerURL}/api/user`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        return response.json();
+      } else {
+        return {};
+      }
+    },
+  });
+
+  useEffect(() => {
+    const token: string | null = localStorage.getItem("token");
+    if (token) {
+      queryClient.invalidateQueries(["user_info"]);
+    }
+  }, [data]);
 
   return (
     <Container
@@ -120,15 +145,30 @@ function Header({
             </ActionIcon>
           </Flex>
         </motion.div>
-        <Button
-          onClick={() => navigate(callToActionUrl)}
-          className={classes.cta}
-          radius="xl"
-          rightSection={<IconArrowRight size={16} />}
-          style={{ flexShrink: 0 }}
-        >
-          {callToActionTitle}
-        </Button>
+        {data?.username ? (
+          <Button
+            onClick={() => {
+              localStorage.removeItem("token");
+              queryClient.invalidateQueries(["user_info_header"]);
+            }}
+            className={classes.cta}
+            radius="xl"
+            style={{ flexShrink: 0 }}
+            bg="yellow"
+          >
+            Logout
+          </Button>
+        ) : (
+          <Button
+            onClick={() => navigate("/user")}
+            className={classes.cta}
+            radius="xl"
+            rightSection={<IconArrowRight size={16} />}
+            style={{ flexShrink: 0 }}
+          >
+            Login
+          </Button>
+        )}
       </Flex>
     </Container>
   );

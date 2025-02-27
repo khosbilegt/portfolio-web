@@ -3,6 +3,8 @@ import Layout from "./Layout";
 import Home from "../features/home/pages/Home";
 import Blog from "../features/blog/pages/Blog";
 import { BlogExplorer } from "../features/blog/pages/BlogExplorer";
+import Login from "../features/user/pages/Login";
+import Register from "../features/user/pages/Register";
 
 function Router() {
   return (
@@ -29,6 +31,16 @@ function Router() {
                 children={<BlogExplorer defaultTags={[0]} />}
               />
             }
+          />
+        </Route>
+        <Route path="/user">
+          <Route
+            path="register"
+            element={<Layout key={"register"} children={<Register />} />}
+          />
+          <Route
+            index
+            element={<Layout key={"login"} children={<Login />} />}
           />
         </Route>
         <Route path="*" element={<Layout children={<Home />} />} />
