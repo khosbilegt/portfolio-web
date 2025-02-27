@@ -32,7 +32,6 @@ function Certificates() {
     data?.definition?.certificates?.map((certificate: Certificate) => {
       tempCertificates.push(certificate);
     });
-    console.log(tempCertificates);
     setCertificates(tempCertificates);
   }, [data]);
 

@@ -3,9 +3,22 @@ import { Badge, Button, Container, Flex, Stack, Text } from "@mantine/core";
 import { motion } from "motion/react";
 import classes from "./Hero.module.css";
 import { useNavigate } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import { portfolioManagerURL } from "../../../app/Variables";
 
 export const Hero = () => {
   const navigate = useNavigate();
+  const heroBlockId = 5;
+
+  const { data } = useQuery({
+    queryKey: ["hero"],
+    queryFn: async () => {
+      const response = await fetch(
+        `${portfolioManagerURL}/api/page/block/${heroBlockId}`
+      );
+      return response.json();
+    },
+  });
 
   return (
     <Container
@@ -29,7 +42,7 @@ export const Hero = () => {
             whileInView={{ opacity: 1 }}
           >
             <Badge variant="light" size="xl" mb="lg">
-              Last updated: February 16, 2025
+              Last updated: {data?.definition?.last_modified}
             </Badge>
           </motion.div>
           <motion.div
@@ -45,7 +58,7 @@ export const Hero = () => {
               style={{ textWrap: "balance" }}
               mb="sm"
             >
-              Full-Stack Developer
+              {data?.definition?.title}
             </JumboTitle>
           </motion.div>
           <motion.div
@@ -61,9 +74,7 @@ export const Hero = () => {
               mb="xl"
               style={{ textWrap: "balance" }}
             >
-              Delivering reliable and innovative solutions tailored to meet your
-              unique needs. Empowering businesses with cutting-edge technology
-              and exceptional service.
+              {data?.definition.blurb}
             </Text>
           </motion.div>
           <motion.div

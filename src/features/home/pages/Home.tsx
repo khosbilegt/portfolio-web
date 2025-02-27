@@ -25,7 +25,6 @@ function Home() {
     });
 
   useEffect(() => {
-    console.log(hash);
     switch (hash) {
       case "#experience":
         scrollToExperience();

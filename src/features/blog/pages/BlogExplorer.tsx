@@ -45,6 +45,7 @@ export const BlogExplorer = ({ defaultTags }: { defaultTags: number[] }) => {
   const renderTag = (tag: Tag, index: number) => {
     return (
       <motion.div
+        key={index}
         initial={{ opacity: 0.0, x: -10 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{
@@ -54,7 +55,6 @@ export const BlogExplorer = ({ defaultTags }: { defaultTags: number[] }) => {
         }}
       >
         <Chip
-          key={index}
           onClick={() => {
             setSelectedTags((prev) => {
               if (prev.includes(tag.id)) {
