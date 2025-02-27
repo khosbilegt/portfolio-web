@@ -3,7 +3,7 @@ import { Footer } from "../components/Footer";
 import Header from "../components/Header";
 // import CallButton from "../features/call/CallButton";
 
-function Layout({ children }: { children: React.ReactNode }) {
+function UserLayout({ children }: { children: React.ReactNode }) {
   // const [isCallModalOpen, { open: openCallModal, close: closeCallModal }] =
   // useDisclosure(false);
 
@@ -18,4 +18,4 @@ function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default Layout;
+export default UserLayout;
