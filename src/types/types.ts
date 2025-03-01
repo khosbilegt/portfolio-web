@@ -4,6 +4,12 @@ type Tag = {
   type: string;
 }
 
+type Block = {
+  id: number;
+  name: string;
+  definition: any;
+}
+
 type PageDefinition = {
   id: number;
   key: string;
@@ -27,4 +33,4 @@ type AnchorCardDefinition = {
   create_date: string;
 }
 
-export type { Tag, PageDefinition, AnchorCardDefinition };
+export type { Tag, PageDefinition, AnchorCardDefinition, Block };
