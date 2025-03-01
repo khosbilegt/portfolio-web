@@ -6,6 +6,9 @@ import { BlogExplorer } from "../features/blog/pages/BlogExplorer";
 import Login from "../features/user/pages/Login";
 import Register from "../features/user/pages/Register";
 import AdminLayout from "./AdminLayout";
+import Dashboard from "../features/admin/pages/Dashboard";
+import BlockTable from "../features/admin/pages/BlockTable";
+import PageTable from "../features/admin/pages/PageTable";
 
 function Router() {
   return (
@@ -44,8 +47,16 @@ function Router() {
             element={<UserLayout key={"login"} children={<Login />} />}
           />
         </Route>
-        <Route path="/admin">
-          <Route index element={<AdminLayout children={<Home />} />} />
+        <Route path="/admin/*">
+          <Route
+            path="block"
+            element={<AdminLayout children={<BlockTable />} />}
+          />
+          <Route
+            path="page"
+            element={<AdminLayout children={<PageTable />} />}
+          />
+          <Route index element={<AdminLayout children={<Dashboard />} />} />
         </Route>
         <Route path="*" element={<UserLayout children={<Home />} />} />
       </Routes>
