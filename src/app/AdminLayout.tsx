@@ -1,4 +1,12 @@
-import { AppShell, Flex, NavLink, Text } from "@mantine/core";
+import {
+  Anchor,
+  AppShell,
+  Breadcrumbs,
+  Flex,
+  NavLink,
+  Text,
+} from "@mantine/core";
+import { useParams } from "react-router";
 
 const navbarItems = [
   { title: "Dashboard", href: "/admin" },
@@ -6,7 +14,15 @@ const navbarItems = [
   { title: "Pages", href: "/admin/page" },
 ];
 
-function AdminLayout({ children }: { children: React.ReactNode }) {
+function AdminLayout({
+  breadcrumbItems,
+  children,
+}: {
+  breadcrumbItems?: { title: string; href: string }[];
+  children: React.ReactNode;
+}) {
+  const { id } = useParams();
+
   return (
     <AppShell
       navbar={{ width: 200, breakpoint: "sm" }}
@@ -29,7 +45,17 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
           <NavLink key={index} href={item.href} label={item.title} />
         ))}
       </AppShell.Navbar>
-      <AppShell.Main>{children}</AppShell.Main>
+      <AppShell.Main>
+        <Breadcrumbs mb={10}>
+          {breadcrumbItems?.map((item, index) => (
+            <Anchor key={index} href={item.href}>
+              {item.title}
+            </Anchor>
+          ))}
+          {id && <Text>{id}</Text>}
+        </Breadcrumbs>
+        {children}
+      </AppShell.Main>
     </AppShell>
   );
 }

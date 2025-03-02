@@ -9,6 +9,7 @@ import AdminLayout from "./AdminLayout";
 import Dashboard from "../features/admin/pages/Dashboard";
 import BlockTable from "../features/admin/pages/BlockTable";
 import PageTable from "../features/admin/pages/PageTable";
+import PageEditor from "../features/admin/pages/PageEditor";
 
 function Router() {
   return (
@@ -50,13 +51,76 @@ function Router() {
         <Route path="/admin/*">
           <Route
             path="block"
-            element={<AdminLayout children={<BlockTable />} />}
+            element={
+              <AdminLayout
+                children={<BlockTable />}
+                breadcrumbItems={[
+                  {
+                    title: "Admin",
+                    href: "/admin",
+                  },
+                  {
+                    title: "Block",
+                    href: "/admin/block",
+                  },
+                ]}
+              />
+            }
+          />
+          <Route
+            path="page/:id"
+            element={
+              <AdminLayout
+                children={<PageEditor />}
+                breadcrumbItems={[
+                  {
+                    title: "Admin",
+                    href: "/admin",
+                  },
+                  {
+                    title: "Page",
+                    href: "/admin/page",
+                  },
+                ]}
+              />
+            }
           />
           <Route
             path="page"
-            element={<AdminLayout children={<PageTable />} />}
+            element={
+              <AdminLayout
+                children={<PageTable />}
+                breadcrumbItems={[
+                  {
+                    title: "Admin",
+                    href: "/admin",
+                  },
+                  {
+                    title: "Page",
+                    href: "/admin/page",
+                  },
+                ]}
+              />
+            }
           />
-          <Route index element={<AdminLayout children={<Dashboard />} />} />
+          <Route
+            index
+            element={
+              <AdminLayout
+                children={<Dashboard />}
+                breadcrumbItems={[
+                  {
+                    title: "Admin",
+                    href: "/admin",
+                  },
+                  {
+                    title: "Dashboard",
+                    href: "/admin",
+                  },
+                ]}
+              />
+            }
+          />
         </Route>
         <Route path="*" element={<UserLayout children={<Home />} />} />
       </Routes>
