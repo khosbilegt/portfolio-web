@@ -1,6 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { portfolioManagerURL } from "../../../app/Variables";
 import {
+  ActionIcon,
   Button,
   Flex,
   JsonInput,
@@ -15,23 +16,155 @@ import {
 import { useEffect, useState } from "react";
 import { Block } from "../../../types/types";
 import { useDisclosure } from "@mantine/hooks";
+import { IconPlus } from "@tabler/icons-react";
+import { useForm } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
 
 function BlockTable() {
   const pageSize = 10;
-  const [definition, setDefinition] = useState<string>("");
-  const [selectedBlock, setSelectedBlock] = useState<Block | null>(null);
+  const queryClient = useQueryClient();
   const [tableData, setTableData] = useState<TableData>({});
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [isEditOpen, { open: openEdit, close: closeEdit }] =
+  const [isModalOpen, { open: openModal, close: closeModal }] =
     useDisclosure(false);
-  const [isDeleteOpen, { open: openDelete, close: closeDelete }] =
-    useDisclosure(false);
+  const [modalMode, setModalMode] = useState<"create" | "edit" | "delete">(
+    "edit"
+  );
+
+  const blockForm = useForm({
+    mode: "controlled",
+    initialValues: {
+      id: -1,
+      name: "",
+      definition: "",
+    },
+    validate: {
+      definition: (value) => {
+        try {
+          JSON.parse(value);
+        } catch (e) {
+          return "Invalid JSON";
+        }
+      },
+    },
+  });
 
   const { data } = useQuery(["block"], async () => {
     const response = await fetch(`${portfolioManagerURL}/api/page/block`);
     return response.json();
   });
+
+  const {
+    data: createBlockData,
+    mutate: createBlock,
+    isError: isCreateBlockError,
+    error: createBlockError,
+  } = useMutation(["create_block"], async (values: any) => {
+    const payload: any = {
+      name: values.name,
+      definition: JSON.parse(values.definition),
+    };
+    const response = await fetch(`${portfolioManagerURL}/api/page/block`, {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    if (response && response.status !== 200) {
+      throw new Error(response.statusText);
+    }
+    return response.json();
+  });
+
+  const {
+    data: deleteBlockData,
+    mutate: deleteBlock,
+    isError: isDeleteError,
+    error: deleteError,
+  } = useMutation(["delete_block"], async (id: number) => {
+    const response = await fetch(
+      `${portfolioManagerURL}/api/page/block/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    if (response && response.status > 299 && response.status < 200) {
+      throw new Error(response.statusText);
+    }
+    if (response.status === 204) {
+      return { id };
+    }
+    return response.json();
+  });
+
+  const {
+    data: editBlockData,
+    mutate: editBlock,
+    isError: isEditBlockError,
+    error: editBlockError,
+  } = useMutation(["edit_block"], async (values: any) => {
+    const payload: any = {
+      name: values.name,
+      definition: JSON.parse(values.definition),
+    };
+    const response = await fetch(
+      `${portfolioManagerURL}/api/page/block/${values.id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    if (response && response.status > 299 && response.status < 200) {
+      throw new Error(response.statusText);
+    }
+    return response.json();
+  });
+
+  useEffect(() => {
+    if (isCreateBlockError) {
+      notifications.show({
+        title: "Create Error",
+        color: "red",
+        message: createBlockError ? createBlockError.toString() : "Error",
+      });
+    }
+    if (isDeleteError) {
+      notifications.show({
+        title: "Delete Error",
+        color: "red",
+        message: deleteError ? deleteError.toString() : "Error",
+      });
+    }
+    if (isEditBlockError) {
+      notifications.show({
+        title: "Edit Error",
+        color: "red",
+        message: editBlockError ? editBlockError.toString() : "Error",
+      });
+    }
+  }, [
+    isCreateBlockError,
+    createBlockError,
+    isDeleteError,
+    deleteError,
+    isEditBlockError,
+    editBlockError,
+  ]);
+
+  useEffect(() => {
+    closeModal();
+    queryClient.invalidateQueries(["block"]);
+  }, [createBlockData, deleteBlockData, editBlockData]);
 
   useEffect(() => {
     setTotalPages(Math.ceil(data?.length / pageSize));
@@ -47,15 +180,13 @@ function BlockTable() {
           <Button
             size="compact-sm"
             onClick={() => {
-              setSelectedBlock(block);
-              console.log(block);
-              try {
-                setDefinition(JSON.stringify(block.definition));
-              } catch (error) {
-                console.error(error);
-                setDefinition("");
-              }
-              openEdit();
+              blockForm.setValues({
+                id: block.id,
+                name: block.name,
+                definition: JSON.stringify(block.definition, null, 2),
+              });
+              setModalMode("edit");
+              openModal();
             }}
           >
             Edit
@@ -64,14 +195,11 @@ function BlockTable() {
             size="compact-sm"
             bg={"red"}
             onClick={() => {
-              setSelectedBlock(block);
-              try {
-                setDefinition(JSON.stringify(block.definition));
-              } catch (error) {
-                console.error(error);
-                setDefinition("");
-              }
-              openDelete();
+              blockForm.setValues({
+                id: block.id,
+              });
+              setModalMode("delete");
+              openModal();
             }}
           >
             Delete
@@ -83,41 +211,62 @@ function BlockTable() {
 
   return (
     <Stack justify="center" align="center">
-      <Modal opened={isEditOpen} onClose={closeEdit} title="Edit">
-        <Stack>
-          <TextInput
-            label="Name"
-            value={selectedBlock?.name}
-            onChange={(e) =>
-              setSelectedBlock({
-                ...selectedBlock,
-                name: e.currentTarget.value,
-                id: selectedBlock?.id ?? 0,
-                definition: selectedBlock?.definition ?? {},
-              })
-            }
-          />
-          <JsonInput
-            label="Definition"
-            validationError="Invalid JSON"
-            value={definition}
-            onChange={(e) => setDefinition(e)}
-            autosize
-            formatOnBlur
-            minRows={4}
-          />
-          <Button>Edit</Button>
-        </Stack>
+      <Modal
+        opened={isModalOpen}
+        onClose={closeModal}
+        title={modalMode.toUpperCase()}
+      >
+        {(modalMode === "edit" || modalMode === "create") && (
+          <form
+            onSubmit={blockForm.onSubmit((values) => {
+              if (modalMode === "edit") {
+                editBlock(values);
+              } else {
+                createBlock(values);
+              }
+            })}
+          >
+            <TextInput label="Name" {...blockForm.getInputProps("name")} />
+            <JsonInput
+              minRows={4}
+              formatOnBlur
+              label="Definition"
+              {...blockForm.getInputProps("definition")}
+            />
+            <Button type="submit" w={"100%"} mt={10}>
+              Submit
+            </Button>
+          </form>
+        )}
+        {modalMode === "delete" && (
+          <Stack>
+            <Text>
+              Are you sure you want to delete this block? This action cannot be
+              undone.
+            </Text>
+            <Flex justify={"end"}>
+              <Button
+                bg="red"
+                onClick={() => {
+                  deleteBlock(blockForm.values.id);
+                }}
+              >
+                Delete
+              </Button>
+            </Flex>
+          </Stack>
+        )}
       </Modal>
-      <Modal opened={isDeleteOpen} onClose={closeDelete} title="Delete">
-        <Text>
-          Are you sure you want to delete this block? This action cannot be
-          undone.
-        </Text>
-        <Flex justify={"end"}>
-          <Button bg="red">Delete</Button>
-        </Flex>
-      </Modal>
+      <Flex justify={"end"} w={"100%"}>
+        <ActionIcon
+          onClick={() => {
+            setModalMode("create");
+            openModal();
+          }}
+        >
+          <IconPlus />
+        </ActionIcon>
+      </Flex>
       <Table data={tableData} striped />
       <Pagination total={totalPages} onChange={(e) => setPage(e)} />
     </Stack>
