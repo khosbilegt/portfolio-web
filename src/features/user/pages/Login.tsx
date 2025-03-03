@@ -128,6 +128,13 @@ function Login() {
             Don't have an account yet?{" "}
             <Anchor href="/user/register">Sign up</Anchor>
           </Text>
+          <Notification withCloseButton={false}>
+            <Text>
+              By logging in, you will get access to advanced features such as
+            </Text>
+            <Text>- Admin View in Guest Mode</Text>
+            <Text>- Commenting on Blog Posts (WIP)</Text>
+          </Notification>
         </form>
       </Card>
     </Flex>

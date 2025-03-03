@@ -2,14 +2,20 @@ import {
   Anchor,
   AppShell,
   Breadcrumbs,
+  Button,
   Flex,
   NavLink,
+  Stack,
   Text,
 } from "@mantine/core";
-import { useParams } from "react-router";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router";
+import { portfolioManagerURL } from "./Variables";
+import { useEffect } from "react";
 
 const navbarItems = [
   { title: "Dashboard", href: "/admin" },
+  { title: "Tags", href: "/admin/tag" },
   { title: "Blocks", href: "/admin/block" },
   { title: "Pages", href: "/admin/page" },
 ];
@@ -22,6 +28,31 @@ function AdminLayout({
   children: React.ReactNode;
 }) {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const { data } = useQuery({
+    queryKey: ["user_info_admin"],
+    queryFn: async () => {
+      const token: string | null = localStorage.getItem("token");
+      if (token && token?.length > 0) {
+        const response = await fetch(`${portfolioManagerURL}/api/user`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        return response.json();
+      } else {
+        return {};
+      }
+    },
+  });
+
+  useEffect(() => {
+    if (localStorage.getItem("token") === null) {
+      navigate("/");
+    }
+  }, [data]);
 
   return (
     <AppShell
@@ -38,12 +69,28 @@ function AdminLayout({
         </Flex>
       </AppShell.Header>
       <AppShell.Navbar p={5}>
-        <Text fw="bold" fz={24} mx="xs">
-          Admin Panel
-        </Text>
-        {navbarItems.map((item, index) => (
-          <NavLink key={index} href={item.href} label={item.title} />
-        ))}
+        <Stack justify="space-between" align="center" h={"100%"}>
+          <Stack w={"100%"} gap={5}>
+            {navbarItems.map((item, index) => (
+              <NavLink key={index} href={item.href} label={item.title} />
+            ))}
+          </Stack>
+          <Stack p={10}>
+            <Button variant="outline" onClick={() => navigate("/")}>
+              Return to User View
+            </Button>
+            <Button
+              variant="outline"
+              color="red"
+              onClick={() => {
+                localStorage.removeItem("token");
+                queryClient.invalidateQueries(["user_info_admin"]);
+              }}
+            >
+              Logout
+            </Button>
+          </Stack>
+        </Stack>
       </AppShell.Navbar>
       <AppShell.Main>
         <Breadcrumbs mb={10}>

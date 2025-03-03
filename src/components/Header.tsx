@@ -9,10 +9,17 @@ import {
   Group,
   MantineBreakpoint,
   MantineRadius,
+  Menu,
   Text,
   useMantineColorScheme,
 } from "@mantine/core";
-import { IconArrowRight, IconMoon, IconSun } from "@tabler/icons-react";
+import {
+  IconArrowRight,
+  IconLogout,
+  IconMoon,
+  IconSun,
+  IconUser,
+} from "@tabler/icons-react";
 import { motion } from "motion/react";
 import classes from "./Header.module.css";
 import { useNavigate } from "react-router";
@@ -63,7 +70,6 @@ function Header({
 
   const { data } = useQuery({
     queryKey: ["user_info_header"],
-
     queryFn: async () => {
       const token: string | null = localStorage.getItem("token");
       if (token && token?.length > 0) {
@@ -82,8 +88,9 @@ function Header({
   useEffect(() => {
     const token: string | null = localStorage.getItem("token");
     if (token) {
-      queryClient.invalidateQueries(["user_info"]);
+      queryClient.invalidateQueries(["user_info_header"]);
     }
+    console.log(data);
   }, [data]);
 
   return (
@@ -146,18 +153,31 @@ function Header({
           </Flex>
         </motion.div>
         {data?.username ? (
-          <Button
-            onClick={() => {
-              localStorage.removeItem("token");
-              queryClient.invalidateQueries(["user_info_header"]);
-            }}
-            className={classes.cta}
-            radius="xl"
-            style={{ flexShrink: 0 }}
-            bg="yellow"
-          >
-            Logout
-          </Button>
+          <Menu>
+            <Menu.Target>
+              <Button radius="xl">{data.username}</Button>
+            </Menu.Target>
+            <Menu.Dropdown>
+              <Menu.Label>User Actions</Menu.Label>
+              <Menu.Item
+                leftSection={<IconUser />}
+                onClick={() => navigate("/admin")}
+              >
+                Admin ({data.role === "admin" ? "Admin" : "Guest"} Mode)
+              </Menu.Item>
+              <Menu.Divider />
+              <Menu.Item
+                leftSection={<IconLogout />}
+                color="red"
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  queryClient.invalidateQueries(["user_info_header"]);
+                }}
+              >
+                Logout
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
         ) : (
           <Button
             onClick={() => navigate("/user")}

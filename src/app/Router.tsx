@@ -10,6 +10,7 @@ import Dashboard from "../features/admin/pages/Dashboard";
 import BlockTable from "../features/admin/pages/BlockTable";
 import PageTable from "../features/admin/pages/PageTable";
 import PageEditor from "../features/admin/pages/PageEditor";
+import TagTable from "../features/admin/pages/TagTable";
 
 function Router() {
   return (
@@ -49,6 +50,24 @@ function Router() {
           />
         </Route>
         <Route path="/admin/*">
+          <Route
+            path="tag"
+            element={
+              <AdminLayout
+                children={<TagTable />}
+                breadcrumbItems={[
+                  {
+                    title: "Admin",
+                    href: "/admin",
+                  },
+                  {
+                    title: "Tag",
+                    href: "/admin/tag",
+                  },
+                ]}
+              />
+            }
+          />
           <Route
             path="block"
             element={
