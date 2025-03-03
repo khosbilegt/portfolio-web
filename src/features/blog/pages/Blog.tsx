@@ -26,7 +26,7 @@ function Blog() {
                 key={tag.id}
                 radius={20}
                 onClick={() => {
-                  navigate(`/project?tag=${tag.name}`);
+                  navigate(`/project?tags=${tag.name}`);
                 }}
               >
                 {tag.name}

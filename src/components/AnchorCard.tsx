@@ -40,6 +40,7 @@ function AnchorCard({
         <Card
           radius="lg"
           p="xl"
+          miw={300}
           className={classes["anchor-card"]}
           onClick={() => {
             if (href_type === "internal") {
