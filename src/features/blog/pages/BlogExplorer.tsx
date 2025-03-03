@@ -109,7 +109,7 @@ export const BlogExplorer = ({ defaultTags }: { defaultTags: number[] }) => {
           "d MMMM, yyyy"
         ),
         tags: blog.tags,
-        contents: [],
+        contents: blog.contents,
       };
       tempBlogs.push(tempBlog);
     });

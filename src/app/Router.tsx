@@ -16,7 +16,7 @@ function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/blog">
-          <Route path=":id" element={<UserLayout children={<Blog />} />} />
+          <Route path=":key" element={<UserLayout children={<Blog />} />} />
           <Route
             index
             element={
