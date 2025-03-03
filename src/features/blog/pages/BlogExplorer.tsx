@@ -8,8 +8,10 @@ import { portfolioManagerURL } from "../../../app/Variables";
 import { format } from "date-fns";
 import { motion } from "motion/react";
 import BlogList from "../components/BlogList";
+import { useSearchParams } from "react-router";
 
 export const BlogExplorer = ({ defaultTags }: { defaultTags: number[] }) => {
+  const [searchParams] = useSearchParams();
   const [searchText, setSearchText] = useState("");
   const [blogs, setBlogs] = useState<PageDefinition[]>([]);
   const [filteredBlogs, setFilteredBlogs] = useState<PageDefinition[]>([]);
@@ -55,6 +57,7 @@ export const BlogExplorer = ({ defaultTags }: { defaultTags: number[] }) => {
         }}
       >
         <Chip
+          checked={selectedTags.includes(tag.id)}
           onClick={() => {
             setSelectedTags((prev) => {
               if (prev.includes(tag.id)) {
@@ -92,6 +95,20 @@ export const BlogExplorer = ({ defaultTags }: { defaultTags: number[] }) => {
   useEffect(() => {
     conductSearch();
   }, [selectedTags, searchText, blogs]);
+
+  useEffect(() => {
+    const queryTags = searchParams.get("tags");
+    if (queryTags) {
+      const queryTagNames = queryTags.split(",");
+      const tempSelectedTags: number[] = [];
+      tags?.forEach((tag: Tag) => {
+        if (queryTagNames.includes(tag.name)) {
+          tempSelectedTags.push(tag.id);
+        }
+      });
+      setSelectedTags(tempSelectedTags);
+    }
+  }, [searchParams, tags]);
 
   useEffect(() => {
     const tempBlogs: PageDefinition[] = [];

@@ -14,14 +14,14 @@ interface Certificate {
 }
 
 function Certificates() {
-  const certificateBlock = 3;
+  const certificateBlockId = 3;
   const [certificates, setCertificates] = useState<Certificate[]>([]);
 
   const { data } = useQuery({
     queryKey: ["certificates"],
     queryFn: async () => {
       const response = await fetch(
-        `${portfolioManagerURL}/api/page/block/${certificateBlock}`
+        `${portfolioManagerURL}/api/page/block/${certificateBlockId}`
       );
       return response.json();
     },

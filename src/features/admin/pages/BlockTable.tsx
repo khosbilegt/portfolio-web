@@ -241,6 +241,7 @@ function BlockTable() {
             <JsonInput
               minRows={4}
               formatOnBlur
+              autosize
               label="Definition"
               {...blockForm.getInputProps("definition")}
             />

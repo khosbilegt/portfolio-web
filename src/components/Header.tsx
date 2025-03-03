@@ -90,7 +90,6 @@ function Header({
     if (token) {
       queryClient.invalidateQueries(["user_info_header"]);
     }
-    console.log(data);
   }, [data]);
 
   return (

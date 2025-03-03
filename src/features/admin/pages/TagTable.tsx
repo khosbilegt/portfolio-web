@@ -119,7 +119,6 @@ function TagTable() {
   const { data: deleteData, mutate: deleteTag } = useMutation(
     ["delete_tag"],
     async (id: number) => {
-      console.log(id);
       const response = await fetch(
         `${portfolioManagerURL}/api/page/tags/${id}`,
         {

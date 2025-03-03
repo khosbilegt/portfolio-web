@@ -1,12 +1,12 @@
-import { Flex, Stack } from "@mantine/core";
-import { Hero } from "../components/Hero";
 import Experience from "../components/Experience";
 import HomeCard from "../components/HomeCard";
 import Education from "../components/Education";
 import Certificates from "../components/Certificates";
+import { Hero } from "../components/Hero";
 import { useScrollIntoView } from "@mantine/hooks";
 import { useLocation } from "react-router";
 import { useEffect } from "react";
+import { Flex, Stack } from "@mantine/core";
 
 function Home() {
   const { hash } = useLocation();
