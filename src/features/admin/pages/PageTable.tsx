@@ -42,8 +42,8 @@ function PageTable() {
       thumbnail: "",
       createDate: "",
       lastModifiedDate: "",
+      contents: "",
       tags: [],
-      contents: [],
     },
   });
 
@@ -52,68 +52,83 @@ function PageTable() {
     return response.json();
   });
 
-  const {
-    data: createPageData,
-    mutate: createPage,
-    isError: isCreateError,
-    error: createError,
-  } = useMutation(["create_page"], async (values: PageDefinition) => {
-    const response = await fetch(`${portfolioManagerURL}/api/page`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(values),
-    });
-    if (response.status < 200 && response.status >= 300) {
-      throw new Error(response.statusText);
+  const { data: createPageData, mutate: createPage } = useMutation(
+    ["create_page"],
+    async (values: PageDefinition) => {
+      const response = await fetch(`${portfolioManagerURL}/api/page`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(values),
+      });
+      if (response.status < 200 && response.status >= 300) {
+        throw new Error(response.statusText);
+      }
+      return response
+        .json()
+        .then((data) => {
+          notifications.show({
+            title: "Success",
+            message: "Page created",
+            color: "green",
+          });
+          return data;
+        })
+        .catch((error) => {
+          notifications.show({
+            title: "Error",
+            message: error.toString(),
+            color: "red",
+          });
+        });
     }
-    return response.json();
-  });
+  );
 
-  const {
-    data: deleteData,
-    mutate: deletePage,
-    isError: isDeleteError,
-    error: deleteError,
-  } = useMutation(async (id: number) => {
-    const response = await fetch(`${portfolioManagerURL}/api/page/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-    if (response.status < 200 && response.status >= 300) {
-      throw new Error(response.statusText);
+  const { data: deleteData, mutate: deletePage } = useMutation(
+    async (id: number) => {
+      const response = await fetch(`${portfolioManagerURL}/api/page/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      if (response.status < 200 && response.status >= 300) {
+        throw new Error(response.statusText);
+      }
+      if (response.status === 204) {
+        notifications.show({
+          title: "Success",
+          message: "Page Deleted",
+          color: "green",
+        });
+        return { id };
+      }
+      return response
+        .json()
+        .then((data) => {
+          notifications.show({
+            title: "Success",
+            message: "Page Deleted",
+            color: "green",
+          });
+          return data;
+        })
+        .catch((error) => {
+          notifications.show({
+            title: "Error",
+            message: error.toString(),
+            color: "red",
+          });
+        });
     }
-    if (response.status === 204) {
-      return { id };
-    }
-    return response.json();
-  });
+  );
 
   useEffect(() => {
     queryClient.invalidateQueries(["page_table"]);
     closeModal();
   }, [createPageData, deleteData]);
-
-  useEffect(() => {
-    if (isCreateError) {
-      notifications.show({
-        title: "Error",
-        message: createError ? createError.toString() : "An error occurred",
-        color: "red",
-      });
-    }
-    if (isDeleteError) {
-      notifications.show({
-        title: "Error",
-        message: deleteError ? deleteError.toString() : "An error occurred",
-        color: "red",
-      });
-    }
-  }, [isCreateError, createError, isDeleteError, deleteError]);
 
   useEffect(() => {
     setTotalPages(Math.ceil(pageData?.length / pageSize));

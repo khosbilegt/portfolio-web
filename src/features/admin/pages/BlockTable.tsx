@@ -55,111 +55,122 @@ function BlockTable() {
     return response.json();
   });
 
-  const {
-    data: createBlockData,
-    mutate: createBlock,
-    isError: isCreateBlockError,
-    error: createBlockError,
-  } = useMutation(["create_block"], async (values: any) => {
-    const payload: any = {
-      name: values.name,
-      definition: JSON.parse(values.definition),
-    };
-    const response = await fetch(`${portfolioManagerURL}/api/page/block`, {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-    if (response && response.status !== 200) {
-      throw new Error(response.statusText);
-    }
-    return response.json();
-  });
-
-  const {
-    data: deleteBlockData,
-    mutate: deleteBlock,
-    isError: isDeleteError,
-    error: deleteError,
-  } = useMutation(["delete_block"], async (id: number) => {
-    const response = await fetch(
-      `${portfolioManagerURL}/api/page/block/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    );
-    if (response && response.status > 299 && response.status < 200) {
-      throw new Error(response.statusText);
-    }
-    if (response.status === 204) {
-      return { id };
-    }
-    return response.json();
-  });
-
-  const {
-    data: editBlockData,
-    mutate: editBlock,
-    isError: isEditBlockError,
-    error: editBlockError,
-  } = useMutation(["edit_block"], async (values: any) => {
-    const payload: any = {
-      name: values.name,
-      definition: JSON.parse(values.definition),
-    };
-    const response = await fetch(
-      `${portfolioManagerURL}/api/page/block/${values.id}`,
-      {
-        method: "PATCH",
+  const { data: createBlockData, mutate: createBlock } = useMutation(
+    ["create_block"],
+    async (values: any) => {
+      const payload: any = {
+        name: values.name,
+        definition: JSON.parse(values.definition),
+      };
+      const response = await fetch(`${portfolioManagerURL}/api/page/block`, {
+        method: "POST",
         body: JSON.stringify(payload),
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
+      });
+      if (response && response.status !== 200) {
+        throw new Error(response.statusText);
       }
-    );
-    if (response && response.status > 299 && response.status < 200) {
-      throw new Error(response.statusText);
+      return response
+        .json()
+        .then((data) => {
+          notifications.show({
+            title: "Success",
+            message: "Block created",
+            color: "green",
+          });
+          return data;
+        })
+        .catch((error) => {
+          notifications.show({
+            title: "Error",
+            message: error.toString(),
+            color: "red",
+          });
+        });
     }
-    return response.json();
-  });
+  );
 
-  useEffect(() => {
-    if (isCreateBlockError) {
-      notifications.show({
-        title: "Create Error",
-        color: "red",
-        message: createBlockError ? createBlockError.toString() : "Error",
-      });
+  const { data: deleteBlockData, mutate: deleteBlock } = useMutation(
+    ["delete_block"],
+    async (id: number) => {
+      const response = await fetch(
+        `${portfolioManagerURL}/api/page/block/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      if (response && response.status > 299 && response.status < 200) {
+        throw new Error(response.statusText);
+      }
+      if (response.status === 204) {
+        return { id };
+      }
+      return response
+        .json()
+        .then((data) => {
+          notifications.show({
+            title: "Success",
+            message: "Block deleted",
+            color: "green",
+          });
+          return data;
+        })
+        .catch((error) => {
+          notifications.show({
+            title: "Error",
+            message: error.toString(),
+            color: "red",
+          });
+        });
     }
-    if (isDeleteError) {
-      notifications.show({
-        title: "Delete Error",
-        color: "red",
-        message: deleteError ? deleteError.toString() : "Error",
-      });
+  );
+
+  const { data: editBlockData, mutate: editBlock } = useMutation(
+    ["edit_block"],
+    async (values: any) => {
+      const payload: any = {
+        name: values.name,
+        definition: JSON.parse(values.definition),
+      };
+      const response = await fetch(
+        `${portfolioManagerURL}/api/page/block/${values.id}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify(payload),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      if (response && response.status > 299 && response.status < 200) {
+        throw new Error(response.statusText);
+      }
+      return response
+        .json()
+        .then((data) => {
+          notifications.show({
+            title: "Success",
+            message: "Block updated",
+            color: "green",
+          });
+          return data;
+        })
+        .catch((error) => {
+          notifications.show({
+            title: "Error",
+            message: error.toString(),
+            color: "red",
+          });
+        });
     }
-    if (isEditBlockError) {
-      notifications.show({
-        title: "Edit Error",
-        color: "red",
-        message: editBlockError ? editBlockError.toString() : "Error",
-      });
-    }
-  }, [
-    isCreateBlockError,
-    createBlockError,
-    isDeleteError,
-    deleteError,
-    isEditBlockError,
-    editBlockError,
-  ]);
+  );
 
   useEffect(() => {
     closeModal();

@@ -19,8 +19,8 @@ type PageDefinition = {
   thumbnail: string;
   createDate: string;
   lastModifiedDate: string;
+  contents: string;
   tags: Tag[];
-  contents: string[];
 }
 
 type AnchorCardDefinition = {

@@ -6,6 +6,7 @@ import { Button, Flex, Select, Stack, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Tag } from "../../../types/types";
 import { notifications } from "@mantine/notifications";
+import PageContentEditor from "../components/PageContentEditor";
 
 function PageEditor() {
   const queryClient = useQueryClient();
@@ -39,41 +40,100 @@ function PageEditor() {
     return response.json();
   });
 
-  const {
-    data: addTagData,
-    mutate: addTag,
-    isError: isAddTagError,
-    error: addTagError,
-  } = useMutation(["add_page_tag"], async (tagId: number) => {
-    const response = await fetch(
-      `${portfolioManagerURL}/api/page/${id}/tag/${tagId}`,
-      {
-        method: "PUT",
+  const { data: updatePageData, mutate: updatePage } = useMutation(
+    ["update_page"],
+    async (values: any) => {
+      const response = await fetch(`${portfolioManagerURL}/api/page/${id}`, {
+        method: "PATCH",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      }
-    );
-    return response.json();
-  });
+        body: JSON.stringify(values),
+      });
+      return response
+        .json()
+        .then((data) => {
+          notifications.show({
+            title: "Success",
+            message: "Page updated",
+            color: "green",
+          });
+          return data;
+        })
+        .catch((error) => {
+          notifications.show({
+            title: "Error",
+            message: error.toString(),
+            color: "red",
+          });
+        });
+    }
+  );
 
-  const {
-    data: removeTagData,
-    mutate: removeTag,
-    isError: isRemoveTagError,
-    error: removeTagError,
-  } = useMutation(["remove_page_tag"], async (tagId: number) => {
-    const response = await fetch(
-      `${portfolioManagerURL}/api/page/${id}/tag/${tagId}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    );
-    return response.json();
-  });
+  const { data: addTagData, mutate: addTag } = useMutation(
+    ["add_page_tag"],
+    async (tagId: number) => {
+      const response = await fetch(
+        `${portfolioManagerURL}/api/page/${id}/tag/${tagId}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      return response
+        .json()
+        .then((data) => {
+          notifications.show({
+            title: "Success",
+            message: "Tag updated",
+            color: "green",
+          });
+          return data;
+        })
+        .catch((error) => {
+          notifications.show({
+            title: "Error",
+            message: error.toString(),
+            color: "red",
+          });
+        });
+    }
+  );
+
+  const { data: removeTagData, mutate: removeTag } = useMutation(
+    ["remove_page_tag"],
+    async (tagId: number) => {
+      const response = await fetch(
+        `${portfolioManagerURL}/api/page/${id}/tag/${tagId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      return response
+        .json()
+        .then((data) => {
+          notifications.show({
+            title: "Success",
+            message: "Tag updated",
+            color: "green",
+          });
+          return data;
+        })
+        .catch((error) => {
+          notifications.show({
+            title: "Error",
+            message: error.toString(),
+            color: "red",
+          });
+        });
+    }
+  );
 
   useEffect(() => {
     if (pageData) {
@@ -94,74 +154,62 @@ function PageEditor() {
 
   useEffect(() => {
     queryClient.invalidateQueries(["page_editor"]);
-  }, [removeTagData, addTagData]);
-
-  useEffect(() => {
-    if (isRemoveTagError) {
-      notifications.show({
-        title: "Error",
-        message: removeTagError
-          ? removeTagError.toString()
-          : "An error occurred",
-        color: "red",
-      });
-    }
-    if (isAddTagError) {
-      notifications.show({
-        title: "Error",
-        message: addTagError ? addTagError.toString() : "An error occurred",
-        color: "red",
-      });
-    }
-  }, [isRemoveTagError, removeTagError, isAddTagError, addTagError]);
+  }, [removeTagData, addTagData, updatePageData]);
 
   return (
     <Stack>
-      <form
-        onSubmit={form.onSubmit((values) => {
-          console.log(values);
-        })}
-        style={{
-          maxWidth: "400px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-        }}
-      >
-        <TextInput label="Name" {...form.getInputProps("name")} />
-        <TextInput label="Key" {...form.getInputProps("key")} />
-        <TextInput label="Title" {...form.getInputProps("title")} />
-        <TextInput label="Subtitle" {...form.getInputProps("subtitle")} />
-        <TextInput label="Thumbnail" {...form.getInputProps("thumbnail")} />
-        <Select
-          label="Tags"
-          searchable
-          multiple
-          data={tagOptions}
-          value={tagSelectValue}
-          onChange={(value: string | null) => {
-            if (value) {
-              const tag: Tag = tagDefinitions[value];
-              setTagSelectValue(null);
-              addTag(tag.id);
-            }
-          }}
-        />
-        <Flex gap={5} wrap={"wrap"}>
-          {pageData?.tags?.map((tag: Tag, index: number) => {
-            return (
-              <Button
-                key={index}
-                onClick={() => removeTag(tag.id)}
-                size="compact-md"
-                variant="outline"
-              >
-                {tag.name}
-              </Button>
-            );
+      <Flex gap={50}>
+        <form
+          onSubmit={form.onSubmit((values) => {
+            updatePage(values);
           })}
-        </Flex>
-      </form>
+          style={{
+            width: "100%",
+            maxWidth: "400px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+          }}
+        >
+          <TextInput label="Name" {...form.getInputProps("name")} />
+          <TextInput label="Key" {...form.getInputProps("key")} />
+          <TextInput label="Title" {...form.getInputProps("title")} />
+          <TextInput label="Subtitle" {...form.getInputProps("subtitle")} />
+          <TextInput label="Thumbnail" {...form.getInputProps("thumbnail")} />
+          <Button type="submit">Save Content</Button>
+        </form>
+        <Stack maw={400} gap={10}>
+          <Select
+            label="Tags"
+            searchable
+            multiple
+            data={tagOptions}
+            value={tagSelectValue}
+            onChange={(value: string | null) => {
+              if (value) {
+                const tag: Tag = tagDefinitions[value];
+                setTagSelectValue(null);
+                addTag(tag.id);
+              }
+            }}
+          />
+          <Flex gap={5} wrap={"wrap"}>
+            {pageData?.tags?.map((tag: Tag, index: number) => {
+              return (
+                <Button
+                  key={index}
+                  onClick={() => removeTag(tag.id)}
+                  size="compact-md"
+                  variant="outline"
+                >
+                  {tag.name}
+                </Button>
+              );
+            })}
+          </Flex>
+        </Stack>
+      </Flex>
+      <PageContentEditor pageId={pageData?.id} content={pageData?.contents} />
     </Stack>
   );
 }
