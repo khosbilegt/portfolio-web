@@ -156,7 +156,11 @@ function PageTable() {
 
   return (
     <Stack justify="center" align="center">
-      <Modal opened={isModalOpen} onClose={closeModal} title="Test">
+      <Modal
+        opened={isModalOpen}
+        onClose={closeModal}
+        title={modalMode.toUpperCase()}
+      >
         {modalMode === "delete" && (
           <Stack>
             <Text>
@@ -180,6 +184,11 @@ function PageTable() {
             onSubmit={pageForm.onSubmit((values) => {
               createPage(values);
             })}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+            }}
           >
             <TextInput label="Name" {...pageForm.getInputProps("name")} />
             <TextInput label="Key" {...pageForm.getInputProps("key")} />
