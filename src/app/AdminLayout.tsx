@@ -63,8 +63,9 @@ function AdminLayout({
       <AppShell.Header>
         <Flex align="center" justify="center" h={"100%"}>
           <Text c={"dimmed"}>
-            You are currently viewing this page as a guest. You do not have the
-            permission to edit content.
+            {data?.role === "admin"
+              ? ""
+              : "You are currently viewing this page as a guest. You do not have the permission to edit content."}
           </Text>
         </Flex>
       </AppShell.Header>

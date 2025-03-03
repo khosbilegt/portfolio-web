@@ -2,6 +2,7 @@ type Tag = {
   id: number;
   name: string;
   type: string;
+  color?: string;
 }
 
 type Block = {
