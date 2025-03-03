@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import { portfolioManagerURL } from "../../../app/Variables";
 import { Button, Flex, Stack, Title } from "@mantine/core";
 import { PageDefinition } from "../../../types/types";
+import "./Blog.css";
 
 function Blog() {
   const navigate = useNavigate();
@@ -34,7 +35,10 @@ function Blog() {
           </Flex>
         )}
         {data && data.contents && (
-          <div dangerouslySetInnerHTML={{ __html: data.contents }} />
+          <div
+            className="blog-viewer"
+            dangerouslySetInnerHTML={{ __html: data.contents }}
+          />
         )}
       </Stack>
     </Flex>

@@ -6,6 +6,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import SubScript from "@tiptap/extension-subscript";
+import Image from "@tiptap/extension-image";
 import { useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { portfolioManagerURL } from "../../../app/Variables";
@@ -24,6 +25,7 @@ function PageContentEditor({
       Link,
       SubScript,
       Highlight,
+      Image,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
     ],
     content,
