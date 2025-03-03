@@ -29,12 +29,12 @@ function Register() {
     },
     validate: {
       email: isEmail("Invalid email address"),
-      password: (value) => {
+      password: (value: any) => {
         if (value.length < 6) {
           return "Password is too short";
         }
       },
-      repeat_password: (value, values) => {
+      repeat_password: (value: any, values: any) => {
         if (value !== values.password) {
           return "Passwords do not match";
         }

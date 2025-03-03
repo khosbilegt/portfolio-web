@@ -27,7 +27,7 @@ function Login() {
     },
     validate: {
       email: isEmail("Invalid email address"),
-      password: (value) => {
+      password: (value: any) => {
         if (value.length < 6) {
           return "Password is too short";
         }

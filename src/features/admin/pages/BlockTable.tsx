@@ -40,7 +40,7 @@ function BlockTable() {
       definition: "",
     },
     validate: {
-      definition: (value) => {
+      definition: (value: any) => {
         try {
           JSON.parse(value);
         } catch (e) {
