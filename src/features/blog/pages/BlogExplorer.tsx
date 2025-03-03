@@ -106,6 +106,7 @@ export const BlogExplorer = ({ defaultTags }: { defaultTags: number[] }) => {
           tempSelectedTags.push(tag.id);
         }
       });
+      setTagLimitEnabled(false);
       setSelectedTags(tempSelectedTags);
     }
   }, [searchParams, tags]);

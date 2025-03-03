@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Anchor, Button, Card, Flex, Text, Timeline } from "@mantine/core";
 import { useNavigate } from "react-router";
 import { motion } from "motion/react";
+import { IconArrowRight } from "@tabler/icons-react";
 
 interface Experience {
   title: string;
@@ -89,6 +90,19 @@ function Experience() {
                     </Button>
                   ))}
                 </Flex>
+                {index !== experiences.length - 1 && (
+                  <Button
+                    variant="outline"
+                    mt={5}
+                    w={150}
+                    rightSection={<IconArrowRight />}
+                    onClick={() =>
+                      navigate(`/project?tags=${experience.company}`)
+                    }
+                  >
+                    Projects
+                  </Button>
+                )}
               </Card>
             </motion.div>
           </motion.div>
