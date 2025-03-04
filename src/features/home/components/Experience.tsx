@@ -1,12 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import { portfolioManagerURL } from "../../../app/Variables";
 import { useEffect, useState } from "react";
-import { Anchor, Button, Card, Flex, Text, Timeline } from "@mantine/core";
+import {
+  Anchor,
+  Button,
+  Card,
+  Flex,
+  List,
+  Text,
+  Timeline,
+} from "@mantine/core";
 import { useNavigate } from "react-router";
 import { motion } from "motion/react";
 import { IconArrowRight } from "@tabler/icons-react";
-import { PageDefinition, Tag } from "../../../types/types";
-import ExperienceCard from "./ExperienceCard";
 
 interface Experience {
   title: string;
@@ -16,6 +22,7 @@ interface Experience {
   end_date: string;
   skills: string[];
   description: string;
+  bullets: string[];
 }
 
 function Experience() {
@@ -32,14 +39,6 @@ function Experience() {
       return response.json();
     },
   });
-  const { data: projectData } = useQuery(["blogs"], async () => {
-    const response = await fetch(`${portfolioManagerURL}/api/page`);
-    return response.json();
-  });
-
-  useEffect(() => {
-    console.log(projectData);
-  }, [projectData]);
 
   useEffect(() => {
     const tempExperiences: Experience[] = [];
@@ -84,7 +83,11 @@ function Experience() {
                 <Anchor c="dimmed" size="sm" href={experience.website}>
                   {experience.company}
                 </Anchor>
-                <Text size="md">{experience.description}</Text>
+                <List spacing={"xs"}>
+                  {experience.bullets?.map((bullet: string, index: number) => (
+                    <List.Item key={index}>{bullet}</List.Item>
+                  ))}
+                </List>
                 <Flex gap={5} mt={5} wrap={"wrap"}>
                   {experience.skills.map((skill: string, index: number) => (
                     <Button
@@ -100,29 +103,6 @@ function Experience() {
                     </Button>
                   ))}
                 </Flex>
-                <Flex mt={5} gap={5}>
-                  {projectData?.map(
-                    (project: PageDefinition, index: number) => {
-                      let tagIncluded = false;
-                      project.tags.forEach((tag: Tag) => {
-                        if (tag.name === experience.company) {
-                          tagIncluded = true;
-                        }
-                      });
-                      if (true) {
-                        return (
-                          <ExperienceCard
-                            title={project.title}
-                            subtitle={project.subtitle}
-                            projectKey={project.key}
-                          />
-                        );
-                      } else {
-                        return <div key={index} />;
-                      }
-                    }
-                  )}
-                </Flex>
                 <Button
                   variant="outline"
                   mt={5}
@@ -132,7 +112,7 @@ function Experience() {
                     navigate(`/project?tags=${experience.company}`)
                   }
                 >
-                  See more
+                  See projects
                 </Button>
               </Card>
             </motion.div>
