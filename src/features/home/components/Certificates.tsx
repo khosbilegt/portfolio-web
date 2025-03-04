@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { portfolioManagerURL } from "../../../app/Variables";
 import { Container, Grid } from "@mantine/core";
-import CertificateCard from "./CertificateCard";
+
+const CertificateCard = lazy(() => import("./CertificateCard"));
 
 interface Certificate {
   title: string;

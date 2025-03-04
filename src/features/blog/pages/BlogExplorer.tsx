@@ -1,14 +1,15 @@
 import { Button, Chip, Flex, Input, Stack } from "@mantine/core";
 import { PageDefinition } from "../../../types/types";
 import { IconSearch } from "@tabler/icons-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy } from "react";
 import { Tag } from "../../../types/types";
 import { useQuery } from "@tanstack/react-query";
 import { portfolioManagerURL } from "../../../app/Variables";
 import { format } from "date-fns";
 import { motion } from "motion/react";
-import BlogList from "../components/BlogList";
 import { useSearchParams } from "react-router";
+
+const BlogList = lazy(() => import("../components/BlogList"));
 
 export const BlogExplorer = ({ defaultTags }: { defaultTags: number[] }) => {
   const [searchParams] = useSearchParams();
