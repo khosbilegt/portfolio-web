@@ -23,7 +23,7 @@ function AnchorCard({
   tags,
   create_date,
   index = 1,
-}: AnchorCardDefinition & { index?: number }) {
+}: AnchorCardDefinition & { index?: number; width?: number }) {
   const navigate = useNavigate();
   return (
     <motion.div

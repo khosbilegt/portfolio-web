@@ -9,6 +9,7 @@ import { portfolioManagerURL } from "../../../app/Variables";
 export const Hero = () => {
   const navigate = useNavigate();
   const heroBlockId = 5;
+  const cvBlockId = 10;
 
   const { data } = useQuery({
     queryKey: ["hero"],
@@ -18,6 +19,13 @@ export const Hero = () => {
       );
       return response.json();
     },
+  });
+
+  const { data: cvData } = useQuery(["cv"], async () => {
+    const response = await fetch(
+      `${portfolioManagerURL}/api/page/block/${cvBlockId}`
+    );
+    return response.json();
   });
 
   return (
@@ -95,8 +103,15 @@ export const Hero = () => {
                 </Button>
               </motion.div>
               <motion.div whileHover={{ scale: 1.1 }}>
-                <Button radius="xl" size="xl" variant="subtle">
-                  About me
+                <Button
+                  radius="xl"
+                  size="xl"
+                  variant="subtle"
+                  onClick={() => {
+                    window.open(cvData?.definition.url);
+                  }}
+                >
+                  Download CV
                 </Button>
               </motion.div>
             </Flex>

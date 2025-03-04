@@ -5,6 +5,8 @@ import { Anchor, Button, Card, Flex, Text, Timeline } from "@mantine/core";
 import { useNavigate } from "react-router";
 import { motion } from "motion/react";
 import { IconArrowRight } from "@tabler/icons-react";
+import { PageDefinition, Tag } from "../../../types/types";
+import ExperienceCard from "./ExperienceCard";
 
 interface Experience {
   title: string;
@@ -30,6 +32,14 @@ function Experience() {
       return response.json();
     },
   });
+  const { data: projectData } = useQuery(["blogs"], async () => {
+    const response = await fetch(`${portfolioManagerURL}/api/page`);
+    return response.json();
+  });
+
+  useEffect(() => {
+    console.log(projectData);
+  }, [projectData]);
 
   useEffect(() => {
     const tempExperiences: Experience[] = [];
@@ -41,7 +51,7 @@ function Experience() {
 
   return (
     <Timeline
-      active={experiences?.length - 2}
+      active={experiences?.length}
       w={{ xs: "80%", md: "50%", lg: "40%" }}
     >
       {experiences.map((experience: Experience, index: number) => (
@@ -58,7 +68,7 @@ function Experience() {
           >
             <motion.div
               whileHover={{
-                scale: 1.05,
+                scale: 1.02,
                 boxShadow: "var(--mantine-shadow-xl)",
               }}
               transition={{ type: "spring" }}
@@ -90,19 +100,40 @@ function Experience() {
                     </Button>
                   ))}
                 </Flex>
-                {index !== experiences.length - 1 && (
-                  <Button
-                    variant="outline"
-                    mt={5}
-                    w={150}
-                    rightSection={<IconArrowRight />}
-                    onClick={() =>
-                      navigate(`/project?tags=${experience.company}`)
+                <Flex mt={5} gap={5}>
+                  {projectData?.map(
+                    (project: PageDefinition, index: number) => {
+                      let tagIncluded = false;
+                      project.tags.forEach((tag: Tag) => {
+                        if (tag.name === experience.company) {
+                          tagIncluded = true;
+                        }
+                      });
+                      if (true) {
+                        return (
+                          <ExperienceCard
+                            title={project.title}
+                            subtitle={project.subtitle}
+                            projectKey={project.key}
+                          />
+                        );
+                      } else {
+                        return <div key={index} />;
+                      }
                     }
-                  >
-                    Projects
-                  </Button>
-                )}
+                  )}
+                </Flex>
+                <Button
+                  variant="outline"
+                  mt={5}
+                  w={150}
+                  rightSection={<IconArrowRight />}
+                  onClick={() =>
+                    navigate(`/project?tags=${experience.company}`)
+                  }
+                >
+                  See more
+                </Button>
               </Card>
             </motion.div>
           </motion.div>
