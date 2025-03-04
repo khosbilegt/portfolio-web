@@ -83,9 +83,11 @@ function Experience() {
                 <Anchor c="dimmed" size="sm" href={experience.website}>
                   {experience.company}
                 </Anchor>
-                <List spacing={"xs"}>
+                <List spacing={"xs"} w={"100%"}>
                   {experience.bullets?.map((bullet: string, index: number) => (
-                    <List.Item key={index}>{bullet}</List.Item>
+                    <List.Item key={index} w={"95%"}>
+                      {bullet}
+                    </List.Item>
                   ))}
                 </List>
                 <Flex gap={5} mt={5} wrap={"wrap"}>
