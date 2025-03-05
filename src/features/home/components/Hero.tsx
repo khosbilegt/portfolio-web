@@ -5,6 +5,7 @@ import classes from "./Hero.module.css";
 import { useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { portfolioManagerURL } from "../../../app/Variables";
+import { Helmet } from "react-helmet";
 
 export const Hero = () => {
   const navigate = useNavigate();
@@ -41,6 +42,10 @@ export const Hero = () => {
       fluid
       style={{ display: "flex" }}
     >
+      <Helmet>
+        <title>Khosbilegt.B - Portfolio</title>
+        <meta name="description" content={data?.definition.blurb} />
+      </Helmet>
       <Container size="md" px={0} style={{ alignSelf: "center" }}>
         <Stack align="center" gap="xs">
           <motion.div

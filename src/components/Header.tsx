@@ -1,6 +1,5 @@
 import {
   ActionIcon,
-  Anchor,
   Burger,
   Button,
   Container,
@@ -137,14 +136,18 @@ function Header({
             style={{ overflow: "hidden" }}
           >
             {links.map((link) => (
-              <Anchor
+              <Button
+                variant="transparent"
                 key={link.href}
                 className={classes.link}
                 onClick={() => navigate(link.href)}
+                fw={400}
+                size="md"
+                p={0}
                 td="none"
               >
                 {link.label}
-              </Anchor>
+              </Button>
             ))}
             <ActionIcon variant="subtle" onClick={() => toggleColorScheme()}>
               {colorScheme === "dark" ? <IconSun /> : <IconMoon />}

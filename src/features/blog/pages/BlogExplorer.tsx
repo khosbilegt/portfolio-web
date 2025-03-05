@@ -8,10 +8,17 @@ import { portfolioManagerURL } from "../../../app/Variables";
 import { format } from "date-fns";
 import { motion } from "motion/react";
 import { useSearchParams } from "react-router";
+import { Helmet } from "react-helmet";
 
 const BlogList = lazy(() => import("../components/BlogList"));
 
-export const BlogExplorer = ({ defaultTags }: { defaultTags: number[] }) => {
+export const BlogExplorer = ({
+  defaultTags,
+  pageName,
+}: {
+  defaultTags: number[];
+  pageName: string;
+}) => {
   const [searchParams] = useSearchParams();
   const [searchText, setSearchText] = useState("");
   const [blogs, setBlogs] = useState<PageDefinition[]>([]);
@@ -57,6 +64,17 @@ export const BlogExplorer = ({ defaultTags }: { defaultTags: number[] }) => {
           ease: "easeInOut",
         }}
       >
+        <Helmet>
+          <title>{pageName} - Explore</title>
+          <meta
+            name="description"
+            content={`Read the ${pageName.toLowerCase()}`}
+          />
+          <meta property="og:site_name" content={`${pageName} - Explore`} />
+          <meta property="og:title" content={`${pageName} - Explore`} />
+          <meta property="og:locale" content="en_US" />
+          <meta property="og:type" content="article" />
+        </Helmet>
         <Chip
           checked={selectedTags.includes(tag.id)}
           onClick={() => {

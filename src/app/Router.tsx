@@ -23,7 +23,7 @@ function Router() {
             element={
               <UserLayout
                 key={"blog-explorer"}
-                children={<BlogExplorer defaultTags={[23]} />}
+                children={<BlogExplorer defaultTags={[23]} pageName="Blogs" />}
               />
             }
           />
@@ -34,7 +34,9 @@ function Router() {
             element={
               <UserLayout
                 key={"project-explorer"}
-                children={<BlogExplorer defaultTags={[0]} />}
+                children={
+                  <BlogExplorer defaultTags={[0]} pageName="Projects" />
+                }
               />
             }
           />
