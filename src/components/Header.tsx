@@ -25,17 +25,7 @@ import { useNavigate } from "react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { portfolioManagerURL } from "../app/Variables";
 import { useEffect } from "react";
-
-export type HeaderLink = {
-  label: string;
-  href: string;
-};
-
-const HEADER_LINKS: HeaderLink[] = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "/project" },
-  { label: "Blog", href: "/blog" },
-];
+import { HeaderLink } from "../app/UserLayout";
 
 type Header01Props = ContainerProps & {
   logo?: React.ReactNode;
@@ -54,7 +44,7 @@ function Header({
       Khosbilegt.B
     </Text>
   ),
-  links = HEADER_LINKS,
+  links = [],
   onMenuToggle,
   isMenuOpen,
   h = 60,
@@ -114,6 +104,7 @@ function Header({
             opened={isMenuOpen}
             onClick={onMenuToggle}
             hiddenFrom={breakpoint}
+            aria-label="Toggle navigation"
           />
           {logo}
         </Group>

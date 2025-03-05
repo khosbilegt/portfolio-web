@@ -80,13 +80,7 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4, ease: "easeInOut" }}
             viewport={{ once: true }}
           >
-            <Text
-              c="dimmed"
-              fz="xl"
-              ta="center"
-              mb="xl"
-              style={{ textWrap: "balance" }}
-            >
+            <Text fz="xl" ta="center" mb="xl" style={{ textWrap: "balance" }}>
               {data?.definition.blurb}
             </Text>
           </motion.div>
