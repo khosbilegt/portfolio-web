@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.4",
   "license": "MIT",
-  "author": "Khosbilegt",
+  "author": "Khosbilegt Bilegsaikhan",
   "description": "Personal blog and portfolio",
   "main": "index.js",
   "type": "module",
