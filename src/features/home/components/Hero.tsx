@@ -1,5 +1,13 @@
 import { JumboTitle } from "../../../components/JumboTitle";
-import { Badge, Button, Container, Flex, Stack, Text } from "@mantine/core";
+import {
+  Badge,
+  Button,
+  Container,
+  Flex,
+  Skeleton,
+  Stack,
+  Text,
+} from "@mantine/core";
 import { motion } from "motion/react";
 import classes from "./Hero.module.css";
 import { useNavigate } from "react-router";
@@ -12,7 +20,7 @@ export const Hero = () => {
   const heroBlockId = 5;
   const cvBlockId = 10;
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["hero"],
     queryFn: async () => {
       const response = await fetch(
@@ -80,9 +88,13 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4, ease: "easeInOut" }}
             viewport={{ once: true }}
           >
-            <Text fz="xl" ta="center" mb="xl" style={{ textWrap: "balance" }}>
-              {data?.definition.blurb}
-            </Text>
+            {isLoading ? (
+              <Skeleton height={40} width="80%" />
+            ) : (
+              <Text fz="xl" ta="center" mb="xl" style={{ textWrap: "balance" }}>
+                {data?.definition.blurb}
+              </Text>
+            )}
           </motion.div>
           <motion.div
             initial={{ opacity: 0.0, y: 40 }}

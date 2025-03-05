@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { lazy, useEffect, useState } from "react";
 import { portfolioManagerURL } from "../../../app/Variables";
 import { Container, Grid } from "@mantine/core";
+import { Helmet } from "react-helmet";
 
 const CertificateCard = lazy(() => import("./CertificateCard"));
 
@@ -46,6 +47,14 @@ function Certificates() {
       }}
       fluid
     >
+      <Helmet>
+        {certificates.map((certificate: Certificate, index: number) => (
+          <link key={index} rel="preload" href={certificate.image} as="image" />
+        ))}
+        {certificates.map((certificate: Certificate, index: number) => (
+          <link key={index} rel="preload" href={certificate.website} />
+        ))}
+      </Helmet>
       <Container size="lg" p={0}>
         <Grid gutter="xl" align="center">
           {certificates.map((certificate: Certificate, index: number) => (
