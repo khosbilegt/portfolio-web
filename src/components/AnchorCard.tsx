@@ -63,7 +63,11 @@ function AnchorCard({
             <Group mb="xs">
               <Flex wrap={"wrap"} gap={5} w={"100%"}>
                 {tags?.map((tag: Tag, index) => (
-                  <Button key={index} size="compact-sm">
+                  <Button
+                    key={index}
+                    size="compact-sm"
+                    aria-label={`Tag: ${tag.name}`}
+                  >
                     {tag.name}
                   </Button>
                 ))}

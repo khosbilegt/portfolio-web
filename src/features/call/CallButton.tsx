@@ -4,6 +4,7 @@ import { IconPhone } from "@tabler/icons-react";
 function CallButton({ open }: { open: () => void }) {
   return (
     <Button
+      aria-label="Call"
       pos="fixed"
       bottom={20}
       right={20}

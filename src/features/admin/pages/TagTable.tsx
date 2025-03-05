@@ -175,6 +175,7 @@ function TagTable() {
         <Badge>{tag.type}</Badge>,
         <Flex gap={10}>
           <Button
+            aria-label="Edit"
             size="compact-sm"
             onClick={() => {
               tagForm.setValues({
@@ -190,6 +191,7 @@ function TagTable() {
             Edit
           </Button>
           <Button
+            aria-label="Delete"
             size="compact-sm"
             bg={"red"}
             onClick={() => {
@@ -222,6 +224,7 @@ function TagTable() {
             </Text>
             <Flex justify={"end"}>
               <Button
+                aria-label="Cancel"
                 bg="red"
                 onClick={() => {
                   deleteTag(tagForm.values.id);
@@ -250,7 +253,7 @@ function TagTable() {
             <TextInput label="Name" {...tagForm.getInputProps("name")} />
             <TextInput label="Type" {...tagForm.getInputProps("type")} />
             <TextInput label="Color" {...tagForm.getInputProps("color")} />
-            <Button type="submit" w={"100%"} mt={10}>
+            <Button type="submit" w={"100%"} mt={10} aria-label="Submit">
               Submit
             </Button>
           </form>

@@ -93,6 +93,7 @@ function Experience() {
                 <Flex gap={5} mt={5} wrap={"wrap"}>
                   {experience.skills.map((skill: string, index: number) => (
                     <Button
+                      aria-label="Skill"
                       key={index}
                       color="blue"
                       variant="filled"
@@ -106,6 +107,7 @@ function Experience() {
                   ))}
                 </Flex>
                 <Button
+                  aria-label="See projects"
                   variant="outline"
                   mt={5}
                   w={150}

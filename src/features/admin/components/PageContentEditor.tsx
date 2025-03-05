@@ -106,6 +106,7 @@ function PageContentEditor({
 
       <Flex justify={"end"}>
         <Button
+          aria-label="Save Content"
           onClick={() => {
             updateData(editor?.getHTML() || "");
           }}

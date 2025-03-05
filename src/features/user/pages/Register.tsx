@@ -139,7 +139,7 @@ function Register() {
             type="password"
             {...form.getInputProps("repeat_password")}
           />
-          <Button w={"90%"} type="submit">
+          <Button w={"90%"} type="submit" aria-label="Register">
             Register
           </Button>
           <Text c={"dimmed"}>

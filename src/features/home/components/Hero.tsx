@@ -99,6 +99,7 @@ export const Hero = () => {
             <Flex gap={"md"}>
               <motion.div whileHover={{ scale: 1.1 }}>
                 <Button
+                  aria-label="Scroll to experiences"
                   radius="xl"
                   size="xl"
                   className={classes.cta}
@@ -109,6 +110,7 @@ export const Hero = () => {
               </motion.div>
               <motion.div whileHover={{ scale: 1.1 }}>
                 <Button
+                  aria-label="Download resume"
                   radius="xl"
                   size="xl"
                   variant="subtle"

@@ -176,7 +176,9 @@ function PageEditor() {
           <TextInput label="Title" {...form.getInputProps("title")} />
           <TextInput label="Subtitle" {...form.getInputProps("subtitle")} />
           <TextInput label="Thumbnail" {...form.getInputProps("thumbnail")} />
-          <Button type="submit">Save Content</Button>
+          <Button type="submit" aria-label="Submit">
+            Save Content
+          </Button>
         </form>
         <Stack maw={400} gap={10}>
           <Select
@@ -197,6 +199,7 @@ function PageEditor() {
             {pageData?.tags?.map((tag: Tag, index: number) => {
               return (
                 <Button
+                  aria-label={`Remove tag ${tag.name}`}
                   key={index}
                   onClick={() => removeTag(tag.id)}
                   size="compact-md"

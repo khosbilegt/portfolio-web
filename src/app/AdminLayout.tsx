@@ -77,12 +77,17 @@ function AdminLayout({
             ))}
           </Stack>
           <Stack p={10}>
-            <Button variant="outline" onClick={() => navigate("/")}>
+            <Button
+              variant="outline"
+              onClick={() => navigate("/")}
+              aria-label="Return to User View"
+            >
               Return to User View
             </Button>
             <Button
               variant="outline"
               color="red"
+              aria-label="Logout"
               onClick={() => {
                 localStorage.removeItem("token");
                 queryClient.invalidateQueries(["user_info_admin"]);

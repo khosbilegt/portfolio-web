@@ -121,7 +121,7 @@ function Login() {
             type="password"
             {...form.getInputProps("password")}
           />
-          <Button w={"90%"} type="submit">
+          <Button w={"90%"} type="submit" aria-label="Login">
             Login
           </Button>
           <Text c={"dimmed"}>

@@ -184,6 +184,7 @@ export const BlogExplorer = ({
         })}
         {tags?.length > 5 && (
           <Button
+            aria-label="See more tags"
             variant="transparent"
             onClick={() => setTagLimitEnabled(!tagLimitEnabled)}
           >

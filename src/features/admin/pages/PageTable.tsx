@@ -144,6 +144,7 @@ function PageTable() {
         pageDefinition.title,
         <Flex gap={10}>
           <Button
+            aria-label="Edit"
             size="compact-sm"
             onClick={() => {
               navigate(`/admin/page/${pageDefinition.id}`);
@@ -152,6 +153,7 @@ function PageTable() {
             Edit
           </Button>
           <Button
+            aria-label="Delete"
             size="compact-sm"
             bg={"red"}
             onClick={() => {
@@ -184,6 +186,7 @@ function PageTable() {
             </Text>
             <Flex justify={"end"}>
               <Button
+                aria-label="Cancel"
                 bg="red"
                 onClick={() => {
                   deletePage(pageForm.values.id);
@@ -212,7 +215,7 @@ function PageTable() {
               label="Subtitle"
               {...pageForm.getInputProps("subtitle")}
             />
-            <Button type="submit" w={"100%"} mt={10}>
+            <Button type="submit" w={"100%"} mt={10} aria-label="Submit">
               Submit
             </Button>
           </form>

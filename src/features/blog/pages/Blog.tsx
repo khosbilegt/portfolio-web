@@ -23,6 +23,7 @@ function Blog() {
           <Flex gap={5} wrap={"wrap"}>
             {data.tags.map((tag) => (
               <Button
+                aria-label="Tag"
                 key={tag.id}
                 radius={20}
                 onClick={() => {

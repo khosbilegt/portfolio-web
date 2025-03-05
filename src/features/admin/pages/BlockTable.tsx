@@ -189,6 +189,7 @@ function BlockTable() {
         block.name,
         <Flex gap={10}>
           <Button
+            aria-label="Edit"
             size="compact-sm"
             onClick={() => {
               blockForm.setValues({
@@ -203,6 +204,7 @@ function BlockTable() {
             Edit
           </Button>
           <Button
+            aria-label="Delete"
             size="compact-sm"
             bg={"red"}
             onClick={() => {
@@ -245,7 +247,7 @@ function BlockTable() {
               label="Definition"
               {...blockForm.getInputProps("definition")}
             />
-            <Button type="submit" w={"100%"} mt={10}>
+            <Button type="submit" w={"100%"} mt={10} aria-label="Submit">
               Submit
             </Button>
           </form>
@@ -258,6 +260,7 @@ function BlockTable() {
             </Text>
             <Flex justify={"end"}>
               <Button
+                aria-label="Delete"
                 bg="red"
                 onClick={() => {
                   deleteBlock(blockForm.values.id);

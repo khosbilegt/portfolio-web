@@ -137,6 +137,7 @@ function Header({
           >
             {links.map((link) => (
               <Button
+                aria-label={`Navigate to ${link.label}`}
                 variant="transparent"
                 key={link.href}
                 className={classes.link}
@@ -157,7 +158,9 @@ function Header({
         {data?.username ? (
           <Menu>
             <Menu.Target>
-              <Button radius="xl">{data.username}</Button>
+              <Button radius="xl" aria-label="Open user menu">
+                {data.username}
+              </Button>
             </Menu.Target>
             <Menu.Dropdown>
               <Menu.Label>User Actions</Menu.Label>
@@ -182,6 +185,7 @@ function Header({
           </Menu>
         ) : (
           <Button
+            aria-label="Login"
             onClick={() => navigate("/user")}
             className={classes.cta}
             radius="xl"
