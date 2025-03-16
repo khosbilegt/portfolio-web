@@ -8,6 +8,7 @@ const HomeCard = lazy(() => import("../components/HomeCard"));
 const Experience = lazy(() => import("../components/Experience"));
 const Education = lazy(() => import("../components/Education"));
 const Certificates = lazy(() => import("../components/Certificates"));
+const OpenSource = lazy(() => import("../components/OpenSource"));
 
 function Home() {
   const { hash } = useLocation();
@@ -57,6 +58,8 @@ function Home() {
         children={<Certificates />}
         ref={certificatesRef}
       />
+      <Flex h={100} />
+      <HomeCard title="Open Source" children={<OpenSource />} />
       <Flex h={100} />
     </Stack>
   );

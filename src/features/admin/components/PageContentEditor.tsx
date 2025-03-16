@@ -10,6 +10,7 @@ import Image from "@tiptap/extension-image";
 import { useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { portfolioManagerURL } from "../../../app/Variables";
+import CodeBlock from "@tiptap/extension-code-block";
 
 function PageContentEditor({
   pageId,
@@ -26,6 +27,9 @@ function PageContentEditor({
       SubScript,
       Highlight,
       Image,
+      CodeBlock.configure({
+        defaultLanguage: "plaintext",
+      }),
       TextAlign.configure({ types: ["heading", "paragraph"] }),
     ],
     content,

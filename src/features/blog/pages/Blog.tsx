@@ -3,7 +3,13 @@ import { useNavigate, useParams } from "react-router";
 import { portfolioManagerURL } from "../../../app/Variables";
 import { Button, Flex, Stack, Title } from "@mantine/core";
 import { PageDefinition } from "../../../types/types";
+import Prism from "prismjs";
+import "prismjs/components/prism-csharp";
+import "prismjs/components/prism-c";
+import "prismjs/components/prism-cpp";
+
 import "./Blog.css";
+import { useEffect } from "react";
 
 function Blog() {
   const navigate = useNavigate();
@@ -13,6 +19,10 @@ function Blog() {
     const response = await fetch(`${portfolioManagerURL}/api/page/key/${key}`);
     return response.json();
   });
+
+  useEffect(() => {
+    Prism.highlightAll();
+  }, [data]);
 
   return (
     <Flex justify={"center"}>
