@@ -3,6 +3,7 @@ import { useScrollIntoView } from "@mantine/hooks";
 import { useLocation } from "react-router";
 import { useEffect, lazy } from "react";
 import { Flex, Stack } from "@mantine/core";
+import Featured from "../components/Featured";
 
 const HomeCard = lazy(() => import("../components/HomeCard"));
 const Experience = lazy(() => import("../components/Experience"));
@@ -45,6 +46,8 @@ function Home() {
   return (
     <Stack gap={"lg"}>
       <Hero />
+      <HomeCard title="Featured Projects" children={<Featured />} />
+      <Flex h={100} />
       <HomeCard
         title="Experience"
         children={<Experience />}

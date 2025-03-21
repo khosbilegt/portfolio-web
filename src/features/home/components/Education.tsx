@@ -3,7 +3,6 @@ import { portfolioManagerURL } from "../../../app/Variables";
 import { useEffect, useState } from "react";
 import { Anchor, Card, Text, Timeline } from "@mantine/core";
 import { motion } from "motion/react";
-import { Helmet } from "react-helmet";
 
 interface Education {
   title: string;
@@ -41,11 +40,6 @@ function Education() {
       active={educations?.length - 1}
       w={{ xs: "80%", md: "50%", lg: "40%" }}
     >
-      <Helmet>
-        {educations.map((education: Education, index: number) => (
-          <link key={index} rel="preload" href={education.website} />
-        ))}
-      </Helmet>
       {educations.map((education: Education, index: number) => (
         <Timeline.Item key={index}>
           <motion.div

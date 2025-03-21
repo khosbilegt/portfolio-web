@@ -13,7 +13,6 @@ import {
 import { useNavigate } from "react-router";
 import { motion } from "motion/react";
 import { IconArrowRight } from "@tabler/icons-react";
-import { Helmet } from "react-helmet";
 
 interface Experience {
   title: string;
@@ -54,11 +53,6 @@ function Experience() {
       active={experiences?.length}
       w={{ xs: "80%", md: "50%", lg: "40%" }}
     >
-      <Helmet>
-        {experiences.map((experience: Experience, index: number) => (
-          <link key={index} rel="preload" href={experience.website} />
-        ))}
-      </Helmet>
       {experiences.map((experience: Experience, index: number) => (
         <Timeline.Item key={index}>
           <motion.div
