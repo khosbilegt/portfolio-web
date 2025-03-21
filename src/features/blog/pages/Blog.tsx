@@ -7,6 +7,9 @@ import Prism from "prismjs";
 import "prismjs/components/prism-csharp";
 import "prismjs/components/prism-c";
 import "prismjs/components/prism-cpp";
+import "prismjs/components/prism-java";
+import "prismjs/components/prism-go";
+import "prismjs/components/prism-markdown";
 
 import "./Blog.css";
 import { useEffect } from "react";
@@ -47,6 +50,7 @@ function Blog() {
         )}
         {data && data.contents && (
           <div
+            onLoad={() => Prism.highlightAll()}
             className="blog-viewer"
             dangerouslySetInnerHTML={{ __html: data.contents }}
           />
