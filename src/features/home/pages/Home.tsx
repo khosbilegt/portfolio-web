@@ -31,6 +31,14 @@ function Home() {
     useScrollIntoView<HTMLDivElement>({
       offset: 60,
     });
+  const { scrollIntoView: scrollToSkills, targetRef: skillsRef } =
+    useScrollIntoView<HTMLDivElement>({
+      offset: 60,
+    });
+  const { scrollIntoView: scrollToOpenSource, targetRef: openSourceRef } =
+    useScrollIntoView<HTMLDivElement>({
+      offset: 60,
+    });
 
   useEffect(() => {
     switch (hash) {
@@ -44,8 +52,14 @@ function Home() {
       case "#education":
         scrollToEducation();
         break;
-      case "#certificates":
+      case "#certificate":
         scrollToCertificates();
+        break;
+      case "#skills":
+        scrollToSkills();
+        break;
+      case "#open-source":
+        scrollToOpenSource();
         break;
       default:
         break;
@@ -75,9 +89,13 @@ function Home() {
         ref={certificatesRef}
       />
       <Flex h={50} />
-      <HomeCard title="Open Source" children={<OpenSource />} />
+      <HomeCard
+        title="Open Source"
+        children={<OpenSource />}
+        ref={openSourceRef}
+      />
       <Flex h={50} />
-      <HomeCard title="Hats" children={<Skills />} />
+      <HomeCard title="Hats" children={<Skills />} ref={skillsRef} />
       <Flex h={100} />
     </Stack>
   );

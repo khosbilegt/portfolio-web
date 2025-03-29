@@ -58,6 +58,8 @@ export const Footer = () => (
               { title: "Experience", href: "/#experience" },
               { title: "Education", href: "/#education" },
               { title: "Certification", href: "/#certificate" },
+              { title: "Open Source", href: "/#open-source" },
+              { title: "Skills", href: "/#skills" },
             ]}
           />
         </Grid.Col>
