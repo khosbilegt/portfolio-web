@@ -1,46 +1,24 @@
 import { Anchor, Card, Flex, Grid, Stack, Text, Title } from "@mantine/core";
-
-const data = [
-  {
-    name: "Front-End",
-    items: [
-      { name: "React", icon: "react" },
-      { name: "Angular", icon: "angular", color: "red" },
-      { name: "Ant Design", icon: "antdesign" },
-      { name: "Mantine", icon: "mantine" },
-      { name: "Flutter", icon: "flutter" },
-      { name: "Tailwind CSS", icon: "tailwindcss" },
-    ],
-  },
-  {
-    name: "Back-End",
-    items: [
-      { name: "Spring Boot", icon: "spring" },
-      { name: "Quarkus", icon: "quarkus" },
-      { name: "Django", icon: "python" },
-      { name: "Nodejs", icon: "nodedotjs" },
-      { name: "Go", icon: "go" },
-      { name: "PostgreSQL", icon: "postgresql" },
-    ],
-  },
-  {
-    name: "DevOps",
-    items: [
-      { name: "Docker", icon: "docker" },
-      { name: "Kubernetes", icon: "kubernetes" },
-      { name: "Linux", icon: "linux" },
-      { name: "Gitlab CI/CD", icon: "gitlab" },
-      { name: "Prometheus", icon: "prometheus" },
-      { name: "Grafana", icon: "grafana" },
-    ],
-  },
-];
+import { useQuery } from "@tanstack/react-query";
+import { portfolioManagerURL } from "../../../app/Variables";
 
 function Skills() {
+  const skillsBlockId = 13;
+
+  const { data } = useQuery({
+    queryKey: ["hats"],
+    queryFn: async () => {
+      const response = await fetch(
+        `${portfolioManagerURL}/api/page/block/${skillsBlockId}`
+      );
+      return response.json();
+    },
+  });
+
   return (
     <Stack w={"60%"} align="center">
       <Flex w={"100%"} justify={"center"} gap={20} wrap={"wrap"}>
-        {data.map((category, index) => {
+        {data?.definition?.data?.map((category: any, index: number) => {
           return (
             <Card
               key={index}
@@ -52,7 +30,7 @@ function Skills() {
               <Stack align="center">
                 <Title order={3}>{category?.name}</Title>
                 <Grid>
-                  {category?.items?.map((item, index) => (
+                  {category?.items?.map((item: any, index: number) => (
                     <Grid.Col
                       key={index}
                       span={6}
