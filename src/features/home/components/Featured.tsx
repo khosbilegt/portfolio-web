@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { PageDefinition } from "../../../types/types";
 import { Button, Flex, Stack } from "@mantine/core";
 import { useNavigate } from "react-router";
+import { format } from "date-fns";
 
 function Featured() {
   const navigate = useNavigate();
@@ -21,12 +22,25 @@ function Featured() {
 
   useEffect(() => {
     if (data) {
-      setBlogs(data);
+      const formattedData = data.map((blog: PageDefinition) => {
+        return {
+          ...blog,
+          createDate: format(new Date(blog.createDate), "d MMMM, yyyy"),
+          lastModifiedDate: format(new Date(blog.createDate), "d MMMM, yyyy"),
+        };
+      });
+      setBlogs(formattedData);
     }
   }, [data]);
 
   return (
-    <Stack>
+    <Stack
+      w={{
+        lg: "80%",
+        md: "90%",
+        base: "70%",
+      }}
+    >
       <BlogList blogs={blogs} />
       <Flex justify={"end"}>
         <Button

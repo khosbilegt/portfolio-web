@@ -109,7 +109,7 @@ export const Hero = () => {
                   radius="xl"
                   size="xl"
                   className={classes.cta}
-                  onClick={() => navigate("#experience")}
+                  onClick={() => navigate("#featured")}
                 >
                   Browse
                 </Button>
