@@ -1,7 +1,7 @@
 "use client";
-import { useScrollIntoView } from "@mantine/hooks";
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 import { Flex, Stack } from "@mantine/core";
+import { usePathname } from "next/navigation";
 
 const Hero = lazy(() => import("./components/home/Hero"));
 const HomeCard = lazy(() => import("./components/home/HomeCard"));
@@ -13,89 +13,44 @@ const Featured = lazy(() => import("./components/home/Featured"));
 const Skills = lazy(() => import("./components/home/Skills"));
 
 export default function Home() {
-  // const { hash } = useLocation();
+  const pathname = usePathname();
 
-  const { scrollIntoView: scrollToExperience, targetRef: experienceRef } =
-    useScrollIntoView<HTMLDivElement>({
-      offset: 60,
+  useEffect(() => {
+    const hash = window.location.hash;
+    const element = document.getElementById(hash.substring(1));
+    element?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      inline: "nearest",
     });
-  const { scrollIntoView: scrollToEducation, targetRef: educationRef } =
-    useScrollIntoView<HTMLDivElement>({
-      offset: 60,
-    });
-  const { scrollIntoView: scrollToCertificates, targetRef: certificatesRef } =
-    useScrollIntoView<HTMLDivElement>({
-      offset: 60,
-    });
-  const { scrollIntoView: scrollToFeatured, targetRef: featuredRef } =
-    useScrollIntoView<HTMLDivElement>({
-      offset: 60,
-    });
-  const { scrollIntoView: scrollToSkills, targetRef: skillsRef } =
-    useScrollIntoView<HTMLDivElement>({
-      offset: 60,
-    });
-  const { scrollIntoView: scrollToOpenSource, targetRef: openSourceRef } =
-    useScrollIntoView<HTMLDivElement>({
-      offset: 60,
-    });
-
-  // useEffect(() => {
-  //   switch (hash) {
-  //     case "#experience":
-  //       scrollToExperience();
-  //       break;
-  //     case "#featured": {
-  //       scrollToFeatured();
-  //       break;
-  //     }
-  //     case "#education":
-  //       scrollToEducation();
-  //       break;
-  //     case "#certificate":
-  //       scrollToCertificates();
-  //       break;
-  //     case "#skills":
-  //       scrollToSkills();
-  //       break;
-  //     case "#open-source":
-  //       scrollToOpenSource();
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // }, [hash]);
+  }, [pathname]);
 
   return (
     <Stack gap={"lg"}>
       <Hero />
-      <HomeCard
-        title="Featured Projects"
-        children={<Featured />}
-        ref={featuredRef}
-      />
+      <HomeCard title="Featured Projects" sectionId="featured">
+        <Featured />
+      </HomeCard>
       <Flex h={100} />
-      <HomeCard
-        title="Experience"
-        children={<Experience />}
-        ref={experienceRef}
-      />
+      <HomeCard title="Experience" sectionId="experience">
+        <Experience />
+      </HomeCard>
       <Flex h={50} />
-      <HomeCard title="Education" children={<Education />} ref={educationRef} />
+      <HomeCard title="Education" sectionId="education">
+        <Education />
+      </HomeCard>
       <Flex h={50} />
-      <HomeCard
-        title="Certificates"
-        children={<Certificates />}
-        ref={certificatesRef}
-      />
+      <HomeCard title="Certificates" sectionId="certificate">
+        <Certificates />
+      </HomeCard>
       <Flex h={50} />
-      <HomeCard
-        title="Open Source"
-        children={<OpenSource />}
-        ref={openSourceRef}
-      />
+      <HomeCard title="Open Source" sectionId="open-source">
+        <OpenSource />
+      </HomeCard>
       <Flex h={50} />
-      <HomeCard title="Hats" children={<Skills />} ref={skillsRef} />
+      <HomeCard title="Hats" sectionId="skills">
+        <Skills />
+      </HomeCard>
       <Flex h={100} />
     </Stack>
   );

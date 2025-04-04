@@ -2,7 +2,6 @@ import Providers from "./providers";
 import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "./index.css";
-
 // app/layout.js
 export default function RootLayout({
   children,
@@ -10,13 +9,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" {...mantineHtmlProps}>
-      <head>
-        <ColorSchemeScript />
-      </head>
-      <Providers>
+    <Providers>
+      <html lang="en" {...mantineHtmlProps}>
+        <head>
+          <title>Khosbilegt.B - Portfolio</title>
+          <meta
+            name="description"
+            content="Khosbilegt.B - Personal Portfolio"
+          />
+          <ColorSchemeScript />
+        </head>
         <body>{children}</body>
-      </Providers>
-    </html>
+      </html>
+    </Providers>
   );
 }

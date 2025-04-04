@@ -173,11 +173,11 @@ function TagTable() {
     const includedData = data?.slice(start, end);
     setTableData({
       head: ["ID", "Name", "Type", "Actions"],
-      body: includedData?.map((tag: Tag) => [
+      body: includedData?.map((tag: Tag, index: number) => [
         tag.id,
         tag.name,
-        <Badge>{tag.type}</Badge>,
-        <Flex gap={10}>
+        <Badge key={index}>{tag.type}</Badge>,
+        <Flex gap={10} key={index}>
           <Button
             aria-label="Edit"
             size="compact-sm"

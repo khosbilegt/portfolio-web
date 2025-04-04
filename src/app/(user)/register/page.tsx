@@ -1,3 +1,4 @@
+"use client";
 import {
   Anchor,
   Button,
@@ -143,7 +144,8 @@ function Register() {
             Register
           </Button>
           <Text c={"dimmed"}>
-            Don't have an account yet? <Anchor href="/user">Sign up</Anchor>
+            Don&apos;t have an account yet?{" "}
+            <Anchor href="/user">Sign up</Anchor>
           </Text>
         </form>
       </Card>

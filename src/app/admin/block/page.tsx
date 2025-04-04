@@ -45,7 +45,7 @@ function BlockTable() {
         try {
           JSON.parse(value);
         } catch (e) {
-          return "Invalid JSON";
+          return "Invalid JSON: " + e?.toString();
         }
       },
     },
@@ -188,10 +188,10 @@ function BlockTable() {
     const includedData = data?.slice(start, end);
     setTableData({
       head: ["ID", "Name", "Actions"],
-      body: includedData?.map((block: Block) => [
+      body: includedData?.map((block: Block, index: number) => [
         block.id,
         block.name,
-        <Flex gap={10}>
+        <Flex gap={10} key={index}>
           <Button
             aria-label="Edit"
             size="compact-sm"

@@ -1,3 +1,4 @@
+"use client";
 import { Button, Chip, Flex, Input, Stack } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 import { useEffect, useState, lazy } from "react";
@@ -12,7 +13,6 @@ const BlogList = lazy(() => import("./BlogList"));
 
 export const BlogExplorer = ({
   defaultTags,
-  pageName,
 }: {
   defaultTags: number[];
   pageName: string;

@@ -141,37 +141,39 @@ function PageTable() {
     const includedData = pageData?.slice(start, end);
     setTableData({
       head: ["ID", "Name", "Key", "Title", "Actions"],
-      body: includedData?.map((pageDefinition: PageDefinition) => [
-        pageDefinition.id,
-        pageDefinition.name,
-        pageDefinition.key,
-        pageDefinition.title,
-        <Flex gap={10}>
-          <Button
-            aria-label="Edit"
-            size="compact-sm"
-            onClick={() => {
-              router.push(`/admin/page/${pageDefinition.id}`);
-            }}
-          >
-            Edit
-          </Button>
-          <Button
-            aria-label="Delete"
-            size="compact-sm"
-            bg={"red"}
-            onClick={() => {
-              pageForm.setValues({
-                id: pageDefinition.id,
-              });
-              setModalMode("delete");
-              openModal();
-            }}
-          >
-            Delete
-          </Button>
-        </Flex>,
-      ]),
+      body: includedData?.map(
+        (pageDefinition: PageDefinition, index: number) => [
+          pageDefinition.id,
+          pageDefinition.name,
+          pageDefinition.key,
+          pageDefinition.title,
+          <Flex gap={10} key={index}>
+            <Button
+              aria-label="Edit"
+              size="compact-sm"
+              onClick={() => {
+                router.push(`/admin/page/${pageDefinition.id}`);
+              }}
+            >
+              Edit
+            </Button>
+            <Button
+              aria-label="Delete"
+              size="compact-sm"
+              bg={"red"}
+              onClick={() => {
+                pageForm.setValues({
+                  id: pageDefinition.id,
+                });
+                setModalMode("delete");
+                openModal();
+              }}
+            >
+              Delete
+            </Button>
+          </Flex>,
+        ]
+      ),
     });
   }, [pageData, page, pageSize]);
 
