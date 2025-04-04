@@ -181,7 +181,7 @@ function Header({
         ) : (
           <Button
             aria-label="Login"
-            onClick={() => router.replace("/user")}
+            onClick={() => router.replace("/login")}
             className={classes.cta}
             radius="xl"
             rightSection={<IconArrowRight size={16} />}

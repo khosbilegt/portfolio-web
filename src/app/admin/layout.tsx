@@ -59,9 +59,9 @@ export default function AdminLayout({
   });
 
   useEffect(() => {
-    // if (localStorage.getItem("token") === null) {
-    //   router.replace("/");
-    // }
+    if (localStorage.getItem("token") === null) {
+      router.replace("/");
+    }
   }, [data]);
 
   return (
