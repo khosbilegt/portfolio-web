@@ -1,8 +1,12 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BlogExplorer } from "../components/BlogExplorer";
 
 function BlogPage() {
-  return <BlogExplorer defaultTags={[23]} pageName="Blogs" />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <BlogExplorer defaultTags={[]} pageName="blog" />
+    </Suspense>
+  );
 }
 
 export default BlogPage;

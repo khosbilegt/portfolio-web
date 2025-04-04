@@ -128,7 +128,7 @@ function Login() {
             Login
           </Button>
           <Text c={"dimmed"}>
-            Don't have an account yet?{" "}
+            Don&apos;t have an account yet?{" "}
             <Anchor href="/user/register">Sign up</Anchor>
           </Text>
           <Notification withCloseButton={false}>

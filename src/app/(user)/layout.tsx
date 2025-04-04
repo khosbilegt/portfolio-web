@@ -32,8 +32,9 @@ export default function MainLayout({
         opened={isMenuOpen}
         onClose={closeMenu}
         title={"Menu"}
-        children={<Sidebar links={HEADER_LINKS} />}
-      />
+      >
+        <Sidebar links={HEADER_LINKS} />
+      </Drawer>
       {children}
       <Footer />
     </Stack>

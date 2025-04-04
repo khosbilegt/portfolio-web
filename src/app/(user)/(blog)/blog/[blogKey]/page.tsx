@@ -3,11 +3,9 @@ import { notFound } from "next/navigation";
 
 import "./Blog.css";
 import { PageDefinition } from "@/app/types";
-import { Metadata } from "next";
 import { cache } from "react";
 import PageContent from "./PageContent";
 import { Flex } from "@mantine/core";
-import Head from "next/head";
 
 const fetchBlog = cache(
   async (blogKey: string): Promise<PageDefinition | null> => {
@@ -20,43 +18,51 @@ const fetchBlog = cache(
   }
 );
 
-// Generate dynamic metadata
-export async function generateMetadata({
-  params,
-}: {
-  params: { blogKey: string };
-}): Promise<Metadata> {
+type Params = Promise<{ blogKey: string }>;
+
+export async function generateMetadata(props: { params: Params }) {
+  const params = await props.params;
+
   const data = await fetchBlog(params.blogKey);
-  if (!data) return {};
+
+  if (!data) {
+    return {
+      title: "Blog Not Found",
+      description: "The requested blog could not be found.",
+    };
+  }
 
   return {
     title: data.title,
-    description: data.subtitle || "",
+    description: data.subtitle,
     openGraph: {
       title: data.title,
       description: data.subtitle,
+      images: [
+        {
+          url: data.thumbnail,
+        },
+      ],
+      url: `/${data.key}`,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: data.title,
+      description: data.subtitle,
+      images: [data.thumbnail],
     },
   };
 }
 
-export default async function Blog({
-  params,
-}: {
-  params: { blogKey: string };
-}) {
+export default async function Blog(props: { params: Params }) {
+  const params = await props.params;
   const data = await fetchBlog(params.blogKey);
 
   if (!data) return notFound();
 
   return (
     <Flex justify={"center"}>
-      <Head>
-        <title>{data.title}</title>
-        <meta name="description" content={data.subtitle} />
-        <meta property="og:title" content={data.title} />
-        <meta property="og:description" content={data.subtitle} />
-        <meta property="og:image" content={data.thumbnail} />
-      </Head>
       <PageContent data={data} />
     </Flex>
   );

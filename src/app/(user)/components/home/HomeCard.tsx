@@ -2,12 +2,16 @@
 
 import { Stack, Title } from "@mantine/core";
 import { motion } from "motion/react";
-import { forwardRef } from "react";
 
-const HomeCard = forwardRef<
-  HTMLDivElement,
-  { title: string; sectionId: string; children: React.ReactNode }
->(({ title, sectionId, children }, ref) => {
+const HomeCard = ({
+  title,
+  sectionId,
+  children,
+}: {
+  title: string;
+  sectionId: string;
+  children: React.ReactNode;
+}) => {
   return (
     <section id={sectionId}>
       <motion.div
@@ -16,13 +20,13 @@ const HomeCard = forwardRef<
         transition={{ duration: 0.8, delay: 0.2, ease: "easeInOut" }}
         viewport={{ once: true }}
       >
-        <Stack gap={"md"} align="center" ref={ref}>
+        <Stack gap={"md"} align="center">
           <Title>{title}</Title>
           {children}
         </Stack>
       </motion.div>
     </section>
   );
-});
+};
 
 export default HomeCard;

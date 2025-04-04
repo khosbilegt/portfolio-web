@@ -13,6 +13,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { portfolioManagerURL } from "@/app/variables";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Head from "next/head";
 
 const navbarItems = [
   { title: "Dashboard", href: "/admin" },
@@ -70,6 +71,10 @@ export default function AdminLayout({
       header={{ height: "50px" }}
       padding="md"
     >
+      <Head>
+        <title>Khosbilegt.B - Portfolio</title>
+        <meta name="description" content="Khosbilegt.B - Personal Portfolio" />
+      </Head>
       <AppShell.Header>
         <Flex align="center" justify="center" h={"100%"}>
           <Text c={"dimmed"}>
