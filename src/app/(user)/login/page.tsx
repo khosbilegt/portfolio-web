@@ -79,13 +79,13 @@ function Login() {
     if (loginData?.token) {
       localStorage.setItem("token", loginData?.token);
       queryClient.invalidateQueries({ queryKey: ["user_info_header"] });
-      router.replace("/");
+      router.push("/");
     }
   }, [loginData]);
 
   useEffect(() => {
     if (userData?.username) {
-      router.replace("/");
+      router.push("/");
     }
   }, [userData]);
 

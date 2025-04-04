@@ -100,7 +100,7 @@ function Experience() {
                       variant="filled"
                       size="compact-sm"
                       onClick={() => {
-                        router.replace(`/project?tags=${skill}`);
+                        router.push(`/project?tags=${skill}`);
                       }}
                     >
                       {skill}
@@ -114,7 +114,7 @@ function Experience() {
                   w={150}
                   rightSection={<IconArrowRight />}
                   onClick={() =>
-                    router.replace(`/project?tags=${experience.company}`)
+                    router.push(`/project?tags=${experience.company}`)
                   }
                 >
                   See projects

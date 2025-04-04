@@ -60,7 +60,7 @@ export default function AdminLayout({
 
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
-      router.replace("/");
+      router.push("/");
     }
   }, [data]);
 
@@ -89,7 +89,7 @@ export default function AdminLayout({
           <Stack p={10}>
             <Button
               variant="outline"
-              onClick={() => router.replace("/")}
+              onClick={() => router.push("/")}
               aria-label="Return to User View"
             >
               Return to User View

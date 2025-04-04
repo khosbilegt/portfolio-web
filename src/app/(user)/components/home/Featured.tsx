@@ -47,7 +47,7 @@ function Featured() {
         <Button
           w={200}
           onClick={() => {
-            router.replace("/project");
+            router.push("/project");
           }}
         >
           See more

@@ -151,7 +151,7 @@ function PageTable() {
             aria-label="Edit"
             size="compact-sm"
             onClick={() => {
-              router.replace(`/admin/page/${pageDefinition.id}`);
+              router.push(`/admin/page/${pageDefinition.id}`);
             }}
           >
             Edit

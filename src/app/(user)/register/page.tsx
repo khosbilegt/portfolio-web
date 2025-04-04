@@ -83,13 +83,13 @@ function Register() {
   useEffect(() => {
     if (registerData?.token) {
       localStorage.setItem("token", registerData?.token);
-      router.replace("/");
+      router.push("/");
     }
   }, [registerData]);
 
   useEffect(() => {
     if (userData?.username) {
-      router.replace("/");
+      router.push("/");
     }
   }, [userData]);
 

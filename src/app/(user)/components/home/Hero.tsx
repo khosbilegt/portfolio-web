@@ -108,7 +108,7 @@ export default function Hero() {
                   radius="xl"
                   size="xl"
                   className={classes.cta}
-                  onClick={() => router.replace("#featured")}
+                  onClick={() => router.push("#featured")}
                 >
                   Browse
                 </Button>

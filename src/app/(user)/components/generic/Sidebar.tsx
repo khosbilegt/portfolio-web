@@ -11,7 +11,7 @@ function Sidebar({ links }: { links?: HeaderLink[] }) {
         <Button
           key={index}
           variant="transparent"
-          onClick={() => router.replace(link.href)}
+          onClick={() => router.push(link.href)}
         >
           {link.label}
         </Button>

@@ -134,7 +134,7 @@ function Header({
                 variant="transparent"
                 key={link.href}
                 className={classes.link}
-                onClick={() => router.replace(link.href)}
+                onClick={() => router.push(link.href)}
                 fw={400}
                 size="md"
                 p={0}
@@ -159,7 +159,7 @@ function Header({
               <Menu.Label>User Actions</Menu.Label>
               <Menu.Item
                 leftSection={<IconUser />}
-                onClick={() => router.replace("/admin")}
+                onClick={() => router.push("/admin")}
               >
                 Admin ({data.role === "admin" ? "Admin" : "Guest"} Mode)
               </Menu.Item>
@@ -181,7 +181,7 @@ function Header({
         ) : (
           <Button
             aria-label="Login"
-            onClick={() => router.replace("/login")}
+            onClick={() => router.push("/login")}
             className={classes.cta}
             radius="xl"
             rightSection={<IconArrowRight size={16} />}

@@ -46,7 +46,7 @@ function AnchorCard({
           className={classes["anchor-card"]}
           onClick={() => {
             if (href_type === "internal") {
-              router.replace(href);
+              router.push(href);
             } else {
               window.open(href, "_blank");
             }
