@@ -1,6 +1,6 @@
 "use client";
 import { Button, Stack } from "@mantine/core";
-import { HeaderLink } from "@/app/layout";
+import { HeaderLink } from "@/app/(user)/layout";
 import { useRouter } from "next/navigation";
 
 function Sidebar({ links }: { links?: HeaderLink[] }) {

@@ -11,7 +11,7 @@ import {
 import { JumboTitle } from "../generic/JumboTitle";
 import { motion } from "motion/react";
 import { useQuery } from "@tanstack/react-query";
-import { portfolioManagerURL } from "../../variables";
+import { portfolioManagerURL } from "../../../variables";
 import classes from "./Hero.module.css";
 import { useRouter } from "next/navigation";
 

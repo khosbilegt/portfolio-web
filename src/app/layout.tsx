@@ -1,54 +1,22 @@
-"use client";
+import Providers from "./providers";
 import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
 import "@mantine/core/styles.css";
-import Providers from "./providers";
-import { useDisclosure } from "@mantine/hooks";
-import { Drawer, Stack } from "@mantine/core";
-import Sidebar from "./components/generic/Sidebar";
-import Header from "./components/generic/Header";
-import { Footer } from "./components/generic/Footer";
 import "./index.css";
 
-export type HeaderLink = {
-  label: string;
-  href: string;
-};
-
-const HEADER_LINKS: HeaderLink[] = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "/project" },
-  { label: "Blog", href: "/blog" },
-];
-
-export default function MainLayout({
+// app/layout.js
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [isMenuOpen, { open: openMenu, close: closeMenu }] =
-    useDisclosure(false);
-
   return (
     <html lang="en" {...mantineHtmlProps}>
       <head>
         <ColorSchemeScript />
       </head>
-      <body>
-        <Providers>
-          <Stack w={"100%"} justify="start" mt={0} style={{ padding: "5px" }}>
-            <Header onMenuToggle={() => openMenu()} links={HEADER_LINKS} />
-            <Drawer
-              size={"60%"}
-              opened={isMenuOpen}
-              onClose={closeMenu}
-              title={"Menu"}
-              children={<Sidebar links={HEADER_LINKS} />}
-            />
-            {children}
-            <Footer />
-          </Stack>
-        </Providers>
-      </body>
+      <Providers>
+        <body>{children}</body>
+      </Providers>
     </html>
   );
 }

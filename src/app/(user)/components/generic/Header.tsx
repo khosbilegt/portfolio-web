@@ -26,7 +26,7 @@ import classes from "./Header.module.css";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { portfolioManagerURL } from "@/app/variables";
 import { useEffect } from "react";
-import { HeaderLink } from "@/app/layout";
+import { HeaderLink } from "@/app/(user)/layout";
 import { useRouter } from "next/navigation";
 
 type Header01Props = ContainerProps & {
