@@ -1,5 +1,5 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { portfolioManagerURL } from "@/app/variables";
 import { Button, Flex, Stack, Title } from "@mantine/core";
 import Prism from "prismjs";
@@ -17,19 +17,21 @@ import { Tag, PageDefinition } from "@/app/types";
 
 function Blog() {
   const router = useRouter();
-  const { blogKey: key } = useParams<{ blogKey: string }>();
+  const { blogKey } = useParams<{ blogKey: string }>();
+  const queryClient = useQueryClient();
 
   const { data } = useQuery<PageDefinition>({
     queryKey: ["blog_by_key"],
     queryFn: async () => {
       const response = await fetch(
-        `${portfolioManagerURL}/api/page/key/${key}`
+        `${portfolioManagerURL}/api/page/key/${blogKey}`
       );
       return response.json();
     },
   });
 
   useEffect(() => {
+    queryClient.invalidateQueries({ queryKey: ["blog_by_key"] });
     Prism.highlightAll();
   }, [data]);
 
