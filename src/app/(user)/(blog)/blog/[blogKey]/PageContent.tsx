@@ -9,9 +9,14 @@ import "prismjs/components/prism-markdown";
 import { PageDefinition, Tag } from "@/app/types";
 import { Button, Flex, Stack, Title } from "@mantine/core";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 function PageContent({ data }: { data: PageDefinition }) {
   const router = useRouter();
+
+  useEffect(() => {
+    Prism.highlightAll();
+  }, [data]);
 
   return (
     <Stack maw={800} w={"80%"}>
