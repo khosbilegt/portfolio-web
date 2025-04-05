@@ -62,7 +62,7 @@ export default async function Blog(props: { params: Params }) {
   if (!data) return notFound();
 
   return (
-    <Flex justify={"center"}>
+    <Flex justify={"center"} className="blog-viewer">
       <PageContent data={data} />
     </Flex>
   );
