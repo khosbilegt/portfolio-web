@@ -11,6 +11,8 @@ export default function RootLayout({
   return (
     <html lang="en" {...mantineHtmlProps}>
       <head>
+        <title>Koso.B - Portfolio</title>
+        <meta name="description" content="Koso.B - Personal Portfolio" />
         <ColorSchemeScript />
       </head>
       <Providers>

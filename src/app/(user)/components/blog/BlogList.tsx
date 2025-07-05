@@ -15,7 +15,7 @@ function BlogList({ blogs }: { blogs: PageDefinition[] }) {
       fluid
     >
       <Container size="lg" p={0} mt="xl">
-        <Grid gutter="xl" align="center">
+        <Grid gutter="xl" align="stretch">
           {blogs?.length === 0 && (
             <Grid.Col span={12}>
               <motion.div
@@ -34,16 +34,18 @@ function BlogList({ blogs }: { blogs: PageDefinition[] }) {
           )}
           {blogs.map((blog, index) => (
             <Grid.Col key={index} span={{ base: 12, md: 4 }}>
-              <AnchorCard
-                key={index}
-                title={blog.title}
-                subtitle={blog.subtitle}
-                thumbnail={blog.thumbnail}
-                href={`/blog/${blog.key}`}
-                href_type="internal"
-                create_date={blog.createDate}
-                tags={blog.tags}
-              />
+              <div style={{ height: '100%'}}>
+                <AnchorCard
+                  key={index}
+                  title={blog.title}
+                  subtitle={blog.subtitle}
+                  thumbnail={blog.thumbnail}
+                  href={`/blog/${blog.key}`}
+                  href_type="internal"
+                  create_date={blog.createDate}
+                  tags={blog.tags}
+                />
+              </div>
             </Grid.Col>
           ))}
         </Grid>

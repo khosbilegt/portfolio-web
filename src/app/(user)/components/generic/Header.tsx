@@ -43,7 +43,7 @@ function Header({
   breakpoint = "xs",
   logo = (
     <Text fw="bold" fz={24} mx="xs">
-      Khosbilegt.B
+      Koso.B
     </Text>
   ),
   links = [],

@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { portfolioManagerURL } from "@/app/variables";
 import CodeBlock from "@tiptap/extension-code-block";
+import '@mantine/tiptap/styles.css';
 
 function PageContentEditor({
   pageId,

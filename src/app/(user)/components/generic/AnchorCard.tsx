@@ -33,16 +33,18 @@ function AnchorCard({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.2 * index, ease: "easeInOut" }}
       viewport={{ once: true }}
+      style={{ height: "100%" }}
     >
       <motion.div
         whileHover={{ scale: 1.05, boxShadow: "var(--mantine-shadow-xl)" }}
         transition={{ type: "spring" }}
-        style={{ borderRadius: "var(--mantine-radius-lg)" }}
+        style={{ borderRadius: "var(--mantine-radius-lg)",  height: "100%"  }}
       >
         <Card
           radius="lg"
           p="xl"
-          miw={300}
+          miw={200}
+          h="100%"
           className={classes["anchor-card"]}
           onClick={() => {
             if (href_type === "internal") {
