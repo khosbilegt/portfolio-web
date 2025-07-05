@@ -26,6 +26,7 @@ function CertificateCard({
 }) {
   return (
     <motion.div
+      style={{height: "100%"}}
       initial={{ opacity: 0.0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.2 * index, ease: "easeInOut" }}
@@ -34,41 +35,40 @@ function CertificateCard({
       <motion.div
         whileHover={{ scale: 1.05, boxShadow: "var(--mantine-shadow-xl)" }}
         transition={{ type: "spring" }}
-        style={{ borderRadius: "var(--mantine-radius-lg)" }}
+        style={{ borderRadius: "var(--mantine-radius-lg)", height: "100%" }}
       >
-        <Card radius="lg" p="xl" onClick={() => window.open(url)}>
-          <Stack>
-            <Box
-              pos="relative"
-              w="100%"
-              style={{
-                aspectRatio: "9/6",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <Image
-                component={"img"}
-                radius="lg"
-                w={200}
-                h={200}
-                style={{ objectFit: "scale-down", objectPosition: "center" }}
-                src={backgroundImageUrl}
-                alt={backgroundImageAlt}
-                sizes={backgroundImageSizes}
-              />
-            </Box>
-            <Group mb="xs">
-              <Badge variant="light">{tag}</Badge>
-              <Text fz="sm" c="dimmed">
-                {publishedAt}
-              </Text>
-            </Group>
-            <Text fz="xl" fw="bold" style={{ textWrap: "balance" }} lh={1.3}>
-              {title}
+        <Card radius="lg" p="xl" onClick={() => window.open(url)} h={"100%"} >
+          <Box
+            h={"100%"}
+            pos="relative"
+            w="100%"
+            style={{
+              aspectRatio: "9/6",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Image
+              component={"img"}
+              radius="lg"
+              w={200}
+              h={200}
+              style={{ objectFit: "scale-down", objectPosition: "center" }}
+              src={backgroundImageUrl}
+              alt={backgroundImageAlt}
+              sizes={backgroundImageSizes}
+            />
+          </Box>
+          <Group mb="xs">
+            <Badge variant="light">{tag}</Badge>
+            <Text fz="sm" c="dimmed">
+              {publishedAt}
             </Text>
-            <Text>{description}</Text>
-          </Stack>
+          </Group>
+          <Text fz="xl" fw="bold" style={{ textWrap: "balance" }} lh={1.3}>
+            {title}
+          </Text>
+          <Text>{description}</Text>
         </Card>
       </motion.div>
     </motion.div>

@@ -54,7 +54,7 @@ function AnchorCard({
             }
           }}
         >
-          <Stack>
+          <Stack justify="space-around" h={'100%'}>
             <Box pos="relative" w="100%" style={{ aspectRatio: "9/6" }}>
               <Image
                 component={"img"}
@@ -64,6 +64,7 @@ function AnchorCard({
                 style={{ objectFit: "scale-down" }}
               />
             </Box>
+            <Stack>
             <Group mb="xs">
               <Flex wrap={"wrap"} gap={5} w={"100%"}>
                 {tags?.map((tag: Tag, index) => (
@@ -84,6 +85,7 @@ function AnchorCard({
               {title}
             </Text>
             <Text>{subtitle}</Text>
+            </Stack>
           </Stack>
         </Card>
       </motion.div>

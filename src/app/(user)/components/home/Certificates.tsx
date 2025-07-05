@@ -45,22 +45,25 @@ function Certificates() {
         lg: "calc(var(--mantine-spacing-lg) * 3)",
       }}
       fluid
+      h={'100%'}
     >
-      <Container size="lg" p={0}>
-        <Grid gutter="xl" align="center">
+      <Container size="lg" p={0} h={'100%'}>
+        <Grid gutter="xl" align="stretch">
           {certificates.map((certificate: Certificate, index: number) => (
-            <Grid.Col key={index} span={{ base: 12, md: 4 }}>
-              <CertificateCard
-                key={index}
-                backgroundImageUrl={certificate.image}
-                backgroundImageAlt="certificate"
-                backgroundImageSizes="300px"
-                title={certificate.title}
-                tag={certificate.issuer}
-                url={certificate.website}
-                description={certificate.description}
-                publishedAt={certificate.issue_date}
-              />
+            <Grid.Col key={index} span={{ base: 12, md: 4 }} style={{height: "100%"}} >
+              <div style={{height: "100%"}}>
+                <CertificateCard
+                    key={index}
+                    backgroundImageUrl={certificate.image}
+                    backgroundImageAlt="certificate"
+                    backgroundImageSizes="300px"
+                    title={certificate.title}
+                    tag={certificate.issuer}
+                    url={certificate.website}
+                    description={certificate.description}
+                    publishedAt={certificate.issue_date}
+                  />
+              </div>
             </Grid.Col>
           ))}
         </Grid>
