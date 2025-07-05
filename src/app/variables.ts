@@ -1,5 +1,5 @@
 // import "./envConfig.ts";
 
-const portfolioManagerURL = "https://khosbilegt.dev";
+const portfolioManagerURL = "https://koso.dev";
 
 export { portfolioManagerURL };

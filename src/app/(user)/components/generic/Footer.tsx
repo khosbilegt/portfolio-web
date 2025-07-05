@@ -91,7 +91,7 @@ export const Footer = () => (
                     <IconBrandLinkedinFilled size={16} /> LinkedIn
                   </Flex>
                 ),
-                href: "https://www.linkedin.com/in/khosbilegt-bilegsaikhan-82929424b/",
+                href: "https://www.linkedin.com/in/koso-bilegsaikhan-82929424b/",
               },
               {
                 title: (
@@ -108,7 +108,7 @@ export const Footer = () => (
       <Flex justify={{ sm: "space-between" }} wrap="wrap" gap="xl">
         <Box maw={{ sm: 300 }}>
           <Text mt="xs" size="xs" c="dimmed">
-            © 2025 Khosbilegt.B All rights reserved.
+            © 2025 Koso.B All rights reserved.
           </Text>
         </Box>
       </Flex>

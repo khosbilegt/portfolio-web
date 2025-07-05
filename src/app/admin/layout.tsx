@@ -72,8 +72,8 @@ export default function AdminLayout({
       padding="md"
     >
       <Head>
-        <title>Khosbilegt.B - Portfolio</title>
-        <meta name="description" content="Khosbilegt.B - Personal Portfolio" />
+        <title>Koso.B - Portfolio</title>
+        <meta name="description" content="Koso.B - Personal Portfolio" />
       </Head>
       <AppShell.Header>
         <Flex align="center" justify="center" h={"100%"}>
